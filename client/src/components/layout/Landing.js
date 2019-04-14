@@ -10,7 +10,8 @@ export default function Landing() {
       <div className="videoOverlay" />
       <div className="videoText">
         <i className="fab fa-gripfire" />
-        <h1>Spark Fitness</h1>
+        <h1>Spark</h1>
+        <h1>Fitness</h1>
         <p>Your health is an investment, not an expense!</p>
       </div>
     </section>
