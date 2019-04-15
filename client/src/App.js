@@ -1,23 +1,26 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import MobileNavbar from "./components/layout/MobileNavbar";
 import Landing from "./components/layout/Landing";
-import WhySpark from "./components/layout/WhySpark";
-import Trial from "./components/layout/Trial";
-import MembershipBanner from "./components/layout/MembershipBanner";
-import Footer from "./components/layout/Footer";
+import Me from "./components/layout/Me";
+
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
+
 import "./App.css";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Landing />
-        <WhySpark />
-        <Trial />
-        <MembershipBanner />
-        <Footer />
-        <MobileNavbar />
-      </div>
+      <Router>
+        <div className="App">
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/signIn" component={SignIn} />
+          <Route exact path="/signUp" component={SignUp} />
+          <Route exact path="/me" component={Me} />
+          <MobileNavbar />
+        </div>
+      </Router>
     );
   }
 }

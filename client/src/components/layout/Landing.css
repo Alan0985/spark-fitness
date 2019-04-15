@@ -1,0 +1,228 @@
+/************************** Landing & Video */
+#video {
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.videoBG {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.videoBG video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-35%, -50%);
+  height: 100vh;
+}
+
+.videoOverlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: #2c3e50;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.videoText {
+  z-index: 2;
+  text-align: center;
+  padding: 1rem 3rem;
+}
+
+.videoText i {
+  font-size: 240px;
+  color: #c23616;
+}
+
+.videoText h1 {
+  font-size: 40px;
+  margin-bottom: 0;
+}
+
+/********************************** Why Spark */
+#whySpark {
+  width: 100vw;
+  height: 100%;
+  min-height: 80vh;
+  text-align: center;
+}
+
+#whySpark .whySparkTitle span {
+  display: block;
+  color: #c23616;
+  font-size: 80px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+#whySpark .whySparkTitle h1 {
+  font-size: 45px;
+  color: #c23616;
+  margin: 20px auto;
+}
+
+.whySparkMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+.whySparkMain i {
+  font-size: 120px;
+  margin: 20px;
+}
+
+.whySparkMain div:nth-child(even) {
+  background-color: #2c3e50;
+  color: #fff;
+}
+.whySparkMain div:nth-child(odd) {
+  background-color: #eee;
+  color: #2c3e50;
+}
+
+/******************************** Membership Banner */
+#membershipBanner {
+  min-height: 100%;
+  position: relative;
+  background-image: url(../../img/768/join_768.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#membershipBanner .membershipBanner {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  padding: 100px 10px;
+  color: #fff;
+  background-color: rgba(44, 62, 80, 0.5);
+}
+
+#membershipBanner .bannerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#membershipBanner h1 {
+  font-size: 55px;
+}
+
+#membershipBanner a {
+  display: inline-block;
+  width: 200px;
+  height: 40px;
+  padding: 4px 20px;
+  line-height: 32px;
+  border-radius: 20px;
+  color: #c23616;
+  background-color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+#membershipBanner a:hover {
+  color: #fff;
+  background-color: #c23616;
+}
+
+/********************************** 3 Days Trial */
+#trial {
+  width: 100vw;
+  color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+  background-color: #2c3e50;
+}
+
+#trial h1 {
+  font-size: 55px;
+}
+
+#trial a {
+  display: inline-block;
+  width: 200px;
+  height: 40px;
+  padding: 4px 20px;
+  line-height: 32px;
+  border-radius: 20px;
+  color: #c23616;
+  background-color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+#trial a:hover {
+  color: #fff;
+  background-color: #c23616;
+}
+
+/********************************** Footer */
+footer {
+  width: 100vw;
+  height: 100%;
+  margin-bottom: 55px;
+  color: #fff;
+  background-color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+}
+
+footer .address p {
+  margin-bottom: 8px;
+}
+
+footer .socialMedia {
+  display: flex;
+  justify-content: center;
+}
+
+footer .socialMedia i {
+  width: 46px;
+  height: 46px;
+  line-height: 42px;
+  font-size: 28px;
+  border: 2px solid #fff;
+  border-radius: 23px;
+  margin: 0 5px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+footer .socialMedia i:hover {
+  opacity: 1;
+}
+
+footer .copyRight {
+  margin-top: 10px;
+  border-top: 1px solid #fff;
+  font-size: 14px;
+}
+
+footer .copyRight a {
+  text-decoration: none;
+  color: #c23616;
+}

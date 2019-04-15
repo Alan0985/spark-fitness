@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./MobileNavbar.css";
 
 class MobileNavbar extends Component {
   render() {
@@ -6,28 +8,28 @@ class MobileNavbar extends Component {
       <nav id="mobileNavbar">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="active" href="">
+            <Link className="active" to="/">
               <i className="fab fa-gripfire" />
               <p>Home</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="" href="#">
+            <Link className="" to="/explore">
               <i className="fas fa-compass" />
               <p>Explore</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="" href="#">
+            <Link className="" to="/moments">
               <i className="far fa-smile-wink" />
               <p>Moments</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="" href="https://www.google.com/">
+            <Link className="" to="/me">
               <i className="fas fa-user" />
               <p>Me</p>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
