@@ -4,21 +4,27 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../key/keys");
 const passport = require("passport");
-
 const User = require("../../models/User");
 
-//route     GET /api/users/test
-//Desc      Test users route
-//Access    Private
-router.get("/test", (req, res) => res.json({ msg: "Users Works" }));
+//Input Validation
+const validateSignUpInput = require("../../validation/signUpValidation");
+const validateSignInInput = require("../../validation/signInValidation");
 
 //route     POST /api/users/signUp
 //Desc      SignUp users route
 //Access    Public
 router.post("/signUp", (req, res) => {
+  const { errors, isValid } = validateSignUpInput(req.body);
+
+  //Validate
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      return res.status(400).json({ email: "This Email has been taken." });
+      errors.email = "This Email has been taken.";
+      return res.status(400).json(errors);
     } else {
       const newUser = new User({
         name: req.body.name,
@@ -46,6 +52,12 @@ router.post("/signUp", (req, res) => {
 //Desc      SignIn user / Return the JWT
 //Access    Public
 router.post("/signIn", (req, res) => {
+  const { errors, isValid } = validateSignInInput(req.body);
+  //Validate
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -53,9 +65,8 @@ router.post("/signIn", (req, res) => {
   User.findOne({ email }).then(user => {
     //Check for user
     if (!user) {
-      return res
-        .status(404)
-        .json({ email: "Please input the correct user information" });
+      errors.email = "User not found, please Sign Up first";
+      return res.status(404).json(errors);
     } else {
       //If user exists, check the password
       bcrypt.compare(password, user.password).then(isMatch => {
@@ -80,9 +91,8 @@ router.post("/signIn", (req, res) => {
             }
           );
         } else {
-          return res
-            .status(400)
-            .json({ password: "Please input the correct user information" });
+          errors.password = "Password is not correct";
+          return res.status(400).json(errors);
         }
       });
     }
