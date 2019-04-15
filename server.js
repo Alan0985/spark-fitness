@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 // DB Config
-const db = require("./config/keys").mongoURI;
+const db = require("./key/keys").mongoURI;
 
 //Connect to MongoDB
 mongoose
