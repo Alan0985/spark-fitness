@@ -39,4 +39,33 @@ router.post("/signUp", (req, res) => {
   });
 });
 
+//route     POST /api/users/signIn
+//Desc      SignIn user / Return the JWT
+//Access    Public
+router.post("/signIn", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  //Find user by email
+  User.findOne({ email }).then(user => {
+    //Check for user
+    if (!user) {
+      return res
+        .status(404)
+        .json({ email: "Please input the correct user information" });
+    } else {
+      //If user exists, check the password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          res.json({ msg: "Succeed" });
+        } else {
+          return res
+            .status(400)
+            .json({ password: "Please input the correct user information" });
+        }
+      });
+    }
+  });
+});
+
 module.exports = router;

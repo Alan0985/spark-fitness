@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import "./SignIn.css";
 
@@ -26,7 +27,10 @@ class SignIn extends Component {
       password: this.state.password
     };
 
-    console.log(user);
+    axios
+      .post("/api/users/signIn", user)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
   }
 
   render() {
