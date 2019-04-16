@@ -1,0 +1,77 @@
+#editProfile {
+  width: 100v;
+  height: 100vh;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#editProfile p {
+  margin-bottom: 0;
+}
+
+#editProfile a {
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+#editProfile .editProfileHeader,
+#editProfile .avatar,
+#editProfile .name,
+#editProfile .SFID,
+#editProfile .weight {
+  height: 50px;
+  font-size: 20px;
+  color: #2c3e50;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 0 20px;
+}
+
+#editProfile .editProfileHeader {
+  height: 60px;
+  background-color: #eee;
+}
+
+#editProfile .backToMyProfile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#editProfile .backToMyProfile p {
+  padding-left: 10px;
+}
+
+#editProfile .editProfileHeader .save {
+  width: 64px;
+  height: 30px;
+  color: #fff;
+  background-color: #2c3e50;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#editProfile .avatar {
+  height: 60px;
+}
+
+#editProfile .avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
+#editProfile .name input,
+#editProfile .weight input {
+  border: none;
+  text-align: right;
+  width: 50vw;
+  outline: none;
+}

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import "./Me.css";
 import avatarPath from "../../img/avatar_500.jpg";
 
@@ -19,13 +21,13 @@ class Me extends Component {
         </div>
 
         <div className="profileMain">
-          <a href="#">
+          <Link to="/me/editProfile">
             <div className="editProfile">
               <i className="fas fa-user-edit" />
               <p>Edit Profile</p>
               <i className="fas fa-chevron-right" />
             </div>
-          </a>
+          </Link>
           <a href="#">
             <div className="myPost">
               <i className="fas fa-images" />

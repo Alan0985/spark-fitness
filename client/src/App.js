@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import MobileNavbar from "./components/layout/MobileNavbar";
 import Landing from "./components/layout/Landing";
 import Me from "./components/layout/Me";
+import EditProfile from "./components/layout/EditProfile";
 
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
@@ -18,6 +19,7 @@ class App extends Component {
           <Route exact path="/signIn" component={SignIn} />
           <Route exact path="/signUp" component={SignUp} />
           <Route exact path="/me" component={Me} />
+          <Route exact path="/me/editProfile" component={EditProfile} />
           <MobileNavbar />
         </div>
       </Router>
