@@ -26,8 +26,7 @@ module.exports = function validateSignUpInput(data) {
   }
 
   if (!validator.isLength(data.password, { min: 4, max: 30 })) {
-    errors.password =
-      "Password must be at least 4, and no more than 30 characters";
+    errors.password = "Password must between 4 and 30 characters";
   }
 
   if (validator.isEmpty(data.password)) {
@@ -35,7 +34,7 @@ module.exports = function validateSignUpInput(data) {
   }
 
   if (!validator.equals(data.password, data.password2)) {
-    errors.password2 = "Passwords don't match";
+    errors.password2 = "Passwords must match";
   }
 
   if (validator.isEmpty(data.password2)) {
