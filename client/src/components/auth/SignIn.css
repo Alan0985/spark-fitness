@@ -26,14 +26,14 @@
 
 #signIn form {
   position: absolute;
-  bottom: 75px;
+  bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 #signIn .inputGroup {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 #signIn input,
@@ -48,12 +48,25 @@
   color: #c23616;
   font-size: 20px;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 4px;
   background-color: rgba(255, 255, 255, 0.8);
 }
 
 #signIn input:focus {
   outline: none;
+}
+
+#signIn .errorText {
+  height: 14px;
+  text-align: center;
+}
+
+#signIn .invalidMsg {
+  font-size: 14px;
+  color: #c23616;
+}
+#signIn .is-invalid {
+  border: 1px solid #c23616;
 }
 
 #signIn .or {
