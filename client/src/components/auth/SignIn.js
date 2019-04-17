@@ -21,6 +21,17 @@ class SignIn extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    //If isAuthenticated is true, means user signed in
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/users/me");
+    }
+
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -32,12 +43,7 @@ class SignIn extends Component {
       password: this.state.password
     };
 
-    this.props.signIn(user, this.props.history);
-
-    // axios
-    //   .post("/api/users/signIn", user)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => this.setState({ errors: err.response.data }));
+    this.props.signIn(user);
   }
 
   render() {
