@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { signUp } from "../../actions/authActions";
@@ -23,6 +23,12 @@ class SignUp extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -37,25 +43,17 @@ class SignUp extends Component {
       password2: this.state.password2
     };
 
-    this.props.signUp(newUser);
-
-    // axios
-    //   .post("/api/users/signUp", newUser)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => this.setState({ errors: err.response.data }));
+    this.props.signUp(newUser, this.props.history);
   }
 
   render() {
     const { errors } = this.state;
-
-    const { user } = this.props.auth;
 
     return (
       <section id="signUp">
         <div className="signUpHeader">
           <h1>Sign Up</h1>
           <p>Sign Up To Keep Fit</p>
-          {user ? user.name : null}
         </div>
 
         <form noValidate onSubmit={this.onSubmit}>
@@ -129,14 +127,16 @@ class SignUp extends Component {
 
 SignUp.propTypes = {
   signUp: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.authReducer
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
   { signUp }
-)(SignUp);
+)(withRouter(SignUp));

@@ -45,11 +45,16 @@
   line-height: 32px;
   border: none;
   border-radius: 20px;
-  color: #c23616;
+  color: #2c3e50;
   font-size: 20px;
   text-align: center;
   margin-top: 4px;
   background-color: rgba(255, 255, 255, 0.8);
+}
+
+#signUp .signUpBtn,
+#signUp a {
+  color: #c23616;
 }
 
 #signUp input:focus {
