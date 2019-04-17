@@ -18,8 +18,8 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route exact path="/signIn" component={SignIn} />
           <Route exact path="/signUp" component={SignUp} />
-          <Route exact path="/me" component={Me} />
-          <Route exact path="/me/editProfile" component={EditProfile} />
+          <Route exact path="/users/me" component={Me} />
+          <Route exact path="/profile/me/editProfile" component={EditProfile} />
           <MobileNavbar />
         </div>
       </Router>

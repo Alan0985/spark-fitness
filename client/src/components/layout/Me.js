@@ -1,10 +1,28 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+// import axios from "axios";
 
 import "./Me.css";
 import avatarPath from "../../img/avatar_500.jpg";
 
+// const User = require("../../");
+
 class Me extends Component {
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     name: "",
+  //     errors: {}
+  //   };
+  // }
+
+  // componentDidMount() {
+  //   axios
+  //     .get("/api/users/me")
+  //     .then(res => this.setState({ name: res.name }))
+  //     .catch(err => this.setState({ errors: err.response.data }));
+  // }
+
   render() {
     return (
       <section id="myProfile">
@@ -21,7 +39,7 @@ class Me extends Component {
         </div>
 
         <div className="profileMain">
-          <Link to="/me/editProfile">
+          <Link to="/profile/me/editProfile">
             <div className="editProfile">
               <i className="fas fa-user-edit" />
               <p>Edit Profile</p>

@@ -19,6 +19,7 @@
 #editProfile .editProfileHeader,
 #editProfile .avatar,
 #editProfile .name,
+#editProfile .email,
 #editProfile .SFID,
 #editProfile .weight {
   height: 50px;
@@ -69,6 +70,7 @@
 }
 
 #editProfile .name input,
+#editProfile .email input,
 #editProfile .weight input {
   border: none;
   text-align: right;
