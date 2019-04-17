@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import classnames from "classnames";
+
+import { connect } from "react-redux";
+import { signIn } from "../../actions/authActions";
 
 import "./SignIn.css";
 
@@ -28,10 +32,12 @@ class SignIn extends Component {
       password: this.state.password
     };
 
-    axios
-      .post("/api/users/signIn", user)
-      .then(res => console.log(res.data))
-      .catch(err => this.setState({ errors: err.response.data }));
+    this.props.signIn(user, this.props.history);
+
+    // axios
+    //   .post("/api/users/signIn", user)
+    //   .then(res => console.log(res.data))
+    //   .catch(err => this.setState({ errors: err.response.data }));
   }
 
   render() {
@@ -82,4 +88,19 @@ class SignIn extends Component {
     );
   }
 }
-export default SignIn;
+
+SignIn.propTypes = {
+  signIn: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { signIn }
+)(withRouter(SignIn));
