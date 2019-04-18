@@ -1,29 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { signOut } from "../../actions/authActions";
 
 import "./Me.css";
 import avatarPath from "../../img/avatar_500.jpg";
 
-// const User = require("../../");
-
 class Me extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     name: "",
-  //     errors: {}
-  //   };
-  // }
-
-  // componentDidMount() {
-  //   axios
-  //     .get("/api/users/me")
-  //     .then(res => this.setState({ name: res.name }))
-  //     .catch(err => this.setState({ errors: err.response.data }));
-  // }
+  onSignOut = () => {
+    this.props.signOut();
+  };
 
   render() {
+    // const { isAuthenticated, user } = this.props.auth;
+
     return (
       <section id="myProfile">
         <div className="profileHeader">
@@ -53,15 +44,25 @@ class Me extends Component {
               <i className="fas fa-chevron-right" />
             </div>
           </a>
-          <a href="#">
-            <div className="signOut">
-              <p>Sign Out</p>
-            </div>
-          </a>
+          <div onClick={this.onSignOut.bind(this)} className="signOut">
+            <p>Sign Out</p>
+          </div>
         </div>
       </section>
     );
   }
 }
 
-export default Me;
+Me.propTypes = {
+  signOut: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { signOut }
+)(Me);

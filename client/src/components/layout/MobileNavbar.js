@@ -26,7 +26,7 @@ class MobileNavbar extends Component {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="" to="/users/me">
+            <Link className="" to="/signIn">
               <i className="fas fa-user" />
               <p>Me</p>
             </Link>

@@ -43,9 +43,25 @@ export const signIn = (userData, history) => dispatch => {
     );
 };
 
+//Set Current User
 export const setCurrentUser = decoded => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded
   };
+};
+
+//Sign Out
+export const signOut = () => dispatch => {
+  //Remove token from localStorge
+  localStorage.removeItem("jwtToken");
+
+  //Remove auth header
+  setAuthToken(false);
+
+  //Set isAuthenticated to false
+  dispatch(setCurrentUser({}));
+
+  //Redirect to Sign In
+  window.location.href = "/signIn";
 };
