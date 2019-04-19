@@ -21,17 +21,17 @@ class SignIn extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  //If user signed in, signIn page is redirected to /users/me
+  //If user already signed in, signIn page is redirected to /me
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/users/me");
+      this.props.history.push("/me");
     }
   }
 
+  //Redirect after signed in or throw error
   componentWillReceiveProps(nextProps) {
-    //If isAuthenticated is true, means user signed in
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/users/me");
+      this.props.history.push("/me");
     }
 
     if (nextProps.errors) {

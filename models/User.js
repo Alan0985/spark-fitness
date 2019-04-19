@@ -18,6 +18,12 @@ const UserSchema = new Schema({
   avatar: {
     type: String
   },
+  weight: {
+    type: Number
+  },
+  sfid: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now

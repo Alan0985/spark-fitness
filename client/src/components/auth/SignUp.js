@@ -23,10 +23,10 @@ class SignUp extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  //If user signed in, signUp page is redirected to /users/me
+  //If user signed in, signUp page is redirected to /me
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/users/me");
+      this.props.history.push("/me");
     }
   }
 

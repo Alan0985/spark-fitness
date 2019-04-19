@@ -8,12 +8,19 @@ import "./Me.css";
 import avatarPath from "../../img/avatar_500.jpg";
 
 class Me extends Component {
+  //If signed out, redirect to /signIn
+  componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/signIn");
+    }
+  }
+
   onSignOut = () => {
     this.props.signOut();
   };
 
   render() {
-    // const { isAuthenticated, user } = this.props.auth;
+    const { user } = this.props.auth;
 
     return (
       <section id="myProfile">
@@ -23,24 +30,24 @@ class Me extends Component {
               <img src={avatarPath} alt="avatar" />
             </div>
             <div className="nameID">
-              <p className="name">Julie</p>
-              <p className="SFID">SF ID: Julie8888</p>
+              <p className="name">{user.name}</p>
+              <p className="SFID">{user.sfid}</p>
             </div>
           </div>
         </div>
 
         <div className="profileMain">
-          <Link to="/profile/me/editProfile">
+          <Link to="/me/editProfile">
             <div className="editProfile">
               <i className="fas fa-user-edit" />
               <p>Edit Profile</p>
               <i className="fas fa-chevron-right" />
             </div>
           </Link>
-          <a href="#">
-            <div className="myPost">
+          <a href="/me/myPosts">
+            <div className="myPosts">
               <i className="fas fa-images" />
-              <p>My Post</p>
+              <p>My Posts</p>
               <i className="fas fa-chevron-right" />
             </div>
           </a>

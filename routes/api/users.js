@@ -31,7 +31,9 @@ router.post("/signUp", (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        avatar: "TouXiang",
+        avatar: "",
+        weight: null,
+        sfid: "Please bind your SFID",
         password: req.body.password,
         password2: req.body.password2
       });
@@ -76,7 +78,11 @@ router.post("/signIn", (req, res) => {
           //Token Payload
           const payload = {
             id: user.id,
+            name: user.name,
             email: user.email,
+            avatar: user.avatar,
+            weight: user.weight,
+            sfid: user.sfid,
             password: user.password
           };
 

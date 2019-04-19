@@ -10,6 +10,8 @@ import MobileNavbar from "./components/layout/MobileNavbar";
 import Landing from "./components/layout/Landing";
 import Me from "./components/layout/Me";
 import EditProfile from "./components/layout/EditProfile";
+import myPosts from "./components/layout/myPosts";
+import postDetail from "./components/layout/postDetail";
 
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
@@ -46,12 +48,10 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/signIn" component={SignIn} />
             <Route exact path="/signUp" component={SignUp} />
-            <Route exact path="/users/me" component={Me} />
-            <Route
-              exact
-              path="/profile/me/editProfile"
-              component={EditProfile}
-            />
+            <Route exact path="/me" component={Me} />
+            <Route exact path="/me/editProfile" component={EditProfile} />
+            <Route exact path="/me/myPosts" component={myPosts} />
+            <Route exact path="/me/myPosts/postDetail" component={postDetail} />
             <MobileNavbar />
           </div>
         </Router>

@@ -18,7 +18,7 @@ export const signUp = (userData, history) => dispatch => {
 };
 
 //Sign In
-export const signIn = (userData, history) => dispatch => {
+export const signIn = userData => dispatch => {
   axios
     .post("/api/users/signIn", userData)
     .then(res => {

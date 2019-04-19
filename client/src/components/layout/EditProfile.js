@@ -1,15 +1,29 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getCurrentProfile } from "../../actions/profileActions";
+
 import "./EditProfile.css";
 import avatarPath from "../../img/avatar_500.jpg";
 
 class EditProfile extends Component {
+  componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/signIn");
+    }
+    this.props.getCurrentProfile();
+  }
+
   render() {
+    const { profiles } = this.props.profile;
+    const { user } = this.props.auth;
+
     return (
       <section id="editProfile">
         <form action="">
           <div className="editProfileHeader">
-            <Link to="/users/me">
+            <Link to="/me">
               <div className="backToMyProfile">
                 <i className="fas fa-chevron-left" />
                 <p>My Profile</p>
@@ -35,12 +49,12 @@ class EditProfile extends Component {
 
           <div className="name">
             <p>Name</p>
-            <input type="text" name="name" value="Julie" />
+            <input type="text" name="name" value={user.name} />
           </div>
 
           <div className="email">
             <p>Email</p>
-            <input type="email" name="email" value="julie@gmail.com" />
+            <input type="email" name="email" value={user.email} />
           </div>
 
           <div className="weight">
@@ -48,7 +62,7 @@ class EditProfile extends Component {
             <input
               type="text"
               name="weight"
-              value=""
+              value="48"
               placeholder="Please enter weight"
             />
           </div>
@@ -57,5 +71,18 @@ class EditProfile extends Component {
     );
   }
 }
+EditProfile.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
-export default EditProfile;
+const mapStateToProps = state => ({
+  profile: state.profile,
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { getCurrentProfile }
+)(EditProfile);
