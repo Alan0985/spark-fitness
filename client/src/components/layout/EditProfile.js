@@ -12,11 +12,11 @@ class EditProfile extends Component {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/signIn");
     }
-    this.props.getCurrentProfile();
+    // this.props.getCurrentProfile();
   }
 
   render() {
-    const { profiles } = this.props.profile;
+    const { profile } = this.props.profile;
     const { user } = this.props.auth;
 
     return (
@@ -38,8 +38,13 @@ class EditProfile extends Component {
           </div>
 
           <div className="SFID">
-            <p>Spark Fitness ID:</p>
-            <p>Julie8888</p>
+            <p>SFID:</p>
+            <input
+              type="text"
+              name="sfid"
+              value={user.sfid}
+              placeholder="Please bind SFID"
+            />
           </div>
 
           <div className="avatar">
@@ -62,7 +67,7 @@ class EditProfile extends Component {
             <input
               type="text"
               name="weight"
-              value="48"
+              value={profile.weight}
               placeholder="Please enter weight"
             />
           </div>

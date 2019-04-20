@@ -69,6 +69,7 @@
   border-radius: 25px;
 }
 
+#editProfile .SFID input,
 #editProfile .name input,
 #editProfile .email input,
 #editProfile .weight input {
