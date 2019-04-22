@@ -130,7 +130,7 @@ class SignUp extends Component {
           </div>
 
           <p className="or">or</p>
-          <Link to="/signIn">Sign In</Link>
+          <Link to="/me/signIn">Sign In</Link>
         </form>
       </section>
     );

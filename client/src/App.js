@@ -46,9 +46,9 @@ class App extends Component {
         <Router>
           <div className="App">
             <Route exact path="/" component={Landing} />
-            <Route exact path="/signIn" component={SignIn} />
-            <Route exact path="/signUp" component={SignUp} />
             <Route exact path="/me" component={Me} />
+            <Route exact path="/me/signIn" component={SignIn} />
+            <Route exact path="/me/signUp" component={SignUp} />
             <Route exact path="/me/editProfile" component={EditProfile} />
             <Route exact path="/me/myPosts" component={myPosts} />
             <Route exact path="/me/myPosts/postDetail" component={postDetail} />

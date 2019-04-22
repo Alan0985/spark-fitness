@@ -16,7 +16,7 @@ const validateNewUserInfo = require("../../validation/newUserInfoValidation");
 //route     POST /api/users/signUp
 //Desc      SignUp users route
 //Access    Public
-router.post("/signUp", (req, res) => {
+router.post("/me/signUp", (req, res) => {
   const { errors, isValid } = validateSignUpInput(req.body);
 
   //Validate
@@ -56,7 +56,7 @@ router.post("/signUp", (req, res) => {
 //route     POST /api/users/signIn
 //Desc      SignIn user / Return the JWT
 //Access    Public
-router.post("/signIn", (req, res) => {
+router.post("/me/signIn", (req, res) => {
   const { errors, isValid } = validateSignInInput(req.body);
   //Validate
   if (!isValid) {

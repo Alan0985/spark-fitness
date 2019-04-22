@@ -28,7 +28,7 @@ class EditProfile extends Component {
 
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
-      this.props.history.push("/signIn");
+      this.props.history.push("/me/signIn");
     }
 
     this.props.getUserInfo();

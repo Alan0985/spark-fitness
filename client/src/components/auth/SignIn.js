@@ -95,7 +95,7 @@ class SignIn extends Component {
             <input type="submit" value="Sign In" className="signInBtn" />
           </div>
           <p className="or">or</p>
-          <Link to="/signUp">Sign Up</Link>
+          <Link to="/me/signUp">Sign Up</Link>
         </form>
       </section>
     );

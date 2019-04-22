@@ -13,7 +13,7 @@ class Me extends Component {
   //If signed out, redirect to /signIn
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
-      this.props.history.push("/signIn");
+      this.props.history.push("/me/signIn");
     }
 
     this.props.getUserInfo();
@@ -35,7 +35,7 @@ class Me extends Component {
             </div>
             <div className="nameID">
               <p className="name">{user.name}</p>
-              <p className="SFID">{user.sfid}</p>
+              <p className="SFID">SFID: {user.sfid}</p>
             </div>
           </div>
         </div>

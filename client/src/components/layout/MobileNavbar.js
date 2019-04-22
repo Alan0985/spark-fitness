@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./MobileNavbar.css";
 
 class MobileNavbar extends Component {
@@ -8,28 +8,28 @@ class MobileNavbar extends Component {
       <nav id="mobileNavbar">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="active" to="/">
+            <NavLink exact className="" to="/">
               <i className="fab fa-gripfire" />
               <p>Home</p>
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link className="" to="/explore">
+            <NavLink className="" to="/explore">
               <i className="fas fa-compass" />
               <p>Explore</p>
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link className="" to="/moments">
+            <NavLink className="" to="/moments">
               <i className="far fa-smile-wink" />
               <p>Moments</p>
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link className="" to="/signIn">
+            <NavLink className="" to="/me">
               <i className="fas fa-user" />
               <p>Me</p>
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>

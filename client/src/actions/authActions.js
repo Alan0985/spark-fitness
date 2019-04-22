@@ -7,8 +7,8 @@ import { GET_ERRORS, GET_USER_INFO } from "./types";
 //Sign Up
 export const signUp = (userData, history) => dispatch => {
   axios
-    .post("/api/users/signUp", userData)
-    .then(res => history.push("/signIn"))
+    .post("/api/users/me/signUp", userData)
+    .then(res => history.push("/me/signIn"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -20,7 +20,7 @@ export const signUp = (userData, history) => dispatch => {
 //Sign In
 export const signIn = userData => dispatch => {
   axios
-    .post("/api/users/signIn", userData)
+    .post("/api/users/me/signIn", userData)
     .then(res => {
       //Save the token
       const { token } = res.data;
@@ -101,5 +101,5 @@ export const signOut = () => dispatch => {
   dispatch(setCurrentUser({}));
 
   //Redirect to Sign In
-  window.location.href = "/signIn";
+  window.location.href = "/me/signIn";
 };
