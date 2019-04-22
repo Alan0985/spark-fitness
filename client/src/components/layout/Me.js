@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { signOut } from "../../actions/authActions";
 
+import { getUserInfo } from "../../actions/authActions";
+
 import "./Me.css";
 import avatarPath from "../../img/avatar_500.jpg";
 
@@ -13,6 +15,8 @@ class Me extends Component {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/signIn");
     }
+
+    this.props.getUserInfo();
   }
 
   onSignOut = () => {
@@ -61,6 +65,7 @@ class Me extends Component {
 }
 
 Me.propTypes = {
+  getUserInfo: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -71,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { signOut }
+  { getUserInfo, signOut }
 )(Me);

@@ -1,8 +1,7 @@
-import { GET_PROFILE } from "../actions/types";
+import { GET_PROFILE, CREATE_PROFILE } from "../actions/types";
 
 const initialState = {
-  profile: {}
-  //   loading: false
+  profile: null
 };
 
 export default function(state = initialState, action) {
@@ -12,6 +11,13 @@ export default function(state = initialState, action) {
         ...state,
         profile: action.payload
       };
+
+    case CREATE_PROFILE:
+      return {
+        ...state,
+        profile: action.payload
+      };
+
     default:
       return state;
   }

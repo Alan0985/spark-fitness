@@ -19,35 +19,35 @@ class postDetail extends Component {
   render() {
     return (
       <section id="postDetail">
-        <div class="postDetailHeader">
+        <div className="postDetailHeader">
           <Link to="/me/myPosts">
-            <div class="backToMyPosts">
-              <i class="fas fa-chevron-left" />
+            <div className="backToMyPosts">
+              <i className="fas fa-chevron-left" />
               <p>Post Detail</p>
             </div>
           </Link>
         </div>
 
-        <div class="postMain">
-          <div class="postContent">
-            <div class="postContentHeader">
-              <div class="avatarNameTime">
-                <div class="avatar">
+        <div className="postMain">
+          <div className="postContent">
+            <div className="postContentHeader">
+              <div className="avatarNameTime">
+                <div className="avatar">
                   <img src={avatarPath} alt="avatar" />
                 </div>
-                <div class="nameTime">
-                  <p class="name">Julie</p>
-                  <p class="postTime">2019/04/17 22:14</p>
+                <div className="nameTime">
+                  <p className="name">Julie</p>
+                  <p className="postTime">2019/04/17 22:14</p>
                 </div>
               </div>
 
-              <div class="postLikes">
-                <i class="fas fa-heart" />
-                <p class="likesQty">232</p>
+              <div className="postLikes">
+                <i className="fas fa-heart" />
+                <p className="likesQty">232</p>
               </div>
             </div>
 
-            <div class="postContentText">
+            <div className="postContentText">
               <p>
                 I find myself with way more energy than I've ever had, with no
                 signs of ever wanting to slow down! Don't give up! It's a
@@ -59,113 +59,113 @@ class postDetail extends Component {
               </p>
             </div>
 
-            <div class="postContentImage">
-              <div class="postImage">
+            <div className="postContentImage">
+              <div className="postImage">
                 <img src={postImage_1} alt="postImage_1" />
               </div>
 
-              <div class="postImage">
+              <div className="postImage">
                 <img src={postImage_2} alt="postImage_2" />
               </div>
 
-              <div class="postImage">
+              <div className="postImage">
                 <img src={postImage_3} alt="postImage_3" />
               </div>
 
-              <div class="postImage">
+              <div className="postImage">
                 <img src={postImage_4} alt="postImage_4" />
               </div>
 
-              <div class="postImage">
+              <div className="postImage">
                 <img src={postImage_5} alt="postImage_5" />
               </div>
 
-              <div class="postImage">
+              <div className="postImage">
                 <img src={postImage_6} alt="postImage_6" />
               </div>
 
-              <div class="postImage">
+              <div className="postImage">
                 <img src={postImage_7} alt="postImage_7" />
               </div>
-              <div class="postImage">
+              <div className="postImage">
                 <img src={postImage_8} alt="postImage_8" />
               </div>
-              <div class="postImage">
+              <div className="postImage">
                 <img src={postImage_9} alt="postImage_9" />
               </div>
             </div>
           </div>
 
-          <div class="postComments">
-            <div class="allComments">
+          <div className="postComments">
+            <div className="allComments">
               <div>All Comments</div>
             </div>
-            <div class="commentsList">
-              <div class="commentItem">
-                <div class="commentItemHeader">
-                  <div class="avatarNameTime">
-                    <div class="avatar">
+            <div className="commentsList">
+              <div className="commentItem">
+                <div className="commentItemHeader">
+                  <div className="avatarNameTime">
+                    <div className="avatar">
                       <img src={avatar2} alt="avatar" />
                     </div>
-                    <div class="nameTime">
-                      <p class="name">Jane</p>
-                      <p class="commentTime">2019/04/17 22:14</p>
+                    <div className="nameTime">
+                      <p className="name">Jane</p>
+                      <p className="commentTime">2019/04/17 22:14</p>
                     </div>
                   </div>
 
-                  <div class="thumbsUp">
-                    <i class="far fa-thumbs-up" />
-                    <p class="thumbsUpQty">12</p>
+                  <div className="thumbsUp">
+                    <i className="far fa-thumbs-up" />
+                    <p className="thumbsUpQty">12</p>
                   </div>
                 </div>
 
-                <div class="commentItemContent">
+                <div className="commentItemContent">
                   <p>Lorem ipsum dolor sit, amet consect adipis</p>
                 </div>
               </div>
 
-              <div class="commentItem">
-                <div class="commentItemHeader">
-                  <div class="avatarNameTime">
-                    <div class="avatar">
+              <div className="commentItem">
+                <div className="commentItemHeader">
+                  <div className="avatarNameTime">
+                    <div className="avatar">
                       <img src={avatar3} alt="avatar" />
                     </div>
-                    <div class="nameTime">
-                      <p class="name">Summer</p>
-                      <p class="commentTime">2019/04/17 22:14</p>
+                    <div className="nameTime">
+                      <p className="name">Summer</p>
+                      <p className="commentTime">2019/04/17 22:14</p>
                     </div>
                   </div>
 
-                  <div class="thumbsUp">
-                    <i class="far fa-thumbs-up" />
-                    <p class="thumbsUpQty">8</p>
+                  <div className="thumbsUp">
+                    <i className="far fa-thumbs-up" />
+                    <p className="thumbsUpQty">8</p>
                   </div>
                 </div>
 
-                <div class="commentItemContent">
+                <div className="commentItemContent">
                   <p>Lorem ipsum dolor</p>
                 </div>
               </div>
 
-              <div class="commentItem">
-                <div class="commentItemHeader">
-                  <div class="avatarNameTime">
-                    <div class="avatar">
+              <div className="commentItem">
+                <div className="commentItemHeader">
+                  <div className="avatarNameTime">
+                    <div className="avatar">
                       <img src={avatarPath} alt="avatar" />
                     </div>
-                    <div class="nameTime">
-                      <p class="name">Lily</p>
-                      <p class="commentTime">2019/04/17 22:14</p>
+                    <div className="nameTime">
+                      <p className="name">Lily</p>
+                      <p className="commentTime">2019/04/17 22:14</p>
                     </div>
                   </div>
 
-                  <div class="thumbsUp">
-                    <i class="far fa-thumbs-up" />
-                    <p class="thumbsUpQty">4</p>
+                  <div className="thumbsUp">
+                    <i className="far fa-thumbs-up" />
+                    <p className="thumbsUpQty">4</p>
                   </div>
                 </div>
 
-                <div class="commentItemContent">
+                <div className="commentItemContent">
                   <p>
                     Lorem ipsum dolor sit, amet consectetur adipisi elit. Hic,
                     maiores!
@@ -173,25 +173,25 @@ class postDetail extends Component {
                 </div>
               </div>
 
-              <div class="commentItem">
-                <div class="commentItemHeader">
-                  <div class="avatarNameTime">
-                    <div class="avatar">
+              <div className="commentItem">
+                <div className="commentItemHeader">
+                  <div className="avatarNameTime">
+                    <div className="avatar">
                       <img src={avatar3} alt="avatar" />
                     </div>
-                    <div class="nameTime">
-                      <p class="name">Helen</p>
-                      <p class="commentTime">2019/04/17 22:14</p>
+                    <div className="nameTime">
+                      <p className="name">Helen</p>
+                      <p className="commentTime">2019/04/17 22:14</p>
                     </div>
                   </div>
 
-                  <div class="thumbsUp">
-                    <i class="far fa-thumbs-up" />
-                    <p class="thumbsUpQty">7</p>
+                  <div className="thumbsUp">
+                    <i className="far fa-thumbs-up" />
+                    <p className="thumbsUpQty">7</p>
                   </div>
                 </div>
 
-                <div class="commentItemContent">
+                <div className="commentItemContent">
                   <p>Lorem ipsum dolor sit, amet</p>
                 </div>
               </div>

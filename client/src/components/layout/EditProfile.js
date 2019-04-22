@@ -2,26 +2,66 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCurrentProfile } from "../../actions/profileActions";
+import isEmpty from "../../validation/isEmpty";
+
+import { getUserInfo, updateUserInfo } from "../../actions/authActions";
 
 import "./EditProfile.css";
 import avatarPath from "../../img/avatar_500.jpg";
 
 class EditProfile extends Component {
+  constructor(props) {
+    super(props);
+    const { user } = props.auth;
+    this.state = {
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      weight: user.weight,
+      sfid: user.sfid
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/signIn");
     }
-    // this.props.getCurrentProfile();
+
+    this.props.getUserInfo();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const newInfo = {
+      name: this.state.name,
+      email: this.state.email,
+      avatar: this.state.avatar,
+      weight: this.state.weight,
+      sfid: this.state.sfid
+    };
+
+    this.props.updateUserInfo(newInfo, this.props.history);
+    window.location = "/me";
   }
 
   render() {
-    const { profile } = this.props.profile;
-    const { user } = this.props.auth;
-
     return (
       <section id="editProfile">
-        <form action="">
+        <form noValidate onSubmit={this.onSubmit}>
           <div className="editProfileHeader">
             <Link to="/me">
               <div className="backToMyProfile">
@@ -30,11 +70,7 @@ class EditProfile extends Component {
               </div>
             </Link>
 
-            <a href="#">
-              <div className="save">
-                <p>Save</p>
-              </div>
-            </a>
+            <input type="submit" value="Save" className="save" />
           </div>
 
           <div className="SFID">
@@ -42,8 +78,9 @@ class EditProfile extends Component {
             <input
               type="text"
               name="sfid"
-              value={user.sfid}
+              value={this.state.sfid}
               placeholder="Please bind SFID"
+              onChange={this.onChange}
             />
           </div>
 
@@ -54,12 +91,23 @@ class EditProfile extends Component {
 
           <div className="name">
             <p>Name</p>
-            <input type="text" name="name" value={user.name} />
+            <input
+              type="text"
+              name="name"
+              value={this.state.name}
+              onChange={this.onChange}
+            />
           </div>
 
           <div className="email">
             <p>Email</p>
-            <input type="email" name="email" value={user.email} />
+            <input
+              type="email"
+              name="email"
+              value={this.state.email}
+              onChange={this.onChange}
+              disabled
+            />
           </div>
 
           <div className="weight">
@@ -67,7 +115,8 @@ class EditProfile extends Component {
             <input
               type="text"
               name="weight"
-              value={profile.weight}
+              value={this.state.weight}
+              onChange={this.onChange}
               placeholder="Please enter weight"
             />
           </div>
@@ -77,17 +126,16 @@ class EditProfile extends Component {
   }
 }
 EditProfile.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
+  getUserInfo: PropTypes.func.isRequired,
+  updateUserInfo: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile,
   auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { getUserInfo, updateUserInfo }
 )(EditProfile);

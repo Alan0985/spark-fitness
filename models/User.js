@@ -21,6 +21,9 @@ const UserSchema = new Schema({
   sfid: {
     type: String
   },
+  weight: {
+    type: Number
+  },
   date: {
     type: Date,
     default: Date.now

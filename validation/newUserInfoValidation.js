@@ -1,13 +1,11 @@
 const validator = require("validator");
 const isEmpty = require("./isEmpty");
 
-module.exports = function validateSignUpInput(data) {
+module.exports = function validateNewUserInfo(data) {
   let errors = {};
 
   data.name = !isEmpty(data.name) ? data.name : "";
   data.email = !isEmpty(data.email) ? data.email : "";
-  data.password = !isEmpty(data.password) ? data.password : "";
-  data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
   if (!validator.isLength(data.name, { min: 2 })) {
     errors.name = "Name must be at least 2 characters";
@@ -25,20 +23,8 @@ module.exports = function validateSignUpInput(data) {
     errors.email = "Email is required";
   }
 
-  if (!validator.isLength(data.password, { min: 2, max: 30 })) {
-    errors.password = "Password must between 2 and 30 characters";
-  }
-
-  if (validator.isEmpty(data.password)) {
-    errors.password = "Password is required";
-  }
-
-  if (!validator.equals(data.password, data.password2)) {
-    errors.password2 = "Passwords must match";
-  }
-
-  if (validator.isEmpty(data.password2)) {
-    errors.password2 = "Confirm Password is required";
+  if (data.weight < 0) {
+    errors.weight = "Please input valid weight";
   }
 
   return {

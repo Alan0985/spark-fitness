@@ -15,6 +15,9 @@ class SignUp extends Component {
     this.state = {
       name: "",
       email: "",
+      avatar: "",
+      sfid: "",
+      weight: 0,
       password: "",
       password2: "",
       errors: {}
@@ -46,10 +49,12 @@ class SignUp extends Component {
     const newUser = {
       name: this.state.name,
       email: this.state.email,
+      avatar: this.state.avatar,
+      sfid: this.state.sfid,
+      weight: this.state.weight,
       password: this.state.password,
       password2: this.state.password2
     };
-
     this.props.signUp(newUser, this.props.history);
   }
 

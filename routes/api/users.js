@@ -11,6 +11,7 @@ const User = require("../../models/User");
 //Input Validation
 const validateSignUpInput = require("../../validation/signUpValidation");
 const validateSignInInput = require("../../validation/signInValidation");
+const validateNewUserInfo = require("../../validation/newUserInfoValidation");
 
 //route     POST /api/users/signUp
 //Desc      SignUp users route
@@ -31,8 +32,9 @@ router.post("/signUp", (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        avatar: "",
-        sfid: "",
+        avatar: req.body.avatar,
+        sfid: req.body.sfid,
+        weight: req.body.weight,
         password: req.body.password,
         password2: req.body.password2
       });
@@ -81,6 +83,7 @@ router.post("/signIn", (req, res) => {
             email: user.email,
             avatar: user.avatar,
             sfid: user.sfid,
+            weight: user.weight,
             password: user.password
           };
 
@@ -104,6 +107,57 @@ router.post("/signIn", (req, res) => {
     }
   });
 });
+
+//route     GET /api/profile/me/editProfile
+//Desc      Get User Info
+//Access    Private
+router.get(
+  "/me/editProfile",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // const { errors, isValid } = validateNewUserInfo(req.body);
+    // //Validate
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
+
+    User.findOne({ email: req.user.email })
+      .then(user => res.json(user))
+      .catch(err => res.status(404).json(err));
+  }
+);
+
+//route     POST /api/profile/me/editProfile
+//Desc      Update User Info
+//Access    Private
+router.post(
+  "/me/editProfile",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // const { errors, isValid } = validateNewUserInfo(req.body);
+    // //Validate
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
+
+    let newUserFields = {};
+    newUserFields = req.user;
+    if (req.body.name) newUserFields.name = req.body.name;
+    if (req.body.email) newUserFields.email = req.body.email;
+    if (req.body.avatar) newUserFields.avatar = req.body.avatar;
+    if (req.body.weight) newUserFields.weight = req.body.weight;
+    if (req.body.sfid) newUserFields.sfid = req.body.sfid;
+
+    //Update User Info
+    User.findOneAndUpdate(
+      { email: req.user.email },
+      { $set: newUserFields },
+      { new: true }
+    ).then(newUser => {
+      res.json(newUser);
+    });
+  }
+);
 
 //route     GET /api/users/me
 //Desc      Return current user

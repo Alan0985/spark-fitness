@@ -19,10 +19,11 @@ router.get(
   (req, res) => {
     const errors = {};
     Profile.findOne({ user: req.user.id })
-      .populate("user", ["name", "email"])
+      .populate("user", ["name", "email", "avatar", "sfid"])
       .then(profile => {
         if (!profile) {
-          return res.status(404).json({ errors: "No Profile" });
+          errors.noprofile = "No Profile";
+          return res.status(404).json(errors);
         }
         res.json(profile);
       })
@@ -30,40 +31,54 @@ router.get(
   }
 );
 
-//route     POST /api/profile/me/editProfile
-//Desc      Get current user profile
+//route     POST /api/profile/me/createProfile
+//Desc      Create user profile
 //Access    Private
-router.post(
-  "/me/editProfile",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateProfileInput(req.body);
+router.post("/me/createProfile", (req, res) => {
+  //Create New Profile
+  const profileData = {};
+  profileData.name = req.body.name;
+  profileData.email = req.body.email;
 
-    //Validate
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+  new Profile(profileData).save().then(profile => res.json(profile));
+});
 
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    if (req.body.name) profileFields.name = req.body.name;
-    if (req.body.email) profileFields.email = req.body.email;
-    if (req.body.weight) profileFields.weight = req.body.weight;
+// //route     POST /api/profile/me/editProfile
+// //Desc      Edit current user profile
+// //Access    Private
+// router.post(
+//   "/me/editProfile",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     const { errors, isValid } = validateProfileInput(req.body);
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      if (profile) {
-        //Update Profile
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        ).then(profile => res.json(profile));
-      } else {
-        //Create New Profile
-        new Profile(profileFields).save().then(profile => res.json(profile));
-      }
-    });
-  }
-);
+//     //Validate
+//     if (!isValid) {
+//       return res.status(400).json(errors);
+//     }
+
+//     const profileFields = {};
+//     profileFields.user = req.user.id;
+//     if (req.body.name) profileFields.name = req.body.name;
+//     if (req.body.email) profileFields.email = req.body.email;
+//     if (req.body.avatar) profileFields.avatar = req.body.avatar;
+//     if (req.body.weight) profileFields.weight = req.body.weight;
+//     if (req.body.sfid) profileFields.sfid = req.body.sfid;
+
+//     Profile.findOne({ user: req.user.id }).then(profile => {
+//       if (profile) {
+//         //Update Profile
+//         Profile.findOneAndUpdate(
+//           { user: req.user.id },
+//           { $set: profileFields },
+//           { new: true }
+//         ).then(profile => res.json(profile));
+//       } else {
+//         //Create New Profile
+//         new Profile(profileFields).save().then(profile => res.json(profile));
+//       }
+//     });
+//   }
+// );
 
 module.exports = router;

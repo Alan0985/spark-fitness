@@ -1,6 +1,6 @@
 import isEmpty from "../validation/isEmpty";
 
-import { SET_CURRENT_USER } from "../actions/types";
+import { GET_USER_INFO } from "../actions/types";
 
 const initialState = {
   isAuthenticated: false,
@@ -9,10 +9,9 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SET_CURRENT_USER:
+    case GET_USER_INFO:
       return {
         ...state,
-        //If decoded user Info exist, true
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
