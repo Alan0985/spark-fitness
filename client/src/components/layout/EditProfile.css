@@ -81,3 +81,19 @@
 #editProfile .email input:disabled {
   background-color: #fff;
 }
+
+#editProfile .errorText {
+  text-align: center;
+  margin-top: 200px;
+}
+
+#editProfile .invalidMsg {
+  width: 65vw;
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  color: #c23616;
+  border: 1px solid #c23616;
+  border-radius: 20px;
+  margin: 5px auto;
+}

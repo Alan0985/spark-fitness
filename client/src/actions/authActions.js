@@ -78,6 +78,8 @@ export const updateUserInfo = newInfo => dispatch => {
         type: GET_USER_INFO,
         payload: res.data
       });
+      alert("Saved");
+      window.location = "/me";
     })
     .catch(err =>
       dispatch({

@@ -115,12 +115,6 @@ router.get(
   "/me/editProfile",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // const { errors, isValid } = validateNewUserInfo(req.body);
-    // //Validate
-    // if (!isValid) {
-    //   return res.status(400).json(errors);
-    // }
-
     User.findOne({ email: req.user.email })
       .then(user => res.json(user))
       .catch(err => res.status(404).json(err));
@@ -134,11 +128,11 @@ router.post(
   "/me/editProfile",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // const { errors, isValid } = validateNewUserInfo(req.body);
-    // //Validate
-    // if (!isValid) {
-    //   return res.status(400).json(errors);
-    // }
+    const { errors, isValid } = validateNewUserInfo(req.body);
+    //Validate
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
     let newUserFields = {};
     newUserFields = req.user;
@@ -153,9 +147,11 @@ router.post(
       { email: req.user.email },
       { $set: newUserFields },
       { new: true }
-    ).then(newUser => {
-      res.json(newUser);
-    });
+    )
+      .then(newUser => {
+        res.json(newUser);
+      })
+      .catch(err => res.status(404).json(err));
   }
 );
 

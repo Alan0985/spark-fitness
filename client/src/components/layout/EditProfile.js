@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import isEmpty from "../../validation/isEmpty";
+import classnames from "classnames";
 
 import { getUserInfo, updateUserInfo } from "../../actions/authActions";
 
@@ -18,7 +18,8 @@ class EditProfile extends Component {
       email: user.email,
       avatar: user.avatar,
       weight: user.weight,
-      sfid: user.sfid
+      sfid: user.sfid,
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -54,11 +55,12 @@ class EditProfile extends Component {
       sfid: this.state.sfid
     };
 
-    this.props.updateUserInfo(newInfo, this.props.history);
-    window.location = "/me";
+    this.props.updateUserInfo(newInfo);
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <section id="editProfile">
         <form noValidate onSubmit={this.onSubmit}>
@@ -93,6 +95,9 @@ class EditProfile extends Component {
             <p>Name</p>
             <input
               type="text"
+              className={classnames("", {
+                "is-invalid": errors.name
+              })}
               name="name"
               value={this.state.name}
               onChange={this.onChange}
@@ -114,11 +119,19 @@ class EditProfile extends Component {
             <p>Weight(kg)</p>
             <input
               type="text"
+              className={classnames("", {
+                "is-invalid": errors.weight
+              })}
               name="weight"
               value={this.state.weight}
               onChange={this.onChange}
               placeholder="Please enter weight"
             />
+          </div>
+
+          <div className="errorText">
+            {errors.name && <p className="invalidMsg">{errors.name}</p>}
+            {errors.weight && <p className="invalidMsg">{errors.weight}</p>}
           </div>
         </form>
       </section>
@@ -128,11 +141,13 @@ class EditProfile extends Component {
 EditProfile.propTypes = {
   getUserInfo: PropTypes.func.isRequired,
   updateUserInfo: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(
