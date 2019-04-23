@@ -10,7 +10,8 @@ import MobileNavbar from "./components/layout/MobileNavbar";
 import Landing from "./components/layout/Landing";
 import Me from "./components/layout/Me";
 import EditProfile from "./components/layout/EditProfile";
-import myPosts from "./components/layout/myPosts";
+import MyPosts from "./components/layout/posts/MyPosts";
+import NewPost from "./components/layout/posts/NewPost";
 import postDetail from "./components/layout/postDetail";
 
 import SignIn from "./components/auth/SignIn";
@@ -34,8 +35,6 @@ if (localStorage.jwtToken) {
   if (currentTime > decoded.exp) {
     //Sign out user
     store.dispatch(signOut());
-
-    //To Do: clear current profile
   }
 }
 
@@ -50,7 +49,8 @@ class App extends Component {
             <Route exact path="/me/signIn" component={SignIn} />
             <Route exact path="/me/signUp" component={SignUp} />
             <Route exact path="/me/editProfile" component={EditProfile} />
-            <Route exact path="/me/myPosts" component={myPosts} />
+            <Route exact path="/me/myPosts" component={MyPosts} />
+            <Route exact path="/me/newPost" component={NewPost} />
             <Route exact path="/me/myPosts/postDetail" component={postDetail} />
             <MobileNavbar />
           </div>
