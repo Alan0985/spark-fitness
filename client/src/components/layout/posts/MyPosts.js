@@ -12,6 +12,9 @@ import "./MyPosts.css";
 
 class MyPosts extends Component {
   componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/me/signIn");
+    }
     this.props.getPosts();
   }
 
@@ -49,10 +52,12 @@ class MyPosts extends Component {
 
 MyPosts.propTypes = {
   getPosts: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   post: state.post
 });
 

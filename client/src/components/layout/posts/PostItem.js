@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
 import avatarPath from "../../../img/avatar_500.jpg";
 import postImage_1 from "../../../img/postImages/postImage_1.jpg";
@@ -14,6 +17,8 @@ import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
 class PostItem extends Component {
   render() {
+    const { post } = this.props;
+
     return (
       <div className="postContent">
         <div className="postContentHeader">
@@ -22,16 +27,16 @@ class PostItem extends Component {
           </div>
 
           <div className="nameTime">
-            <p className="name">Julie</p>
-            <p className="postTime">2019/04/17 22:14</p>
+            <p className="name">{post.name}</p>
+            <p className="postTime">
+              <Moment format="YYYY/MM/DD HH:mm">{post.date}</Moment>
+            </p>
           </div>
         </div>
 
         <div className="postContentText">
           <p>
-            I find myself with way more energy than I've ever had, with no signs
-            of ever wanting to slow down! Don't give up! It's a wonderful
-            journey!
+            {post.text}
             <Link to="/me/myPosts/postDetail">...More...</Link>
           </p>
         </div>
@@ -75,11 +80,11 @@ class PostItem extends Component {
         <div className="postContentFooter">
           <div className="postLikes">
             <i className="fas fa-heart" />
-            <p className="likesQty">232</p>
+            <p className="likesQty">{post.postLikes.length}</p>
           </div>
           <div className="postComments">
             <i className="far fa-comment-dots" />
-            <p className="commentsQty">58</p>
+            <p className="commentsQty">{post.comments.length}</p>
           </div>
           <div className="allComments">
             <Link to="/me/myPosts/postDetail">All Comments</Link>
@@ -90,4 +95,16 @@ class PostItem extends Component {
   }
 }
 
-export default PostItem;
+PostItem.propTypes = {
+  auth: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(PostItem);

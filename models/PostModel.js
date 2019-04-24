@@ -36,15 +36,15 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "users"
       },
+      text: {
+        type: String,
+        required: true
+      },
       name: {
         type: String
       },
       avatar: {
         type: String
-      },
-      Text: {
-        type: String,
-        required: true
       },
       commentLikes: [
         {
@@ -67,4 +67,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = PostModel = mongoose.model("post", PostSchema);
+module.exports = PostModel = mongoose.model("posts", PostSchema);
