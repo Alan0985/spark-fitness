@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function MembershipBanner() {
   return (
@@ -10,7 +11,7 @@ export default function MembershipBanner() {
             Incredible services and amenities that will help you achieve your
             goals.
           </p>
-          <a href="#">Join Today</a>
+          <Link to="">Join Today</Link>
         </div>
       </div>
     </section>
