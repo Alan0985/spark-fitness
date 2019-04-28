@@ -1,6 +1,5 @@
 import axios from "axios";
-
-import { ADD_POST, GET_POSTS, GET_ERRORS, LOADING } from "./types";
+import { ADD_POST, GET_POSTS, GET_POST, GET_ERRORS, LOADING } from "./types";
 
 //Add one post
 export const addPost = postData => dispatch => {
@@ -13,6 +12,25 @@ export const addPost = postData => dispatch => {
         payload: res.data
       })
     )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+//Get one post
+export const getPost = id => dispatch => {
+  dispatch({ type: LOADING });
+  axios
+    .get(`/api/posts/${id}`)
+    .then(res => {
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      });
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -40,6 +58,7 @@ export const getPosts = () => dispatch => {
     );
 };
 
+//Add Like to post
 export const addLike = id => dispatch => {
   axios
     .post(`/api/posts/likes/${id}`)

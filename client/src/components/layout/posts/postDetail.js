@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import "./postDetail.css";
-import avatarPath from "../../img/avatar_500.jpg";
-import avatar2 from "../../img/avatar2_500.jpg";
-import avatar3 from "../../img/avatar3_500.jpg";
-import postImage_1 from "../../img/postImages/postImage_1.jpg";
-import postImage_2 from "../../img/postImages/postImage_2.jpg";
-import postImage_3 from "../../img/postImages/postImage_3.jpg";
-import postImage_4 from "../../img/postImages/postImage_4.jpg";
-import postImage_5 from "../../img/postImages/postImage_5.jpg";
-import postImage_6 from "../../img/postImages/postImage_6.jpg";
-import postImage_7 from "../../img/postImages/postImage_7.jpg";
-import postImage_8 from "../../img/postImages/postImage_8.jpg";
-import postImage_9 from "../../img/postImages/postImage_9.jpg";
+import avatarPath from "../../../img/avatar_500.jpg";
+import avatar2 from "../../../img/avatar2_500.jpg";
+import avatar3 from "../../../img/avatar3_500.jpg";
+import postImage_1 from "../../../img/postImages/postImage_1.jpg";
+import postImage_2 from "../../../img/postImages/postImage_2.jpg";
+import postImage_3 from "../../../img/postImages/postImage_3.jpg";
+import postImage_4 from "../../../img/postImages/postImage_4.jpg";
+import postImage_5 from "../../../img/postImages/postImage_5.jpg";
+import postImage_6 from "../../../img/postImages/postImage_6.jpg";
+import postImage_7 from "../../../img/postImages/postImage_7.jpg";
+import postImage_8 from "../../../img/postImages/postImage_8.jpg";
+import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
 class postDetail extends Component {
   render() {

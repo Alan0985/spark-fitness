@@ -43,7 +43,7 @@ class PostItem extends Component {
         <div className="postContentText">
           <p>
             {post.text}
-            <Link to="/me/myPosts/postDetail">...More...</Link>
+            <Link to="/me/postDetail">...More...</Link>
           </p>
         </div>
 
@@ -96,7 +96,7 @@ class PostItem extends Component {
             <p className="commentsQty">{post.comments.length}</p>
           </div>
           <div className="allComments">
-            <Link to="/me/myPosts/postDetail">All Comments</Link>
+            <Link to="/me/postDetail">All Comments</Link>
           </div>
         </div>
       </div>
