@@ -8,6 +8,7 @@ class PostContent extends Component {
     return posts.map(post => <PostItem key={post._id} post={post} />);
   }
 }
+
 PostContent.propTypes = {
   posts: PropTypes.array.isRequired
 };

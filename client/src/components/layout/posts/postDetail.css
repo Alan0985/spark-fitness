@@ -89,12 +89,12 @@
 }
 
 #postDetail .postLikes p {
-  padding-left: 8px;
+  padding-left: 6px;
 }
 
 #postDetail .fa-heart {
   color: #c23616;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 #postDetail .postContentText {

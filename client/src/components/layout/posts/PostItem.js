@@ -24,7 +24,6 @@ class PostItem extends Component {
 
   render() {
     const { post } = this.props;
-
     return (
       <div className="postContent">
         <div className="postContentHeader">
@@ -43,7 +42,7 @@ class PostItem extends Component {
         <div className="postContentText">
           <p>
             {post.text}
-            <Link to="/me/postDetail">...More...</Link>
+            <Link to={`/me/posts/${post._id}`}>...More...</Link>
           </p>
         </div>
 
@@ -96,7 +95,7 @@ class PostItem extends Component {
             <p className="commentsQty">{post.comments.length}</p>
           </div>
           <div className="allComments">
-            <Link to="/me/postDetail">All Comments</Link>
+            <Link to={`/me/posts/${post._id}`}>All Comments</Link>
           </div>
         </div>
       </div>
