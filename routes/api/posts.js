@@ -40,13 +40,12 @@ router.get("/:id", (req, res) => {
 });
 
 //route     GET /api/posts
-//Desc      Get all posts of who signed in
+//Desc      Get all posts
 //Access    Private
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // Post.find({ user: req.user.id })
     Post.find()
       .sort({ date: -1 })
       .then(posts => res.json(posts))

@@ -13,6 +13,8 @@ import EditProfile from "./components/layout/EditProfile";
 import MyPosts from "./components/layout/posts/MyPosts";
 import NewPost from "./components/layout/posts/NewPost";
 import PostDetail from "./components/layout/posts/PostDetail";
+import Moments from "./components/layout/moments/Moments";
+import MomentPostDetail from "./components/layout/moments/MomentPostDetail";
 
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
@@ -51,7 +53,10 @@ class App extends Component {
             <Route exact path="/me/editProfile" component={EditProfile} />
             <Route exact path="/me/newPost" component={NewPost} />
             <Route exact path="/me/myPosts" component={MyPosts} />
-            <Route exact path="/me/posts/:id" component={PostDetail} />
+            <Route exact path="/me/myPosts/:id" component={PostDetail} />
+            <Route exact path="/moments" component={Moments} />
+            <Route exact path="/moments/:id" component={MomentPostDetail} />
+
             <MobileNavbar />
           </div>
         </Router>

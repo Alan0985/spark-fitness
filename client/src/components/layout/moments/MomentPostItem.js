@@ -17,7 +17,7 @@ import postImage_7 from "../../../img/postImages/postImage_7.jpg";
 import postImage_8 from "../../../img/postImages/postImage_8.jpg";
 import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
-class PostItem extends Component {
+class MomentPostItem extends Component {
   onClickLikes(id) {
     this.props.addLike(id);
   }
@@ -43,7 +43,7 @@ class PostItem extends Component {
           <p>
             {post.text.length < 120 ? post.text : post.text.slice(0, 120)}
             {post.text.length < 120 ? null : (
-              <Link to={`/me/myPosts/${post._id}`}> ...More...</Link>
+              <Link to={`/moments/${post._id}`}> ...More...</Link>
             )}
           </p>
         </div>
@@ -97,7 +97,7 @@ class PostItem extends Component {
             <p className="commentsQty">{post.comments.length}</p>
           </div>
           <div className="allComments">
-            <Link to={`/me/myPosts/${post._id}`}>Comments</Link>
+            <Link to={`/moments/${post._id}`}>Comments</Link>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ class PostItem extends Component {
   }
 }
 
-PostItem.propTypes = {
+MomentPostItem.propTypes = {
   addLike: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired
@@ -118,4 +118,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { addLike }
-)(PostItem);
+)(MomentPostItem);

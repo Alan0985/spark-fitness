@@ -19,13 +19,16 @@ class MyPosts extends Component {
   }
 
   render() {
+    const { user } = this.props.auth;
     const { posts, loading } = this.props.post;
     let myPosts;
 
-    if (posts === null || loading) {
+    if (posts.length < 1 || loading) {
       myPosts = <Spinner />;
     } else {
-      myPosts = <PostContent posts={posts} />;
+      let filteredPosts;
+      filteredPosts = posts.filter(post => post.user === user.id);
+      myPosts = <PostContent posts={filteredPosts} />;
     }
 
     return (
