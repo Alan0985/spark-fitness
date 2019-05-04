@@ -83,3 +83,16 @@ export const unLike = id => dispatch => {
       })
     );
 };
+
+//Add Comment
+export const addComment = id => dispatch => {
+  axios
+    .post(`/api/posts/comment/${id}`)
+    .then(res => dispatch(getPost()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};

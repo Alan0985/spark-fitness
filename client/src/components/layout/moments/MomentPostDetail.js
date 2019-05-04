@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Moment from "react-moment";
 
 import Spinner from "../../common/Spinner";
-import { getPost } from "../../../actions/postActions";
+import { getPost, addComment } from "../../../actions/postActions";
 
 import "./MomentPostDetail.css";
 import avatarPath from "../../../img/avatar_500.jpg";
@@ -21,9 +21,33 @@ import postImage_8 from "../../../img/postImages/postImage_8.jpg";
 import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
 class MomentPostDetail extends Component {
+  constructor() {
+    super();
+    this.state = {
+      text: ""
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   componentDidMount() {
     this.props.getPost(this.props.match.params.id);
   }
+
+  onChange = e => {
+    this.setState({ text: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const newComment = {
+      text: this.state.text
+    };
+
+    this.props.addComment(newComment);
+  };
 
   render() {
     const { post, loading } = this.props.post;
@@ -70,29 +94,24 @@ class MomentPostDetail extends Component {
               <div className="postImage">
                 <img src={postImage_3} alt="postImage_3" />
               </div>
-
-              <div className="postImage">
-                <img src={postImage_4} alt="postImage_4" />
-              </div>
-
-              <div className="postImage">
-                <img src={postImage_5} alt="postImage_5" />
-              </div>
-
-              <div className="postImage">
-                <img src={postImage_6} alt="postImage_6" />
-              </div>
-
-              <div className="postImage">
-                <img src={postImage_7} alt="postImage_7" />
-              </div>
-              <div className="postImage">
-                <img src={postImage_8} alt="postImage_8" />
-              </div>
-              <div className="postImage">
-                <img src={postImage_9} alt="postImage_9" />
-              </div>
             </div>
+          </div>
+
+          <div className="addComment">
+            <form noValidate onSubmit={this.onSubmit}>
+              <div className="avatar">
+                <img src={avatar2} alt="avatar" />
+              </div>
+              <input
+                className="textInput"
+                type="text"
+                name="comment"
+                value={this.state.text}
+                placeholder=" Add a comment here"
+                onChange={this.onChange}
+              />
+              <input type="submit" value="Send" className="send" />
+            </form>
           </div>
 
           <div className="postComments">
@@ -146,6 +165,7 @@ class MomentPostDetail extends Component {
 
 MomentPostDetail.propTypes = {
   getPost: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired
 };
@@ -157,5 +177,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPost }
+  { getPost, addComment }
 )(MomentPostDetail);
