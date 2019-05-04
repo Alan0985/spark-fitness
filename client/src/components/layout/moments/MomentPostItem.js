@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
-import { addLike } from "../../../actions/postActions";
+import { addLike, unLike } from "../../../actions/postActions";
 
 import avatarPath from "../../../img/avatar_500.jpg";
 import postImage_1 from "../../../img/postImages/postImage_1.jpg";
@@ -19,11 +19,29 @@ import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
 class MomentPostItem extends Component {
   onClickLikes(id) {
-    this.props.addLike(id);
+    const { post, auth } = this.props;
+    if (
+      //Check the signed-in user already liked this post or not
+      post.postLikes.map(like => like.user === auth.user.id).length > 0
+    ) {
+      this.props.unLike(id);
+    } else {
+      this.props.addLike(id);
+    }
+  }
+
+  userLiked() {
+    const { post, auth } = this.props;
+    if (post.postLikes.map(like => like.user === auth.user.id).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   render() {
     const { post } = this.props;
+
     return (
       <div className="postContent">
         <div className="postContentHeader">
@@ -89,7 +107,12 @@ class MomentPostItem extends Component {
             className="postLikes"
             onClick={this.onClickLikes.bind(this, post._id)}
           >
-            <i className="fas fa-heart" />
+            {this.userLiked() ? (
+              <i className="fas fa-heart" />
+            ) : (
+              <i className="far fa-heart" />
+            )}
+
             <p className="likesQty">{post.postLikes.length}</p>
           </div>
           <div className="postComments">
@@ -107,6 +130,7 @@ class MomentPostItem extends Component {
 
 MomentPostItem.propTypes = {
   addLike: PropTypes.func.isRequired,
+  unLike: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired
 };
@@ -117,5 +141,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addLike }
+  { addLike, unLike }
 )(MomentPostItem);

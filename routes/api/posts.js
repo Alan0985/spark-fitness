@@ -53,24 +53,37 @@ router.get(
   }
 );
 
-//route     POST /api/posts/likes/:id
-//Desc      Add Like to post
+//route     POST /api/posts/like/:id
+//Desc      Like a post
 //Access    Private
 router.post(
-  "/likes/:id",
+  "/like/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     User.findOne({ user: req.user.id }).then(user => {
       Post.findById(req.params.id).then(post => {
-        if (
-          post.postLikes.filter(like => like.user.toString() === req.user.id)
-            .length > 0
-        ) {
-          return alert("You already liked this post");
-        }
-
         //Add user id to postLikes array
         post.postLikes.unshift({ user: req.user.id });
+        post.save().then(post => res.json(post));
+      });
+    });
+  }
+);
+
+//route     POST /api/posts/unlike/:id
+//Desc      Unlike a post
+//Access    Private
+router.post(
+  "/unlike/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ user: req.user.id }).then(user => {
+      Post.findById(req.params.id).then(post => {
+        //Remove user id from postLikes array
+        const index = post.postLikes
+          .map(like => like.user)
+          .indexOf(req.user.id);
+        post.postLikes.splice(index, 1);
         post.save().then(post => res.json(post));
       });
     });

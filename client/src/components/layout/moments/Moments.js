@@ -21,7 +21,7 @@ class Moments extends Component {
     const { posts, loading } = this.props.post;
     let allPosts;
 
-    if (posts === null || loading) {
+    if (posts.length < 1 || loading) {
       allPosts = <Spinner />;
     } else {
       allPosts = <MomentPostContent posts={posts} />;

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 
+import Spinner from "../../common/Spinner";
 import { getPost } from "../../../actions/postActions";
 
 import "./PostDetail.css";
@@ -25,19 +26,13 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { post } = this.props.post;
+    const { post, loading } = this.props.post;
 
-    return (
-      <section id="postDetail">
-        <div className="postDetailHeader">
-          <Link to="/me/myPosts">
-            <div className="backToMyPosts">
-              <i className="fas fa-chevron-left" />
-              <p>Post Detail</p>
-            </div>
-          </Link>
-        </div>
-
+    let postMain;
+    if (Object.keys(post).length < 1 || loading) {
+      postMain = <Spinner />;
+    } else {
+      postMain = (
         <div className="postMain">
           <div className="postContent">
             <div className="postContentHeader">
@@ -54,9 +49,8 @@ class PostDetail extends Component {
               </div>
 
               <div className="postLikes">
-                <i className="fas fa-heart" />
-                <p className="likesQty">32</p>
-                {/* <p className="likesQty">{post.postLikes.length}</p> */}
+                <i className="far fa-heart" />
+                <p className="likesQty">{post.postLikes.length}</p>
               </div>
             </div>
 
@@ -131,6 +125,20 @@ class PostDetail extends Component {
             </div>
           </div>
         </div>
+      );
+    }
+
+    return (
+      <section id="postDetail">
+        <div className="postDetailHeader">
+          <Link to="/me/myPosts">
+            <div className="backToMyPosts">
+              <i className="fas fa-chevron-left" />
+              <p>Post Detail</p>
+            </div>
+          </Link>
+        </div>
+        {postMain}
       </section>
     );
   }

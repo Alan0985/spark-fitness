@@ -61,7 +61,20 @@ export const getPosts = () => dispatch => {
 //Add Like to post
 export const addLike = id => dispatch => {
   axios
-    .post(`/api/posts/likes/${id}`)
+    .post(`/api/posts/like/${id}`)
+    .then(res => dispatch(getPosts()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+//Remove Like of post
+export const unLike = id => dispatch => {
+  axios
+    .post(`/api/posts/unlike/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
