@@ -58,10 +58,9 @@ export const getPosts = () => dispatch => {
     );
 };
 
-//Add Like to post
-export const addLike = id => dispatch => {
+export const clickLike = postId => dispatch => {
   axios
-    .post(`/api/posts/like/${id}`)
+    .post(`/api/posts/like/${postId}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
@@ -88,19 +87,6 @@ export const addLike = id => dispatch => {
 //       })
 //     );
 // };
-
-//Remove Like of post
-export const unLike = id => dispatch => {
-  axios
-    .post(`/api/posts/unlike/${id}`)
-    .then(res => dispatch(getPosts()))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
 
 //Add Comment
 export const addComment = (postId, commentData) => dispatch => {

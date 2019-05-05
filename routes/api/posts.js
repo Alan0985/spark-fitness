@@ -54,60 +54,52 @@ router.get(
 );
 
 //route     POST /api/posts/like/:id
-//Desc      Like a post
+//Desc      Like or Unlike a post
 //Access    Private
 router.post(
-  "/like/:id",
+  "/like/:postId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ user: req.user.id }).then(user => {
-      Post.findById(req.params.id).then(post => {
+    Post.findById(req.params.postId).then(post => {
+      if (
+        //Check if the post is liked or not
+        post.postLikes.filter(like => like.user.toString() === req.user.id)
+          .length === 0
+      ) {
         //Add user id to postLikes array
         post.postLikes.unshift({ user: req.user.id });
-        post.save().then(post => res.json(post));
-      });
+      } else {
+        //Get index and remove user id from postLikes array
+        const index = post.postLikes
+          .map(like => like.user.toString())
+          .indexOf(req.user.id);
+        post.postLikes.splice(index, 1);
+      }
+
+      post.save().then(post => res.json(post));
     });
   }
 );
+
 //route     POST /api/posts/comments/:id
 //Desc      Like a comment
 //Access    Private
-router.post(
-  "/thumbsUp/:post_id/:comment_id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Post.findOne({ _id: req.params.post_id })
-      .then(post => {
-        post.comments.findOne({ _id: req.params.comment_id }).then(comment => {
-          //Add user id to commentLikes array
-          comment.commentLikes.unshift({ user: req.user.id });
-        });
+// router.post(
+//   "/thumbsUp/:post_id/:comment_id",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     Post.findOne({ _id: req.params.post_id })
+//       .then(post => {
+//         post.comments.findOne({ _id: req.params.comment_id }).then(comment => {
+//           //Add user id to commentLikes array
+//           comment.commentLikes.unshift({ user: req.user.id });
+//         });
 
-        post.save().then(post => res.json(post));
-      })
-      .catch(err => res.status(404).json({ msg: "No Post Found" }));
-  }
-);
-
-//route     POST /api/posts/unlike/:id
-//Desc      Unlike a post
-//Access    Private
-router.post(
-  "/unlike/:id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    User.findOne({ user: req.user.id }).then(user => {
-      Post.findById(req.params.id).then(post => {
-        //Remove user id from postLikes array
-        const index = post.postLikes
-          .map(like => like.user)
-          .indexOf(req.user.id);
-        post.postLikes.splice(index, 1);
-        post.save().then(post => res.json(post));
-      });
-    });
-  }
-);
+//         post.save().then(post => res.json(post));
+//       })
+//       .catch(err => res.status(404).json({ msg: "No Post Found" }));
+//   }
+// );
 
 //route     POST /api/posts/comments/:id
 //Desc      Add Comment

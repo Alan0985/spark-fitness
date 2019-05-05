@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
-import { addLike, unLike } from "../../../actions/postActions";
+import { clickLike } from "../../../actions/postActions";
 
 import avatarPath from "../../../img/avatar_500.jpg";
 import postImage_1 from "../../../img/postImages/postImage_1.jpg";
@@ -18,16 +18,8 @@ import postImage_8 from "../../../img/postImages/postImage_8.jpg";
 import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
 class MomentPostItem extends Component {
-  onClickLikes(id) {
-    const { post, auth } = this.props;
-    if (
-      //Check the signed-in user already liked this post or not
-      post.postLikes.map(like => like.user === auth.user.id).length > 0
-    ) {
-      this.props.unLike(id);
-    } else {
-      this.props.addLike(id);
-    }
+  onClickLikes(postId) {
+    this.props.clickLike(postId);
   }
 
   userLiked() {
@@ -129,8 +121,7 @@ class MomentPostItem extends Component {
 }
 
 MomentPostItem.propTypes = {
-  addLike: PropTypes.func.isRequired,
-  unLike: PropTypes.func.isRequired,
+  clickLike: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired
 };
@@ -141,5 +132,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addLike, unLike }
+  { clickLike }
 )(MomentPostItem);
