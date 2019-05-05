@@ -69,6 +69,25 @@ router.post(
     });
   }
 );
+//route     POST /api/posts/comments/:id
+//Desc      Like a comment
+//Access    Private
+router.post(
+  "/thumbsUp/:post_id/:comment_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.findOne({ _id: req.params.post_id })
+      .then(post => {
+        post.comments.findOne({ _id: req.params.comment_id }).then(comment => {
+          //Add user id to commentLikes array
+          comment.commentLikes.unshift({ user: req.user.id });
+        });
+
+        post.save().then(post => res.json(post));
+      })
+      .catch(err => res.status(404).json({ msg: "No Post Found" }));
+  }
+);
 
 //route     POST /api/posts/unlike/:id
 //Desc      Unlike a post
@@ -86,6 +105,51 @@ router.post(
         post.postLikes.splice(index, 1);
         post.save().then(post => res.json(post));
       });
+    });
+  }
+);
+
+//route     POST /api/posts/comments/:id
+//Desc      Add Comment
+//Access    Private
+router.post(
+  "/comment/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validatePostInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    Post.findById(req.params.id)
+      .then(post => {
+        const newComment = {
+          user: req.user.id,
+          name: req.user.name,
+          avatar: req.user.avatar,
+          text: req.body.text
+        };
+        post.comments.unshift(newComment);
+        post.save().then(post => res.json(post));
+      })
+      .catch(err => res.status(404).json({ NotFound: "Post Not Found" }));
+  }
+);
+
+//route     DELETE /api/posts/comment/:postId/:commentId
+//Desc      Delete a comment
+//Access    Private
+router.delete(
+  "/comment/:postId/:commentId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.findById(req.params.postId).then(post => {
+      const index = post.comments
+        .map(comment => comment._id)
+        .indexOf(req.params.commentId);
+      post.comments.splice(index, 1);
+      post.save().then(post => res.json(post));
     });
   }
 );

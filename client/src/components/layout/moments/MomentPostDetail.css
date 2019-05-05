@@ -186,6 +186,15 @@
   background-color: #2c3e50;
 }
 
+#postDetail .postComments .noComment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+  margin-top: 30px;
+}
+
 #postDetail .postComments .commentItemHeader {
   display: flex;
   justify-content: space-between;
@@ -195,6 +204,7 @@
 
 #postDetail .postComments .commentItemContent {
   padding-left: 46px;
+  padding-right: 30px;
   font-size: 14px;
 }
 #postDetail .postComments .avatarNameTime {

@@ -36,15 +36,15 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "users"
       },
-      text: {
-        type: String,
-        required: true
-      },
       name: {
         type: String
       },
       avatar: {
         type: String
+      },
+      text: {
+        type: String,
+        required: true
       },
       commentLikes: [
         {
@@ -54,7 +54,7 @@ const PostSchema = new Schema({
           }
         }
       ],
-      Date: {
+      date: {
         type: Date,
         default: Date.now
       }

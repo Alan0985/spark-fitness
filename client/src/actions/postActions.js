@@ -71,6 +71,24 @@ export const addLike = id => dispatch => {
     );
 };
 
+//Add Like to comment
+// export const thumbsUp = (postId, commentId) => dispatch => {
+//   axios
+//     .post(`/api/posts/thumbsUp/${postId}/${commentId}`)
+//     .then(res =>
+//       dispatch({
+//         type: GET_POST,
+//         payload: res.data
+//       })
+//     )
+//     .catch(err =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// };
+
 //Remove Like of post
 export const unLike = id => dispatch => {
   axios
@@ -85,10 +103,34 @@ export const unLike = id => dispatch => {
 };
 
 //Add Comment
-export const addComment = id => dispatch => {
+export const addComment = (postId, commentData) => dispatch => {
+  dispatch({ type: LOADING });
   axios
-    .post(`/api/posts/comment/${id}`)
-    .then(res => dispatch(getPost()))
+    .post(`/api/posts/comment/${postId}`, commentData)
+    .then(res =>
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+//Delete Comment
+export const deleteComment = (postId, commentId) => dispatch => {
+  axios
+    .delete(`/api/posts/comment/${postId}/${commentId}`)
+    .then(res =>
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      })
+    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

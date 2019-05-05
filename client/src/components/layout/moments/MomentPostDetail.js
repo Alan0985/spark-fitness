@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 
+import CommentList from "../comments/CommentList";
 import Spinner from "../../common/Spinner";
 import { getPost, addComment } from "../../../actions/postActions";
 
@@ -21,10 +22,11 @@ import postImage_8 from "../../../img/postImages/postImage_8.jpg";
 import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
 class MomentPostDetail extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      text: ""
+      text: "",
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -32,7 +34,16 @@ class MomentPostDetail extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/me/signIn");
+    }
     this.props.getPost(this.props.match.params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
 
   onChange = e => {
@@ -42,15 +53,22 @@ class MomentPostDetail extends Component {
   onSubmit = e => {
     e.preventDefault();
 
+    const { user } = this.props.auth;
+    const { _id } = this.props.post.post;
+
     const newComment = {
+      name: user.name,
+      avatar: user.avatar,
       text: this.state.text
     };
 
-    this.props.addComment(newComment);
+    this.props.addComment(_id, newComment);
+    this.setState({ text: "" });
   };
 
   render() {
     const { post, loading } = this.props.post;
+    const { errors } = this.state;
 
     let postMain;
     if (Object.keys(post).length < 1 || loading) {
@@ -118,8 +136,10 @@ class MomentPostDetail extends Component {
             <div className="allComments">
               <div>All Comments</div>
             </div>
-            <div className="commentsList">
-              <div className="commentItem">
+            <div className="commentList">
+              <CommentList comments={post.comments} />
+
+              {/* <div className="commentItem">
                 <div className="commentItemHeader">
                   <div className="avatarNameTime">
                     <div className="avatar">
@@ -140,7 +160,7 @@ class MomentPostDetail extends Component {
                 <div className="commentItemContent">
                   <p>Lorem ipsum dolor sit, amet consect adipis</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -167,12 +187,15 @@ MomentPostDetail.propTypes = {
   getPost: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  // postId: PropTypes.string.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   post: state.post,
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(

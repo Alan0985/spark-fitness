@@ -56,7 +56,6 @@ class App extends Component {
             <Route exact path="/me/myPosts/:id" component={PostDetail} />
             <Route exact path="/moments" component={Moments} />
             <Route exact path="/moments/:id" component={MomentPostDetail} />
-
             <MobileNavbar />
           </div>
         </Router>
