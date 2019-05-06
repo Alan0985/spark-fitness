@@ -8,8 +8,9 @@ import Spinner from "../../common/Spinner";
 import { getPost } from "../../../actions/postActions";
 
 import "./PostDetail.css";
-import avatarPath from "../../../img/avatar_500.jpg";
+
 import avatar2 from "../../../img/avatar2_500.jpg";
+
 import postImage_1 from "../../../img/postImages/postImage_1.jpg";
 import postImage_2 from "../../../img/postImages/postImage_2.jpg";
 import postImage_3 from "../../../img/postImages/postImage_3.jpg";
@@ -38,7 +39,7 @@ class PostDetail extends Component {
             <div className="postContentHeader">
               <div className="avatarNameTime">
                 <div className="avatar">
-                  <img src={avatarPath} alt="avatar" />
+                  <img src={post.avatar} alt="avatar" />
                 </div>
                 <div className="nameTime">
                   <p className="name">{post.name}</p>

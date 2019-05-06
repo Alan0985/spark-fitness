@@ -5,8 +5,6 @@ import Moment from "react-moment";
 
 import { deleteComment } from "../../../actions/postActions";
 
-import avatar2 from "../../../img/avatar2_500.jpg";
-
 class CommentItem extends Component {
   onDeleteComment(postId, commentId) {
     if (window.confirm("Delete this comment?")) {
@@ -21,7 +19,7 @@ class CommentItem extends Component {
         <div className="commentItemHeader">
           <div className="avatarNameTime">
             <div className="avatar">
-              <img src={avatar2} alt="avatar" />
+              <img src={comment.avatar} alt="avatar" />
             </div>
             <div className="nameTime">
               <p className="name">{comment.name}</p>

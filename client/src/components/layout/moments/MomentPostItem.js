@@ -6,7 +6,6 @@ import Moment from "react-moment";
 
 import { clickLike } from "../../../actions/postActions";
 
-import avatarPath from "../../../img/avatar_500.jpg";
 import postImage_1 from "../../../img/postImages/postImage_1.jpg";
 import postImage_2 from "../../../img/postImages/postImage_2.jpg";
 import postImage_3 from "../../../img/postImages/postImage_3.jpg";
@@ -38,7 +37,7 @@ class MomentPostItem extends Component {
       <div className="postContent">
         <div className="postContentHeader">
           <div className="avatar">
-            <img src={avatarPath} alt="avatar" />
+            <img src={post.avatar} alt="avatar" />
           </div>
 
           <div className="nameTime">

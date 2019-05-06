@@ -7,7 +7,6 @@ import classnames from "classnames";
 import { getUserInfo, updateUserInfo } from "../../actions/authActions";
 
 import "./EditProfile.css";
-import avatarPath from "../../img/avatar_500.jpg";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -88,7 +87,13 @@ class EditProfile extends Component {
 
           <div className="avatar">
             <p>Avatar</p>
-            <img src={avatarPath} alt="avatar" />
+            {/* <img src={this.state.avatar} alt="avatar" /> */}
+            <input
+              type="file"
+              name="avatar"
+              capture="camera"
+              accept="image/*"
+            />
           </div>
 
           <div className="name">

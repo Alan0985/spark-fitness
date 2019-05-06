@@ -9,8 +9,7 @@ import Spinner from "../../common/Spinner";
 import { getPost, deletePost, addComment } from "../../../actions/postActions";
 
 import "./MomentPostDetail.css";
-import avatarPath from "../../../img/avatar_500.jpg";
-import avatar2 from "../../../img/avatar2_500.jpg";
+
 import postImage_1 from "../../../img/postImages/postImage_1.jpg";
 import postImage_2 from "../../../img/postImages/postImage_2.jpg";
 import postImage_3 from "../../../img/postImages/postImage_3.jpg";
@@ -75,7 +74,7 @@ class MomentPostDetail extends Component {
 
   render() {
     const { post, loading } = this.props.post;
-    const { errors } = this.state;
+    const { errors, auth } = this.props;
 
     let postMain;
     if (Object.keys(post).length < 1 || loading) {
@@ -87,7 +86,7 @@ class MomentPostDetail extends Component {
             <div className="postContentHeader">
               <div className="avatarNameTime">
                 <div className="avatar">
-                  <img src={avatarPath} alt="avatar" />
+                  <img src={post.avatar} alt="avatar" />
                 </div>
                 <div className="nameTime">
                   <p className="name">{post.name}</p>
@@ -121,7 +120,7 @@ class MomentPostDetail extends Component {
               </div>
             </div>
 
-            {post.user === this.props.auth.user.id ? (
+            {post.user === auth.user.id ? (
               <div
                 className="deletePost"
                 onClick={this.onDeletePost.bind(this, post._id)}
@@ -134,7 +133,7 @@ class MomentPostDetail extends Component {
           <div className="addComment">
             <form noValidate onSubmit={this.onSubmit}>
               <div className="avatar">
-                <img src={avatar2} alt="avatar" />
+                <img src={auth.user.avatar} alt="avatar" />
               </div>
               <input
                 className="textInput"

@@ -7,7 +7,6 @@ import { signOut } from "../../actions/authActions";
 import { getUserInfo } from "../../actions/authActions";
 
 import "./Me.css";
-import avatarPath from "../../img/avatar_500.jpg";
 
 class Me extends Component {
   //If signed out, redirect to /signIn
@@ -31,7 +30,7 @@ class Me extends Component {
         <div className="profileHeader">
           <div className="avatarName">
             <div className="profileAvatar">
-              <img src={avatarPath} alt="avatar" />
+              <img src={user.avatar} alt="avatar" />
             </div>
             <div className="nameID">
               <p className="name">{user.name}</p>
