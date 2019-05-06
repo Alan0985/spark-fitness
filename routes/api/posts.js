@@ -30,6 +30,25 @@ router.post(
   }
 );
 
+//route     DELETE /api/posts/:postId
+//Desc      Delete a post
+//Access    Private
+router.delete(
+  "/:postId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.findById(req.params.postId)
+      .then(post => {
+        post.remove().then(res => {
+          res.json({ Success: true });
+        });
+      })
+      .catch(err =>
+        res.status(400).json({ msg: "ooops, something wrong here" })
+      );
+  }
+);
+
 //route     GET /api/posts/:id
 //Desc      Get one post
 //Access    Private
@@ -82,26 +101,6 @@ router.post(
 );
 
 //route     POST /api/posts/comments/:id
-//Desc      Like a comment
-//Access    Private
-// router.post(
-//   "/thumbsUp/:post_id/:comment_id",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Post.findOne({ _id: req.params.post_id })
-//       .then(post => {
-//         post.comments.findOne({ _id: req.params.comment_id }).then(comment => {
-//           //Add user id to commentLikes array
-//           comment.commentLikes.unshift({ user: req.user.id });
-//         });
-
-//         post.save().then(post => res.json(post));
-//       })
-//       .catch(err => res.status(404).json({ msg: "No Post Found" }));
-//   }
-// );
-
-//route     POST /api/posts/comments/:id
 //Desc      Add Comment
 //Access    Private
 router.post(
@@ -138,7 +137,7 @@ router.delete(
   (req, res) => {
     Post.findById(req.params.postId).then(post => {
       const index = post.comments
-        .map(comment => comment._id)
+        .map(comment => comment._id.toString())
         .indexOf(req.params.commentId);
       post.comments.splice(index, 1);
       post.save().then(post => res.json(post));

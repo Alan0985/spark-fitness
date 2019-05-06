@@ -20,6 +20,19 @@ export const addPost = postData => dispatch => {
     );
 };
 
+//Delete one post
+export const deletePost = postId => dispatch => {
+  axios
+    .delete(`/api/posts/${postId}`)
+    .then(res => res.json({ success: true }))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 //Get one post
 export const getPost = id => dispatch => {
   dispatch({ type: LOADING });
@@ -58,6 +71,7 @@ export const getPosts = () => dispatch => {
     );
 };
 
+//Like or Unlike post
 export const clickLike = postId => dispatch => {
   axios
     .post(`/api/posts/like/${postId}`)
@@ -69,24 +83,6 @@ export const clickLike = postId => dispatch => {
       })
     );
 };
-
-//Add Like to comment
-// export const thumbsUp = (postId, commentId) => dispatch => {
-//   axios
-//     .post(`/api/posts/thumbsUp/${postId}/${commentId}`)
-//     .then(res =>
-//       dispatch({
-//         type: GET_POST,
-//         payload: res.data
-//       })
-//     )
-//     .catch(err =>
-//       dispatch({
-//         type: GET_ERRORS,
-//         payload: err.response.data
-//       })
-//     );
-// };
 
 //Add Comment
 export const addComment = (postId, commentData) => dispatch => {

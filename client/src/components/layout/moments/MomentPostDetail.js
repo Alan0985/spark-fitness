@@ -6,7 +6,7 @@ import Moment from "react-moment";
 
 import CommentList from "../comments/CommentList";
 import Spinner from "../../common/Spinner";
-import { getPost, addComment } from "../../../actions/postActions";
+import { getPost, deletePost, addComment } from "../../../actions/postActions";
 
 import "./MomentPostDetail.css";
 import avatarPath from "../../../img/avatar_500.jpg";
@@ -66,6 +66,13 @@ class MomentPostDetail extends Component {
     this.setState({ text: "" });
   };
 
+  onDeletePost(postId) {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      this.props.deletePost(postId);
+      window.location.replace("/moments");
+    }
+  }
+
   render() {
     const { post, loading } = this.props.post;
     const { errors } = this.state;
@@ -113,6 +120,15 @@ class MomentPostDetail extends Component {
                 <img src={postImage_3} alt="postImage_3" />
               </div>
             </div>
+
+            {post.user === this.props.auth.user.id ? (
+              <div
+                className="deletePost"
+                onClick={this.onDeletePost.bind(this, post._id)}
+              >
+                <i className="fas fa-trash-alt" />
+              </div>
+            ) : null}
           </div>
 
           <div className="addComment">
@@ -138,29 +154,6 @@ class MomentPostDetail extends Component {
             </div>
             <div className="commentList">
               <CommentList comments={post.comments} />
-
-              {/* <div className="commentItem">
-                <div className="commentItemHeader">
-                  <div className="avatarNameTime">
-                    <div className="avatar">
-                      <img src={avatar2} alt="avatar" />
-                    </div>
-                    <div className="nameTime">
-                      <p className="name">Jane</p>
-                      <p className="commentTime">2019/04/17 22:14</p>
-                    </div>
-                  </div>
-
-                  <div className="thumbsUp">
-                    <i className="far fa-thumbs-up" />
-                    <p className="thumbsUpQty">12</p>
-                  </div>
-                </div>
-
-                <div className="commentItemContent">
-                  <p>Lorem ipsum dolor sit, amet consect adipis</p>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -185,10 +178,10 @@ class MomentPostDetail extends Component {
 
 MomentPostDetail.propTypes = {
   getPost: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
-  // postId: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired
 };
 
@@ -200,5 +193,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPost, addComment }
+  { getPost, deletePost, addComment }
 )(MomentPostDetail);

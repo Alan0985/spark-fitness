@@ -8,22 +8,10 @@ import { deleteComment } from "../../../actions/postActions";
 import avatar2 from "../../../img/avatar2_500.jpg";
 
 class CommentItem extends Component {
-  // onClickThumbsUp(postId, commentId) {
-  //   // const { comment, post, auth } = this.props;
-  //   // if (
-  //   //   //Check the signed-in user already liked this comment or not
-  //   //   comment.commentLikes.map(like => like.user === auth.user.id).length > 0
-  //   // ) {
-  //   //   this.props.unThumbsUp(
-  //   //     this.props.match.params.postId,
-  //   //     this.props.match.params.commentId
-  //   //   );
-  //   // } else {
-  //   this.props.thumbsUp(postId, commentId);
-  // }
-
   onDeleteComment(postId, commentId) {
-    this.props.deleteComment(postId, commentId);
+    if (window.confirm("Delete this comment?")) {
+      this.props.deleteComment(postId, commentId);
+    }
   }
 
   render() {
@@ -42,7 +30,6 @@ class CommentItem extends Component {
               </p>
             </div>
           </div>
-
           {comment.user === auth.user.id ? (
             <div
               className="trash"
@@ -55,18 +42,6 @@ class CommentItem extends Component {
               <i className="fas fa-trash-alt" />
             </div>
           ) : null}
-
-          {/* <div
-            className="thumbsUp"
-            onClick={this.onClickThumbsUp.bind(
-              this,
-              post.post._id,
-              comment._id
-            )}
-          >
-            <i className="far fa-thumbs-up" />
-            <p className="thumbsUpQty">{comment.commentLikes.length}</p>
-          </div> */}
         </div>
 
         <div className="commentItemContent">

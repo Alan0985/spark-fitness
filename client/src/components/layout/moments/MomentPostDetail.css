@@ -109,7 +109,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  padding-bottom: 2vw;
+  padding-bottom: 0;
 }
 
 #postDetail .postImage {
@@ -124,23 +124,15 @@
   border-radius: 6px;
 }
 
-#postDetail .postComments {
-  height: 100%;
-  background-color: #fff;
-  padding: 0 2.5vw;
-}
-
-#postDetail .allComments {
-  height: 40px;
+#postDetail .deletePost {
+  padding: 5px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid #ddd;
+  justify-content: flex-end;
 }
 
-#postDetail .commentItem {
-  padding: 5px 0;
-  border-bottom: 1px solid #ddd;
+#postDetail .fa-trash-alt {
+  color: #ccc;
+  font-weight: 300;
 }
 
 #postDetail .addComment {
@@ -184,6 +176,25 @@
   border-radius: 16px;
   color: #fff;
   background-color: #2c3e50;
+}
+
+#postDetail .postComments {
+  height: 100%;
+  background-color: #fff;
+  padding: 0 2.5vw;
+}
+
+#postDetail .allComments {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+#postDetail .commentItem {
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
 }
 
 #postDetail .postComments .noComment {
