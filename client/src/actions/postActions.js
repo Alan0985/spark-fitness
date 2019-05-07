@@ -75,7 +75,7 @@ export const getPosts = () => dispatch => {
 export const clickLike = postId => dispatch => {
   axios
     .post(`/api/posts/like/${postId}`)
-    .then(res => dispatch(getPosts()))
+    .then(res => window.location.reload())
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

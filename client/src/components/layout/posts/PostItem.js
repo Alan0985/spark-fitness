@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
+import { clickLike } from "../../../actions/postActions";
+
 import postImage_1 from "../../../img/postImages/postImage_1.jpg";
 import postImage_2 from "../../../img/postImages/postImage_2.jpg";
 import postImage_3 from "../../../img/postImages/postImage_3.jpg";
@@ -15,8 +17,12 @@ import postImage_8 from "../../../img/postImages/postImage_8.jpg";
 import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
 class PostItem extends Component {
+  onClickLike(postId) {
+    this.props.clickLike(postId);
+  }
+
   render() {
-    const { post } = this.props;
+    const { post, auth } = this.props;
     return (
       <div className="postContent">
         <div className="postContentHeader">
@@ -78,8 +84,16 @@ class PostItem extends Component {
         </div>
 
         <div className="postContentFooter">
-          <div className="postLikes">
-            <i className="far fa-heart" />
+          <div
+            className="postLikes"
+            onClick={this.onClickLike.bind(this, post._id)}
+          >
+            {post.postLikes.filter(like => like.user === auth.user.id).length >
+            0 ? (
+              <i className="fas fa-heart" />
+            ) : (
+              <i className="far fa-heart" />
+            )}
             <p className="likesQty">{post.postLikes.length}</p>
           </div>
           <div className="postComments">
@@ -96,6 +110,7 @@ class PostItem extends Component {
 }
 
 PostItem.propTypes = {
+  clickLike: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired
 };
@@ -106,5 +121,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { clickLike }
 )(PostItem);

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Moment from "react-moment";
 
 import CommentList from "../comments/CommentList";
-import { addComment } from "../../../actions/postActions";
+import { getPost, clickLike, addComment } from "../../../actions/postActions";
 
 import postImage_1 from "../../../img/postImages/postImage_1.jpg";
 import postImage_2 from "../../../img/postImages/postImage_2.jpg";
@@ -25,6 +25,10 @@ class PostMain extends Component {
   onChange = e => {
     this.setState({ text: e.target.value });
   };
+
+  onClickLike(postId) {
+    this.props.clickLike(postId);
+  }
 
   onSubmit = e => {
     e.preventDefault();
@@ -62,8 +66,16 @@ class PostMain extends Component {
               </div>
             </div>
 
-            <div className="postLikes">
-              <i className="fas fa-heart" />
+            <div
+              className="postLikes"
+              onClick={this.onClickLike.bind(this, post._id)}
+            >
+              {post.postLikes.filter(like => like.user === auth.user.id)
+                .length > 0 ? (
+                <i className="fas fa-heart" />
+              ) : (
+                <i className="far fa-heart" />
+              )}
               <p className="likesQty">{post.postLikes.length}</p>
             </div>
           </div>
@@ -118,6 +130,8 @@ class PostMain extends Component {
 }
 
 PostMain.propTypes = {
+  getPost: PropTypes.func.isRequired,
+  clickLike: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
@@ -132,5 +146,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addComment }
+  { getPost, clickLike, addComment }
 )(PostMain);

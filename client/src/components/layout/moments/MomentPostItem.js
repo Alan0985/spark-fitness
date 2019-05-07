@@ -17,21 +17,12 @@ import postImage_8 from "../../../img/postImages/postImage_8.jpg";
 import postImage_9 from "../../../img/postImages/postImage_9.jpg";
 
 class MomentPostItem extends Component {
-  onClickLikes(postId) {
+  onClickLike(postId) {
     this.props.clickLike(postId);
   }
 
-  userLiked() {
-    const { post, auth } = this.props;
-    if (post.postLikes.map(like => like.user === auth.user.id).length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   render() {
-    const { post } = this.props;
+    const { post, auth } = this.props;
 
     return (
       <div className="postContent">
@@ -96,9 +87,10 @@ class MomentPostItem extends Component {
         <div className="postContentFooter">
           <div
             className="postLikes"
-            onClick={this.onClickLikes.bind(this, post._id)}
+            onClick={this.onClickLike.bind(this, post._id)}
           >
-            {this.userLiked() ? (
+            {post.postLikes.filter(like => like.user === auth.user.id).length >
+            0 ? (
               <i className="fas fa-heart" />
             ) : (
               <i className="far fa-heart" />
