@@ -32,7 +32,7 @@ router.post("/me/signUp", (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        avatar: req.body.avatar,
+        avatar: "https://www.sweetasnz.ml/avatar/avatar_default.svg",
         sfid: req.body.sfid,
         weight: req.body.weight,
         password: req.body.password,

@@ -89,6 +89,26 @@ export const updateUserInfo = newInfo => dispatch => {
     );
 };
 
+// Change avatar
+// export const changeAvatar = newAvatar => dispatch => {
+//   axios
+//     .post("/api/users/me/editProfile", newAvatar)
+//     .then(res => {
+//       dispatch({
+//         type: GET_USER_INFO,
+//         payload: res.data
+//       });
+//       alert("Saved");
+//       window.location = "/me";
+//     })
+//     .catch(err =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// };
+
 // Sign Out
 export const signOut = () => dispatch => {
   //Remove token from localStorge

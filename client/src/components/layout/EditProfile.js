@@ -87,13 +87,17 @@ class EditProfile extends Component {
 
           <div className="avatar">
             <p>Avatar</p>
-            {/* <img src={this.state.avatar} alt="avatar" /> */}
-            <input
-              type="file"
-              name="avatar"
-              capture="camera"
-              accept="image/*"
-            />
+
+            <div className="avatarInput">
+              {/* <input
+                type="file"
+                name="avatar"
+                accept="image/*"
+                capture="camera"
+                onClick={this.onChangeAvatar.bind(this)}
+              /> */}
+              <img src={this.state.avatar} alt="avatar" />
+            </div>
           </div>
 
           <div className="name">
@@ -146,6 +150,7 @@ class EditProfile extends Component {
 EditProfile.propTypes = {
   getUserInfo: PropTypes.func.isRequired,
   updateUserInfo: PropTypes.func.isRequired,
+  changeAvatar: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };

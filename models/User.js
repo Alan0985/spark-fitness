@@ -18,6 +18,7 @@ const UserSchema = new Schema({
   avatar: {
     type: String
   },
+
   sfid: {
     type: String
   },

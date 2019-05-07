@@ -51,6 +51,21 @@
   background-color: #fff;
 }
 
+#myPosts .postMain .noPost {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+}
+
+#myPosts .postMain .noPost div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #myPosts .postContent {
   height: 100%;
   background-color: #fff;

@@ -45,7 +45,7 @@ class NewPost extends Component {
     };
 
     this.props.addPost(newPost);
-    this.props.history.push("/me/myPosts");
+    window.location.replace("/me/myPosts");
   }
 
   render() {
