@@ -1,0 +1,54 @@
+.exploreHeader {
+  width: 100vw;
+  height: 50px;
+  color: #c23616;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #c23616;
+}
+
+.exploreHeader i {
+  font-size: 38px;
+  margin-right: 10px;
+}
+
+.exploreHeader p {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+#exploreTab {
+  width: 100vw;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#exploreTab ul {
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#exploreTab a {
+  width: 25vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bdc3c7;
+  text-decoration: none;
+  border-bottom: 2px solid #fff;
+}
+
+#exploreTab p {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+#exploreTab .active {
+  color: #c23616;
+  border-bottom: 2px solid #c23616;
+}

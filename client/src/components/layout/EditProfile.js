@@ -43,6 +43,10 @@ class EditProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  onChangeAvatar() {
+    // this.props.changeAvatar();
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -89,13 +93,13 @@ class EditProfile extends Component {
             <p>Avatar</p>
 
             <div className="avatarInput">
-              {/* <input
+              <input
                 type="file"
                 name="avatar"
                 accept="image/*"
                 capture="camera"
                 onClick={this.onChangeAvatar.bind(this)}
-              /> */}
+              />
               <img src={this.state.avatar} alt="avatar" />
             </div>
           </div>
@@ -150,7 +154,7 @@ class EditProfile extends Component {
 EditProfile.propTypes = {
   getUserInfo: PropTypes.func.isRequired,
   updateUserInfo: PropTypes.func.isRequired,
-  changeAvatar: PropTypes.func.isRequired,
+  // changeAvatar: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };

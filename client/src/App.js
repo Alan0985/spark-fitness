@@ -8,6 +8,8 @@ import store from "./store";
 
 import MobileNavbar from "./components/layout/MobileNavbar";
 import Landing from "./components/layout/Landing";
+import Explore from "./components/layout/explore/Explore";
+
 import Me from "./components/layout/Me";
 import EditProfile from "./components/layout/EditProfile";
 import MyPosts from "./components/layout/posts/MyPosts";
@@ -47,6 +49,15 @@ class App extends Component {
         <Router>
           <div className="App">
             <Route exact path="/" component={Landing} />
+
+            <Route exact path="/explore" component={Explore} />
+            <Route exact path="/explore/contact" component={Explore} />
+            <Route exact path="/explore/membership" component={Explore} />
+            <Route exact path="/explore/pt" component={Explore} />
+
+            <Route exact path="/moments" component={Moments} />
+            <Route exact path="/moments/:id" component={MomentPostDetail} />
+
             <Route exact path="/me" component={Me} />
             <Route exact path="/me/signIn" component={SignIn} />
             <Route exact path="/me/signUp" component={SignUp} />
@@ -54,8 +65,7 @@ class App extends Component {
             <Route exact path="/me/newPost" component={NewPost} />
             <Route exact path="/me/myPosts" component={MyPosts} />
             <Route exact path="/me/myPosts/:id" component={PostDetail} />
-            <Route exact path="/moments" component={Moments} />
-            <Route exact path="/moments/:id" component={MomentPostDetail} />
+
             <MobileNavbar />
           </div>
         </Router>
