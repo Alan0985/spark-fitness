@@ -1,0 +1,85 @@
+#about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mission {
+  width: 100vw;
+  height: 80vh;
+  color: #fff;
+  background-image: url(../../../../img/768/mission_768.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.mission .missionOverlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mission h1 {
+  font-size: 45px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #fff;
+  margin-top: 15px;
+}
+
+.aboutUs {
+  width: 80vw;
+  height: 100%;
+  min-height: 400px;
+  text-align: center;
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutUs h1 {
+  color: #c23616;
+  font-size: 45px;
+}
+
+.team {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.team .teamMember {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.team img {
+  border-radius: 100px;
+}
+
+.team h1 {
+  color: #c23616;
+  font-size: 45px;
+}
+
+.team p {
+  text-align: center;
+  color: #2c3e50;
+}
