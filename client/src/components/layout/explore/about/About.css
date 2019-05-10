@@ -54,15 +54,24 @@
 }
 
 .team {
-  width: 80vw;
+  width: 900px;
+  max-width: 80vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.team .teamMembers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .team .teamMember {
-  max-width: 500px;
+  width: 400px;
+  max-width: 80vw;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -5,7 +5,7 @@ export default function Footer() {
     <footer>
       <div className="connect">
         <div className="address">
-          <p>P: 021 1234567</p>
+          <p>P: +64 21 1234567</p>
           <p>E: info@sparkfitness.co.nz</p>
           <p>Rohi Pl, Flat Bush, Auckland 2016, New Zealand</p>
         </div>

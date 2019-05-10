@@ -8,11 +8,6 @@ import Spinner from "../../../common/Spinner";
 
 import "./About.css";
 
-const avatar_jason = "https://www.sweetasnz.ml/avatar/avatar_jason.jpg";
-const avatar_mary = "https://www.sweetasnz.ml/avatar/avatar_mary.jpg";
-const avatar_lizzy = "https://www.sweetasnz.ml/avatar/avatar_lizzy.jpg";
-const avatar_jack = "https://www.sweetasnz.ml/avatar/avatar_jack.jpg";
-
 class About extends Component {
   componentDidMount() {
     this.props.getExploreData();
@@ -21,14 +16,21 @@ class About extends Component {
   render() {
     const { team } = this.props.explore.explore;
     const { loading } = this.props.explore;
-    console.log(team);
 
-    // let teamMembers;
-    // if (typeof team === "undefined" || loading) {
-    //   teamMembers = <Spinner />;
-    // } else {
-    //   teamMembers = team.map();
-    // }
+    let teamMembers;
+    if (typeof team === "undefined" || loading) {
+      teamMembers = <Spinner />;
+    } else {
+      teamMembers = team.map(teamMember => (
+        <div className="teamMember" key={teamMember.id}>
+          <img src={teamMember.avatar} alt={teamMember.name} />
+          <h2>{teamMember.name}</h2>
+          <p>{teamMember.title}</p>
+          <p>{teamMember.description}</p>
+        </div>
+      ));
+    }
+
     return (
       <div id="about">
         <div className="mission">
@@ -58,59 +60,7 @@ class About extends Component {
             <h1>Our Team</h1>
           </div>
 
-          <div className="teamMembers">
-            <div className="row">
-              <div className="teamMember col col-lg-6 col-xs-12">
-                <img src={avatar_jason} alt="avatar_jason" />
-                <h2>Jason</h2>
-                <p>Founder and Master Trainer</p>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde
-                  totam porro quae, nisi ducimus officiis nemo quam laudantium
-                  non vero consequatur illum soluta odit quasi adipisci in sit
-                  tempore eaque.
-                </p>
-              </div>
-
-              <div className="teamMember col col-lg-6 col-xs-12">
-                <img src={avatar_mary} alt="avatar_mary" />
-                <h2>Mary</h2>
-                <p>Trainer</p>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde
-                  totam porro quae, nisi ducimus officiis nemo quam laudantium
-                  non vero consequatur illum soluta odit quasi adipisci in sit
-                  tempore eaque.
-                </p>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="teamMember col col-lg-6 col-xs-12">
-                <img src={avatar_lizzy} alt="avatar_lizzy" />
-                <h2>Lizzy</h2>
-                <p>Trainer</p>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde
-                  totam porro quae, nisi ducimus officiis nemo quam laudantium
-                  non vero consequatur illum soluta odit quasi adipisci in sit
-                  tempore eaque.
-                </p>
-              </div>
-
-              <div className="teamMember col col-lg-6 col-xs-12">
-                <img src={avatar_jack} alt="avatar_jack" />
-                <h2>Jack</h2>
-                <p>Trainer</p>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde
-                  totam porro quae, nisi ducimus officiis nemo quam laudantium
-                  non vero consequatur illum soluta odit quasi adipisci in sit
-                  tempore eaque.
-                </p>
-              </div>
-            </div>
-          </div>
+          <div className="teamMembers">{teamMembers}</div>
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import Video from "./Video";
 import WhySpark from "./WhySpark";
-import Trial from "./Trial";
+import GrabTrial from "./GrabTrial";
 import MembershipBanner from "./MembershipBanner";
 import Footer from "./Footer";
 
@@ -12,7 +12,7 @@ export default function Landing() {
     <div>
       <Video />
       <WhySpark />
-      <Trial />
+      <GrabTrial />
       <MembershipBanner />
       <Footer />
     </div>

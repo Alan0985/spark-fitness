@@ -146,7 +146,7 @@
 }
 
 /********************************** 3 Days Trial */
-#trial {
+#grabTrial {
   width: 100vw;
   color: #fff;
   text-align: center;
@@ -154,11 +154,11 @@
   background-color: #2c3e50;
 }
 
-#trial h1 {
+#grabTrial h1 {
   font-size: 55px;
 }
 
-#trial a {
+#grabTrial a {
   display: inline-block;
   width: 200px;
   height: 40px;
@@ -172,7 +172,7 @@
   font-weight: 600;
 }
 
-#trial a:hover {
+#grabTrial a:hover {
   color: #fff;
   background-color: #c23616;
 }

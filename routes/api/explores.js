@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Explore = require("../../models/ExploreModel");
 
+const validateContactForm = require("../../validation/contactFormValidation");
+
 //route     GET /api/explore
 //Desc      Get Explore Data
 //Access    Public
@@ -16,6 +18,13 @@ router.get("/", (req, res) => {
 //Desc      Create a new message
 //Access    Public
 router.post("/", (req, res) => {
+  const { errors, isValid } = validateContactForm(req.body);
+
+  //Validate
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const newMessage = {
     name: req.body.name,
     email: req.body.email,

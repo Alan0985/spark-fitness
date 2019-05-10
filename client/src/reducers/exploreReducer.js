@@ -1,8 +1,4 @@
-import {
-  GET_EXPLORE_DATA,
-  CREATE_NEW_MESSAGE,
-  LOADING
-} from "../actions/types";
+import { GET_EXPLORE_DATA, LOADING } from "../actions/types";
 
 const initialState = {
   explore: {},
@@ -23,13 +19,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         explore: action.payload,
-        loading: false
-      };
-
-    case CREATE_NEW_MESSAGE:
-      return {
-        ...state,
-        messages: [action.payload, ...state.messages],
         loading: false
       };
 
