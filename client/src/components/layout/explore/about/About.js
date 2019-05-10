@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import { getExploreData } from "../../../../actions/exploreActions";
 
 import Spinner from "../../../common/Spinner";
 
@@ -10,7 +14,21 @@ const avatar_lizzy = "https://www.sweetasnz.ml/avatar/avatar_lizzy.jpg";
 const avatar_jack = "https://www.sweetasnz.ml/avatar/avatar_jack.jpg";
 
 class About extends Component {
+  componentDidMount() {
+    this.props.getExploreData();
+  }
+
   render() {
+    const { team } = this.props.explore.explore;
+    const { loading } = this.props.explore;
+    console.log(team);
+
+    // let teamMembers;
+    // if (typeof team === "undefined" || loading) {
+    //   teamMembers = <Spinner />;
+    // } else {
+    //   teamMembers = team.map();
+    // }
     return (
       <div id="about">
         <div className="mission">
@@ -98,4 +116,17 @@ class About extends Component {
     );
   }
 }
-export default About;
+
+About.propTypes = {
+  getExploreData: PropTypes.func.isRequired,
+  explore: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  explore: state.explore
+});
+
+export default connect(
+  mapStateToProps,
+  { getExploreData }
+)(About);
