@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import classnames from "classnames";
 
 class ExploreNavbar extends Component {
   render() {
     return (
-      <div>
+      <div className="fixedHeader">
         <div className="exploreHeader">
           <i className="fab fa-gripfire" />
           <p>Spark Fitness</p>
         </div>
 
-        <nav id="exploreTab">
+        <nav className="exploreTab">
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink exact className="" to="/explore">
