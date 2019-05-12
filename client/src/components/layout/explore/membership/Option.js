@@ -1,15 +1,43 @@
 import React, { Component } from "react";
 
-import FranchiseItem from "./FranchiseItem";
+import { YesFranchiseItem, NoFranchiseItem } from "./FranchiseItem";
 
 class Option extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showFranchise: false
+    };
+  }
+
+  toggleFranchise() {
+    this.setState({
+      showFranchise: !this.state.showFranchise
+    });
+  }
+
   render() {
     const { option } = this.props;
+    let yesFranchiseList;
+    let noFranchiseList;
 
-    let franchiseList;
-    franchiseList = option.franchise.map((franchiseItem, i) => (
-      <FranchiseItem key={option.franchise[i]} franchiseValue={franchiseItem} />
-    ));
+    if (this.state.showFranchise) {
+      yesFranchiseList = option.yesFranchise.map((franchiseItem, i) => (
+        <YesFranchiseItem
+          key={option.yesFranchise[i]}
+          franchiseValue={franchiseItem}
+        />
+      ));
+      noFranchiseList = option.noFranchise.map((franchiseItem, i) => (
+        <NoFranchiseItem
+          key={option.noFranchise[i]}
+          franchiseValue={franchiseItem}
+        />
+      ));
+    } else {
+      yesFranchiseList = null;
+      noFranchiseList = null;
+    }
 
     return (
       <div id={`option${option.type}`} className="option">
@@ -20,7 +48,10 @@ class Option extends Component {
           </div>
           <div className="optionDetail">
             <a href="/explore/contact">Join Now</a>
-            <div className="yourFranchise">
+            <div
+              onClick={this.toggleFranchise.bind(this)}
+              className="yourFranchise"
+            >
               <i className="fas fa-angle-double-down" />
               <p>Your Franchise</p>
               <i className="fas fa-angle-double-down" />
@@ -29,7 +60,10 @@ class Option extends Component {
         </div>
 
         <div className="franchise">
-          <div className="franchiseList">{franchiseList}</div>
+          <div className="franchiseList">
+            {yesFranchiseList}
+            {noFranchiseList}
+          </div>
         </div>
       </div>
     );

@@ -111,6 +111,10 @@
   margin-top: 6px;
 }
 
+.options .noFranchiseItem {
+  background-color: #ccc;
+}
+
 .options .franchiseList i {
   margin-right: 6px;
   font-size: 24px;
@@ -123,9 +127,11 @@
 }
 
 .options h1,
-.options h5,
 .options p {
   margin-bottom: 0;
+}
+.options h5 {
+  margin: 3px auto;
 }
 
 .options a {
@@ -150,11 +156,11 @@
   background-image: url(../../../../img/768/basic_768.jpg);
 }
 
-#optionBasic .franchiseItem:nth-child(odd) {
+#optionBasic .yesFranchiseItem:nth-child(odd) {
   background-color: rgba(129, 207, 224, 1);
 }
 
-#optionBasic .franchiseItem:nth-child(even),
+#optionBasic .yesFranchiseItem:nth-child(even),
 #optionBasic a {
   background-color: rgba(37, 116, 169, 1);
 }
@@ -169,12 +175,12 @@
   background-image: url(../../../../img/768/flexi_768.jpg);
 }
 
-#optionFlexi .franchiseItem:nth-child(odd),
+#optionFlexi .yesFranchiseItem:nth-child(odd),
 #optionFlexi a {
   background-color: rgba(77, 175, 124, 1);
 }
 
-#optionFlexi .franchiseItem:nth-child(even) {
+#optionFlexi .yesFranchiseItem:nth-child(even) {
   background-color: rgba(35, 203, 167, 1);
 }
 
@@ -188,11 +194,11 @@
   background-image: url(../../../../img/768/prepay_768.jpg);
 }
 
-#optionPrepay .franchiseItem:nth-child(odd) {
-  background-color: rgba(252, 214, 112, 1);
+#optionPrepay .yesFranchiseItem:nth-child(odd) {
+  background-color: rgba(244, 208, 63, 1);
 }
 
-#optionPrepay .franchiseItem:nth-child(even),
+#optionPrepay .yesFranchiseItem:nth-child(even),
 #optionPrepay a {
   background-color: rgba(245, 171, 53, 1);
 }
