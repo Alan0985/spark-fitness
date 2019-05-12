@@ -32,7 +32,7 @@ class Membership extends Component {
         <div className="optionBanner">
           <div className="optionBannerOverlay">
             <h1>Membership Options</h1>
-            <p>Choosing health can be a life altering experience</p>
+            <p>Make a decision, then you are on the way</p>
           </div>
         </div>
         <div className="options">{options}</div>

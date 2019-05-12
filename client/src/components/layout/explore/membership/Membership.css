@@ -10,14 +10,10 @@
   width: 100vw;
   height: 80vh;
   color: #fff;
-  background-image: url(../../../../img/768/mission_768.jpg);
+  background-image: url(../../../../img/768/membership_768.jpg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  margin-bottom: 10px;
 }
 
 .optionBanner .optionBannerOverlay {
@@ -39,6 +35,15 @@
   margin-top: 15px;
 }
 
+.options {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .options .option {
   width: 96vw;
   max-width: 400px;
@@ -46,7 +51,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin: 20px 20px;
 }
 
 .options .optionHeader {
@@ -61,42 +66,42 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
   border-radius: 8px;
 }
 
 .options .optionTitle {
   width: 100%;
-  background-color: rgba(0, 181, 204, 0.7);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   text-align: center;
 }
 
 .options .optionDetail {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
-.options .franchiseHeader {
-  width: 320px;
+.options .yourFranchise {
+  width: 100%;
   height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  background-color: rgba(0, 181, 204, 1);
-  border-radius: 18px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
-.options .franchiseHeader p {
-  margin: 0 20px;
+.options .yourFranchise p {
+  margin: 0 10px;
+}
+
+.options .franchise {
+  width: 100%;
 }
 
 .options .franchiseItem {
-  width: 320px;
   height: 36px;
   display: flex;
   justify-content: space-between;
@@ -106,18 +111,9 @@
   margin-top: 6px;
 }
 
-.options .franchiseItem:nth-child(odd) {
-  background-color: rgba(129, 207, 224, 1);
-}
-
-.options .franchiseItem:nth-child(even) {
-  background-color: rgba(0, 181, 204, 1);
-}
-
 .options .franchiseList i {
   margin-right: 6px;
   font-size: 24px;
-  color: #fff;
 }
 
 .options .franchiseList p {
@@ -131,15 +127,72 @@
 .options p {
   margin-bottom: 0;
 }
+
 .options a {
   width: 120px;
   height: 36px;
   line-height: 36px;
   text-align: center;
-  background-color: #c23616;
   color: #fff;
   border-radius: 18px;
   font-size: 20px;
   text-decoration: none;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+}
+
+/* Basic Membership */
+#optionBasic .optionTitle,
+#optionBasic .yourFranchise {
+  background-color: rgba(37, 116, 169, 0.8);
+}
+
+#optionBasic .optionHeader {
+  background-image: url(../../../../img/768/basic_768.jpg);
+}
+
+#optionBasic .franchiseItem:nth-child(odd) {
+  background-color: rgba(129, 207, 224, 1);
+}
+
+#optionBasic .franchiseItem:nth-child(even),
+#optionBasic a {
+  background-color: rgba(37, 116, 169, 1);
+}
+
+/* Flexi Membership */
+#optionFlexi .optionTitle,
+#optionFlexi .yourFranchise {
+  background-color: rgba(77, 175, 124, 0.8);
+}
+
+#optionFlexi .optionHeader {
+  background-image: url(../../../../img/768/flexi_768.jpg);
+}
+
+#optionFlexi .franchiseItem:nth-child(odd),
+#optionFlexi a {
+  background-color: rgba(77, 175, 124, 1);
+}
+
+#optionFlexi .franchiseItem:nth-child(even) {
+  background-color: rgba(35, 203, 167, 1);
+}
+
+/* Prepay Membership */
+#optionPrepay .optionTitle,
+#optionPrepay .yourFranchise {
+  background-color: rgba(245, 171, 53, 0.8);
+}
+
+#optionPrepay .optionHeader {
+  background-image: url(../../../../img/768/prepay_768.jpg);
+}
+
+#optionPrepay .franchiseItem:nth-child(odd) {
+  background-color: rgba(252, 214, 112, 1);
+}
+
+#optionPrepay .franchiseItem:nth-child(even),
+#optionPrepay a {
+  background-color: rgba(245, 171, 53, 1);
 }

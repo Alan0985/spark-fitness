@@ -20,15 +20,15 @@ class Option extends Component {
           </div>
           <div className="optionDetail">
             <a href="/explore/contact">Join Now</a>
+            <div className="yourFranchise">
+              <i className="fas fa-angle-double-down" />
+              <p>Your Franchise</p>
+              <i className="fas fa-angle-double-down" />
+            </div>
           </div>
         </div>
-        <div className="franchise">
-          <div className="franchiseHeader">
-            <i className="fas fa-angle-double-down" />
-            <p>Your Franchise</p>
-            <i className="fas fa-angle-double-down" />
-          </div>
 
+        <div className="franchise">
           <div className="franchiseList">{franchiseList}</div>
         </div>
       </div>
