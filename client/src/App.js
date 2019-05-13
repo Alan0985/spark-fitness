@@ -53,7 +53,7 @@ class App extends Component {
             <Route exact path="/explore" component={Explore} />
             <Route exact path="/explore/contact" component={Explore} />
             <Route exact path="/explore/membership" component={Explore} />
-            <Route exact path="/explore/pt" component={Explore} />
+            <Route exact path="/explore/training" component={Explore} />
 
             <Route exact path="/moments" component={Moments} />
             <Route exact path="/moments/:id" component={MomentPostDetail} />

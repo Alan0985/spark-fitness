@@ -23,7 +23,7 @@ class ExploreNavbar extends Component {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="" to="/explore/pt">
+              <NavLink className="" to="/explore/training">
                 <p>Training</p>
               </NavLink>
             </li>

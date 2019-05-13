@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import { YesFranchiseItem, NoFranchiseItem } from "./FranchiseItem";
 
 class Option extends Component {

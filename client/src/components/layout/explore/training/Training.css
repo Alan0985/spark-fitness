@@ -1,0 +1,115 @@
+#training {
+  margin-top: 95px;
+  display: flex;
+  flex-direction: column;
+}
+
+.trainingGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trainingIntro {
+  width: 80vw;
+  height: 100%;
+  text-align: center;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.trainingIntro h1 {
+  color: #c23616;
+  font-size: 45px;
+}
+
+.trainingClass {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.trainingClass .classItem {
+  width: 96vw;
+  max-width: 400px;
+  height: 140px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 3px 3px;
+  border-radius: 8px;
+  background-color: #ccc;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 5px;
+}
+
+.trainingClass #pt01 {
+  background-image: url(../../../../img/400/pt01_400.jpg);
+}
+
+.trainingClass #pt02 {
+  background-image: url(../../../../img/400/pt02_400.jpg);
+}
+
+.trainingClass #pt03 {
+  background-image: url(../../../../img/400/pt03_400.jpg);
+}
+
+.trainingClass #gt01 {
+  background-image: url(../../../../img/400/yoga1_400.jpg);
+}
+
+.trainingClass #gt02 {
+  background-image: url(../../../../img/400/tabata2_400.jpg);
+}
+
+.trainingClass #gt03 {
+  background-image: url(../../../../img/400/tabata1_400.jpg);
+}
+
+.trainingClass #gt04 {
+  background-image: url(../../../../img/400/tabata1_400.jpg);
+}
+
+.trainingClass .nameAndIcon {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trainingClass h1 {
+  font-size: 22px;
+}
+
+.trainingClass p {
+  width: 36px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 10px;
+  border: 1px solid #c23616;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.trainingClass .enrollQty {
+  width: 90px;
+}
+
+.trainingClass .levelDuration {
+  width: 76px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.trainingClass i {
+  font-size: 18px;
+  color: #c23616;
+}

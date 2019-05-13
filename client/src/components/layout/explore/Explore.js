@@ -5,7 +5,7 @@ import ExploreNavbar from "./ExploreNavbar";
 import About from "./about/About";
 import Contact from "./contact/Contact";
 import Membership from "./membership/Membership";
-import PT from "./pt/PT";
+import Training from "./training/Training";
 
 import "./Explore.css";
 
@@ -18,7 +18,7 @@ class Explore extends Component {
           <Route exact path="/explore" component={About} />
           <Route exact path="/explore/contact" component={Contact} />
           <Route exact path="/explore/membership" component={Membership} />
-          <Route exact path="/explore/pt" component={PT} />
+          <Route exact path="/explore/training" component={Training} />
         </div>
       </Router>
     );
