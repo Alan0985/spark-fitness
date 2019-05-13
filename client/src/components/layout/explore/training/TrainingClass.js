@@ -8,14 +8,14 @@ export const TrainingClass = props => {
 
   return (
     <div id={props.classItem.id} className="classItem">
-      <div className="nameAndIcon">
+      <div className="classItemHeader">
         <h1 className="name">{props.classItem.name}</h1>
         <div className="icon">{popularity}</div>
       </div>
-      <p className="enrollQty">{`${props.classItem.enrollQty} Enrolled`}</p>
-      <div className="levelDuration">
+      <div className="classItemFooter">
         <p>{`L${props.classItem.level}`}</p>
         <p>{`${props.classItem.duration}h`}</p>
+        <p className="enrollQty">{`${props.classItem.enrollQty} Enrolled`}</p>
       </div>
     </div>
   );

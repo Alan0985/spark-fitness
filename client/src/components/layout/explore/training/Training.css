@@ -14,7 +14,7 @@
   width: 80vw;
   height: 100%;
   text-align: center;
-  margin: 20px 0;
+  margin: 10px 0;
   display: flex;
   flex-direction: column;
 }
@@ -33,7 +33,7 @@
 .trainingClass .classItem {
   width: 96vw;
   max-width: 400px;
-  height: 140px;
+  height: 160px;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  padding: 5px;
+  padding: 3px;
 }
 
 .trainingClass #pt01 {
@@ -61,30 +61,46 @@
 }
 
 .trainingClass #gt01 {
-  background-image: url(../../../../img/400/yoga1_400.jpg);
+  background-image: url(../../../../img/400/gt01_400.jpg);
 }
 
 .trainingClass #gt02 {
-  background-image: url(../../../../img/400/tabata2_400.jpg);
+  background-image: url(../../../../img/400/gt02_400.jpg);
 }
 
 .trainingClass #gt03 {
-  background-image: url(../../../../img/400/tabata1_400.jpg);
+  background-image: url(../../../../img/400/gt03_400.jpg);
 }
 
 .trainingClass #gt04 {
-  background-image: url(../../../../img/400/tabata1_400.jpg);
+  background-image: url(../../../../img/400/gt04_400.jpg);
 }
 
-.trainingClass .nameAndIcon {
+.trainingClass #gt05 {
+  background-image: url(../../../../img/400/gt05_400.jpg);
+}
+
+.trainingClass #gt06 {
+  background-image: url(../../../../img/400/gt06_400.jpg);
+}
+
+.trainingClass .classItemHeader {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .trainingClass h1 {
   font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+#gt01 h1,
+#gt03 h1 {
+  color: #2c3e50;
 }
 
 .trainingClass p {
@@ -92,21 +108,23 @@
   height: 20px;
   line-height: 20px;
   border-radius: 10px;
-  border: 1px solid #c23616;
   font-size: 14px;
   text-align: center;
-  color: #fff;
-  margin-bottom: 6px;
+  color: #2c3e50;
+  background-color: #fff;
+  margin-bottom: 0;
 }
 
 .trainingClass .enrollQty {
   width: 90px;
 }
 
-.trainingClass .levelDuration {
-  width: 76px;
+.trainingClass .classItemFooter {
+  height: 66px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .trainingClass i {
