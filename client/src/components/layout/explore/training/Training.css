@@ -1,7 +1,34 @@
 #training {
-  margin-top: 95px;
   display: flex;
   flex-direction: column;
+}
+
+.training {
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+  background-image: url(../../../../img/1920/training_1920.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.training .trainingOverlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.training h1 {
+  font-size: 45px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #fff;
+  margin-top: 120px;
 }
 
 .trainingGroup {

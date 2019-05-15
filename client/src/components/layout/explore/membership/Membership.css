@@ -1,5 +1,4 @@
 #membership {
-  margin-top: 95px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,9 +7,9 @@
 
 .optionBanner {
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
   color: #fff;
-  background-image: url(../../../../img/768/membership_768.jpg);
+  background-image: url(../../../../img/1920/membership_1920.jpg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -32,7 +31,7 @@
   font-size: 45px;
   text-transform: uppercase;
   border-bottom: 2px solid #fff;
-  margin-top: 15px;
+  margin-top: 120px;
 }
 
 .options {

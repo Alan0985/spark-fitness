@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 class ExploreNavbar extends Component {
   render() {
     return (
-      <div className="fixedHeader">
+      <div id="exploreNavbar">
         <div className="exploreHeader">
           <i className="fab fa-gripfire" />
           <p>Spark Fitness</p>

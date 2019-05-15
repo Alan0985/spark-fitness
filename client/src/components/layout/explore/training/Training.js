@@ -27,7 +27,20 @@ class Training extends Component {
       ));
     }
 
-    return <div id="training">{trainingGroup}</div>;
+    return (
+      <div id="training">
+        <div className="training">
+          <div className="trainingOverlay">
+            <h1>Our Training</h1>
+            <p>
+              No matter what your level of fitness and ability is, we’ve got a
+              class to suit you.
+            </p>
+          </div>
+        </div>
+        {trainingGroup}
+      </div>
+    );
   }
 }
 

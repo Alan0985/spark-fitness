@@ -6,12 +6,13 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, signOut } from "./actions/authActions";
 import store from "./store";
 
-import MobileNavbar from "./components/layout/MobileNavbar";
-import Landing from "./components/layout/Landing";
+import DesktopNavbar from "./components/layout/navbar/DesktopNavbar";
+import MobileNavbar from "./components/layout/navbar/MobileNavbar";
+import Landing from "./components/layout/landing/Landing";
 import Explore from "./components/layout/explore/Explore";
 
-import Me from "./components/layout/Me";
-import EditProfile from "./components/layout/EditProfile";
+import Me from "./components/layout/me/Me";
+import EditProfile from "./components/layout/me/EditProfile";
 import MyPosts from "./components/layout/posts/MyPosts";
 import NewPost from "./components/layout/posts/NewPost";
 import PostDetail from "./components/layout/posts/PostDetail";
@@ -48,6 +49,8 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
+            <DesktopNavbar />
+
             <Route exact path="/" component={Landing} />
 
             <Route exact path="/explore" component={Explore} />
