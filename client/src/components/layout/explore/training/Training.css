@@ -42,7 +42,7 @@
   max-width: 80vw;
   height: 100%;
   text-align: center;
-  margin: 10px 0;
+  margin: 30px 0;
   display: flex;
   flex-direction: column;
 }
@@ -120,7 +120,7 @@
 }
 
 .trainingClass h1 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   color: #fff;
   margin-bottom: 0;

@@ -37,18 +37,6 @@ export default class DesktopNavbar extends Component {
               <p>Contact</p>
             </NavLink>
           </li>
-
-          <li className="nav-item">
-            <NavLink exact className="" to="/moments">
-              <p>Moments</p>
-            </NavLink>
-          </li>
-
-          <li className="nav-item">
-            <NavLink className="" to="/me">
-              <p>Me</p>
-            </NavLink>
-          </li>
         </ul>
       </nav>
     );
