@@ -17,10 +17,8 @@ export default function Footer() {
         </div>
       </div>
       <div className="copyRight">
-        <div>
-          Copyright &copy; Spark Fitness; Developed By
-          <a href="https://github.com/Alan0985"> Alan Wang</a>
-        </div>
+        Copyright &copy; Spark Fitness; Developed By
+        <a href="https://github.com/Alan0985"> Alan Wang</a>
       </div>
     </footer>
   );

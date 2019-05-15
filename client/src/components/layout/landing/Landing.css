@@ -110,16 +110,17 @@
 
 /******************************** Membership Banner */
 #membershipBanner {
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
   position: relative;
-  background-image: url(../../../img/768/join_768.jpg);
+  background-image: url(../../../img/1920/join_1920.jpg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-#membershipBanner .membershipBanner {
+#membershipBanner .bannerOverlay {
   width: 100vw;
   height: 100vh;
   text-align: center;
@@ -194,18 +195,23 @@
 footer {
   width: 100vw;
   height: 100%;
-  margin-bottom: 55px;
   color: #fff;
   background-color: #2c3e50;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  padding: 5px;
+}
+
+footer .connect {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 5px 5px;
 }
 
 footer .address p {
-  margin-bottom: 8px;
+  margin: 5px 0;
 }
 
 footer .socialMedia {
@@ -230,7 +236,8 @@ footer .socialMedia i:hover {
 }
 
 footer .copyRight {
-  margin-top: 10px;
+  height: 24px;
+  line-height: 24px;
   border-top: 1px solid #fff;
   font-size: 14px;
 }

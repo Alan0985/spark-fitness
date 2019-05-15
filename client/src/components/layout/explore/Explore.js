@@ -7,6 +7,8 @@ import Contact from "./contact/Contact";
 import Membership from "./membership/Membership";
 import Training from "./training/Training";
 
+import Footer from "../landing/Footer";
+
 import "./Explore.css";
 
 class Explore extends Component {
@@ -19,6 +21,7 @@ class Explore extends Component {
           <Route exact path="/explore/contact" component={Contact} />
           <Route exact path="/explore/membership" component={Membership} />
           <Route exact path="/explore/training" component={Training} />
+          <Footer />
         </div>
       </Router>
     );

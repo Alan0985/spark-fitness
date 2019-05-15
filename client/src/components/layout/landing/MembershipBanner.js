@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function MembershipBanner() {
   return (
     <section id="membershipBanner">
-      <div className="membershipBanner">
+      <div className="bannerOverlay">
         <div className="bannerText">
           <h1>Perfect Membership For You</h1>
           <p>

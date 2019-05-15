@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-.optionBanner {
+#membership .optionBanner {
   width: 100vw;
   height: 100vh;
   color: #fff;

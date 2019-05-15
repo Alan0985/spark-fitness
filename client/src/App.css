@@ -10,8 +10,33 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-  #desktopNavbar {
+  #desktopNavbar,
+  #explore footer {
     display: none;
+  }
+
+  #membershipBanner {
+    background-image: url(./img/768/join_768.jpg);
+  }
+
+  #membership .optionBanner {
+    background-image: url(./img/768/membership_768.jpg);
+  }
+
+  #training .training {
+    background-image: url(./img/768/training_768.jpg);
+  }
+
+  #explore {
+    margin-bottom: 55px;
+  }
+
+  footer {
+    margin-bottom: 55px;
+  }
+
+  footer .connect {
+    flex-direction: column;
   }
 }
 
