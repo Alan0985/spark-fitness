@@ -45,6 +45,22 @@ class EditProfile extends Component {
 
   onChangeAvatar() {
     // this.props.changeAvatar();
+    var file = document.querySelector("input[type=file]").files[0];
+    var reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      () => {
+        this.setState({
+          avatar: reader.result
+        });
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   }
 
   onSubmit(e) {
@@ -98,10 +114,21 @@ class EditProfile extends Component {
                 name="avatar"
                 accept="image/*"
                 capture="camera"
+                onChange={this.onChangeAvatar.bind(this)}
+              />
+              <img id="previewAvatar" src={this.state.avatar} alt="avatar" />
+            </div>
+
+            {/* <div className="avatarInput">
+              <input
+                type="file"
+                name="avatar"
+                accept="image/*"
+                capture="camera"
                 onClick={this.onChangeAvatar.bind(this)}
               />
               <img src={this.state.avatar} alt="avatar" />
-            </div>
+            </div> */}
           </div>
 
           <div className="name">
