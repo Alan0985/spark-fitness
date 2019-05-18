@@ -43,24 +43,36 @@ class EditProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onChangeAvatar() {
-    // this.props.changeAvatar();
-    var file = document.querySelector("input[type=file]").files[0];
-    var reader = new FileReader();
+  onChangeAvatar(e) {
+    const files = Array.from(e.target.files);
+    const formData = new FormData();
 
-    reader.addEventListener(
-      "load",
-      () => {
+    files.forEach((file, i) => {
+      if (file.size > 100000) {
+        console.log(`${file.name} is too large.`);
+      } else {
+        formData.append(i, file);
+      }
+    });
+
+    fetch("/image-upload", {
+      method: "POST",
+      body: formData
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw res;
+        }
+        return res.json();
+      })
+      .then(images => {
         this.setState({
-          avatar: reader.result
+          avatar: images[0].secure_url
         });
-      },
-      false
-    );
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   onSubmit(e) {
@@ -113,22 +125,10 @@ class EditProfile extends Component {
                 type="file"
                 name="avatar"
                 accept="image/*"
-                capture="camera"
                 onChange={this.onChangeAvatar.bind(this)}
               />
-              <img id="previewAvatar" src={this.state.avatar} alt="avatar" />
-            </div>
-
-            {/* <div className="avatarInput">
-              <input
-                type="file"
-                name="avatar"
-                accept="image/*"
-                capture="camera"
-                onClick={this.onChangeAvatar.bind(this)}
-              />
               <img src={this.state.avatar} alt="avatar" />
-            </div> */}
+            </div>
           </div>
 
           <div className="name">
@@ -181,7 +181,6 @@ class EditProfile extends Component {
 EditProfile.propTypes = {
   getUserInfo: PropTypes.func.isRequired,
   updateUserInfo: PropTypes.func.isRequired,
-  // changeAvatar: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
