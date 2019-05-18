@@ -4,11 +4,28 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { signOut } from "../../../actions/authActions";
 
-import { getUserInfo } from "../../../actions/authActions";
+import { getUserInfo, updateUserInfo } from "../../../actions/authActions";
 
 import "./Me.css";
 
 class Me extends Component {
+  constructor(props) {
+    super(props);
+    const { user } = props.auth;
+    this.state = {
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      cover: user.cover,
+      weight: user.weight,
+      sfid: user.sfid,
+      errors: {}
+    };
+
+    // this.onChange = this.onChange.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
+  }
+
   //If signed out, redirect to /signIn
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
@@ -16,6 +33,49 @@ class Me extends Component {
     }
 
     this.props.getUserInfo();
+  }
+
+  onChangeCover(e) {
+    const files = Array.from(e.target.files);
+    const formData = new FormData();
+
+    files.forEach((file, i) => {
+      if (file.size > 512000) {
+        alert("Please upload an image smaller than 500k");
+      } else {
+        formData.append(i, file);
+      }
+    });
+
+    fetch("/image-upload", {
+      method: "POST",
+      body: formData
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw res;
+        }
+        return res.json();
+      })
+      .then(images => {
+        this.setState({
+          cover: images[0].secure_url
+        });
+      })
+      .then(res => {
+        const newInfo = {
+          name: this.state.name,
+          email: this.state.email,
+          avatar: this.state.avatar,
+          cover: this.state.cover,
+          weight: this.state.weight,
+          sfid: this.state.sfid
+        };
+        this.props.updateUserInfo(newInfo);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   onSignOut = () => {
@@ -28,6 +88,14 @@ class Me extends Component {
     return (
       <section id="myProfile">
         <div className="profileHeader">
+          <input
+            type="file"
+            name="cover"
+            accept="image/*"
+            onChange={this.onChangeCover.bind(this)}
+          />
+          <img className="cover" src={user.cover} alt="cover" />
+
           <div className="avatarName">
             <div className="profileAvatar">
               <img src={user.avatar} alt="avatar" />
@@ -65,6 +133,7 @@ class Me extends Component {
 
 Me.propTypes = {
   getUserInfo: PropTypes.func.isRequired,
+  updateUserInfo: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -75,5 +144,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getUserInfo, signOut }
+  { getUserInfo, updateUserInfo, signOut }
 )(Me);

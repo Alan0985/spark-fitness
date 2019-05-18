@@ -32,7 +32,10 @@ router.post("/me/signUp", (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        avatar: "https://www.sweetasnz.ml/avatar/avatar_default.svg",
+        avatar:
+          "https://res.cloudinary.com/dgmvfyzua/image/upload/v1558149427/avatar_default_ex0t7c.svg",
+        cover:
+          "https://res.cloudinary.com/dgmvfyzua/image/upload/v1558150786/cover_default_euagoq.jpg",
         sfid: req.body.sfid,
         weight: req.body.weight,
         password: req.body.password,
@@ -139,6 +142,7 @@ router.post(
     if (req.body.name) newUserFields.name = req.body.name;
     if (req.body.email) newUserFields.email = req.body.email;
     if (req.body.avatar) newUserFields.avatar = req.body.avatar;
+    if (req.body.cover) newUserFields.cover = req.body.cover;
     if (req.body.weight) newUserFields.weight = req.body.weight;
     if (req.body.sfid) newUserFields.sfid = req.body.sfid;
 

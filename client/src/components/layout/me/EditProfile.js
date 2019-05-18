@@ -48,8 +48,8 @@ class EditProfile extends Component {
     const formData = new FormData();
 
     files.forEach((file, i) => {
-      if (file.size > 100000) {
-        console.log(`${file.name} is too large.`);
+      if (file.size > 512000) {
+        alert(`${file.name} is too large.`);
       } else {
         formData.append(i, file);
       }
