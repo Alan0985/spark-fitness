@@ -24,6 +24,7 @@ router.post(
       text: req.body.text,
       name: req.user.name,
       avatar: req.user.avatar,
+      images: req.body.images,
       user: req.user.id
     });
     newPost.save().then(post => res.json(post));

@@ -44,14 +44,12 @@
   outline: none;
 }
 #newPost .newPostContent {
-  width: 100%;
-  height: 300px;
   margin-top: 60px;
 }
 
 #newPost textarea {
   width: 100%;
-  height: 100%;
+  height: 25vh;
   outline: none;
   border: none;
 }
