@@ -46,12 +46,16 @@ class NewPost extends Component {
     const files = Array.from(e.target.files);
 
     if (files.length > 9) {
+      //Check if more than 9 images selected once
+      alert("Sorry, please upload 9 images at most");
+      return false;
+    } else if (files.length + this.state.images.length > 9) {
+      //Check if total image quantity is over 9 or not, when more images added
       alert("Sorry, please upload 9 images at most");
       return false;
     }
 
-    const formData = new FormData();
-
+    let formData = new FormData();
     files.forEach((file, i) => {
       if (file.size > 1048576) {
         alert(
@@ -78,7 +82,7 @@ class NewPost extends Component {
       })
       .then(images => {
         this.setState({
-          images,
+          images: this.state.images.concat(images),
           uploading: false
         });
       })
@@ -125,7 +129,7 @@ class NewPost extends Component {
 
         case images.length > 0 && images.length < 9:
           return (
-            <div>
+            <div className="imagesWrapper">
               <PostImages
                 images={images}
                 removeImage={this.removeImage}
@@ -137,11 +141,13 @@ class NewPost extends Component {
 
         case images.length === 9:
           return (
-            <PostImages
-              images={images}
-              removeImage={this.removeImage}
-              onError={this.onError}
-            />
+            <div className="imagesWrapper">
+              <PostImages
+                images={images}
+                removeImage={this.removeImage}
+                onError={this.onError}
+              />
+            </div>
           );
         default:
           return <Plus onChange={this.onUploadImages} />;

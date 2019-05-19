@@ -1,8 +1,8 @@
 import React from "react";
 
 export default props => (
-  <div className="plus">
-    <label htmlFor="multi">+</label>
-    <input type="file" id="multi" onChange={props.onChange} multiple />
+  <div className="postImage plus">
+    <div className="plusIcon">+</div>
+    <input type="file" id="chooseFile" onChange={props.onChange} multiple />
   </div>
 );
