@@ -44,7 +44,7 @@
 #postDetail .postContent {
   height: 100%;
   background-color: #fff;
-  padding: 0 2vw;
+  padding: 0 2vw 2vw 2vw;
   margin-bottom: 6px;
 }
 

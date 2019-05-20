@@ -31,12 +31,12 @@ class MomentPostItem extends Component {
         </div>
 
         <div className="postContentText">
-          <p>
-            {post.text.length < 120 ? post.text : post.text.slice(0, 120)}
-            {post.text.length < 120 ? null : (
-              <Link to={`/moments/${post._id}`}> ...More...</Link>
-            )}
-          </p>
+          <Link to={`/moments/${post._id}`}>
+            <p>
+              {post.text.length < 120 ? post.text : post.text.slice(0, 120)}
+              {post.text.length < 120 ? null : <span>...More...</span>}
+            </p>
+          </Link>
         </div>
 
         <div className="postContentImage">

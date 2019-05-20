@@ -52,7 +52,8 @@
 #allPosts .postContentText {
   padding: 0 0.5vw;
 }
-#allPosts .postContentText a {
+
+#allPosts .postContentText span {
   color: #c23616;
 }
 

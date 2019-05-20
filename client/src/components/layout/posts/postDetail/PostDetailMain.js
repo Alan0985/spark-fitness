@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 
+import PostContentImage from "../PostContentImage";
 import CommentList from "../../comments/CommentList";
+
 import {
   getPost,
   clickLike,
@@ -50,16 +52,6 @@ class PostDetailMain extends Component {
     const { post } = this.props.post;
     const { auth } = this.props;
 
-    let postContentImage;
-
-    postContentImage = post.images.map((image, i) => {
-      return (
-        <div key={i} className="postImage">
-          <img src={image} alt="postImage" />
-        </div>
-      );
-    });
-
     return (
       <div className="postDetailMain">
         <div className="postContent">
@@ -94,7 +86,9 @@ class PostDetailMain extends Component {
             <p>{post.text}</p>
           </div>
 
-          <div className="postContentImage">{postContentImage}</div>
+          <div className="postContentImage">
+            <PostContentImage post={post} />
+          </div>
         </div>
 
         <div className="addComment">
