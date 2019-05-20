@@ -5,16 +5,7 @@ import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
 import { clickLike } from "../../../actions/postActions";
-
-import postImage_1 from "../../../img/postImages/postImage_1.jpg";
-import postImage_2 from "../../../img/postImages/postImage_2.jpg";
-import postImage_3 from "../../../img/postImages/postImage_3.jpg";
-import postImage_4 from "../../../img/postImages/postImage_4.jpg";
-import postImage_5 from "../../../img/postImages/postImage_5.jpg";
-import postImage_6 from "../../../img/postImages/postImage_6.jpg";
-import postImage_7 from "../../../img/postImages/postImage_7.jpg";
-import postImage_8 from "../../../img/postImages/postImage_8.jpg";
-import postImage_9 from "../../../img/postImages/postImage_9.jpg";
+import PostContentImage from "../posts/PostContentImage";
 
 class MomentPostItem extends Component {
   onClickLike(postId) {
@@ -49,39 +40,7 @@ class MomentPostItem extends Component {
         </div>
 
         <div className="postContentImage">
-          <div className="postImage">
-            <img src={postImage_1} alt="postImage_1" />
-          </div>
-
-          <div className="postImage">
-            <img src={postImage_2} alt="postImage_2" />
-          </div>
-
-          <div className="postImage">
-            <img src={postImage_3} alt="postImage_3" />
-          </div>
-
-          <div className="postImage">
-            <img src={postImage_4} alt="postImage_4" />
-          </div>
-
-          <div className="postImage">
-            <img src={postImage_5} alt="postImage_5" />
-          </div>
-
-          <div className="postImage">
-            <img src={postImage_6} alt="postImage_6" />
-          </div>
-
-          <div className="postImage">
-            <img src={postImage_7} alt="postImage_7" />
-          </div>
-          <div className="postImage">
-            <img src={postImage_8} alt="postImage_8" />
-          </div>
-          <div className="postImage">
-            <img src={postImage_9} alt="postImage_9" />
-          </div>
+          <PostContentImage post={post} />
         </div>
 
         <div className="postContentFooter">

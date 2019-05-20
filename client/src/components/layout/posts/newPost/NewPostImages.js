@@ -2,7 +2,7 @@ import React from "react";
 
 export default props =>
   props.images.map((image, i) => (
-    <div key={i} className="postImage">
+    <div key={i} className="newPostImage">
       <img
         src={image.secure_url}
         alt=""

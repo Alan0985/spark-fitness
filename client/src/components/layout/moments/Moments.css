@@ -7,7 +7,7 @@
   color: #2c3e50;
 }
 
-#allPosts .postMain {
+#allPosts .postDetailMain {
   width: 100vw;
   height: 100%;
   background-color: #fff;
@@ -54,24 +54,6 @@
 }
 #allPosts .postContentText a {
   color: #c23616;
-}
-
-#allPosts .postContentImage {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-}
-
-#allPosts .postImage {
-  width: 31vw;
-  height: 31vw;
-  margin: 0.5vw;
-}
-
-#allPosts .postImage img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
 }
 
 #allPosts .postContentFooter {

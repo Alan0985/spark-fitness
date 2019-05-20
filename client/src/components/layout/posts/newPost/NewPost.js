@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 
-import { addPost } from "../../../actions/postActions";
+import { addPost } from "../../../../actions/postActions";
 
-import PostImages from "./PostImages";
+import NewPostImages from "./NewPostImages";
 import Plus from "./Plus";
-import Spinner from "../../common/Spinner";
+import Spinner from "../../../common/Spinner";
 
 import "./NewPost.css";
 
@@ -122,7 +122,7 @@ class NewPost extends Component {
     const { errors, images, uploading } = this.state;
     const { post, loading } = this.props.post;
 
-    const postImages = () => {
+    const newPostImages = () => {
       switch (true) {
         case uploading:
           return <Spinner />;
@@ -130,7 +130,7 @@ class NewPost extends Component {
         case images.length > 0 && images.length < 9:
           return (
             <div className="imagesWrapper">
-              <PostImages
+              <NewPostImages
                 images={images}
                 removeImage={this.removeImage}
                 onError={this.onError}
@@ -142,7 +142,7 @@ class NewPost extends Component {
         case images.length === 9:
           return (
             <div className="imagesWrapper">
-              <PostImages
+              <NewPostImages
                 images={images}
                 removeImage={this.removeImage}
                 onError={this.onError}
@@ -183,7 +183,7 @@ class NewPost extends Component {
                 onChange={this.onChange}
               />
 
-              <div className="postImages">{postImages()}</div>
+              <div className="newPostImages">{newPostImages()}</div>
 
               <div className="errorText">
                 {errors.text && <p className="invalidMsg">{errors.text}</p>}

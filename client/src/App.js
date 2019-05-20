@@ -14,8 +14,8 @@ import Explore from "./components/layout/explore/Explore";
 import Me from "./components/layout/me/Me";
 import EditProfile from "./components/layout/me/EditProfile";
 import MyPosts from "./components/layout/posts/MyPosts";
-import NewPost from "./components/layout/posts/NewPost";
-import PostDetail from "./components/layout/posts/PostDetail";
+import NewPost from "./components/layout/posts/newPost/NewPost";
+import PostDetail from "./components/layout/posts/postDetail/PostDetail";
 import Moments from "./components/layout/moments/Moments";
 import MomentPostDetail from "./components/layout/moments/MomentPostDetail";
 

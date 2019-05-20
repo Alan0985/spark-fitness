@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
+import PostContentImage from "./PostContentImage";
 import { clickLike } from "../../../actions/postActions";
 
 class PostItem extends Component {
@@ -13,16 +14,6 @@ class PostItem extends Component {
 
   render() {
     const { post, auth } = this.props;
-
-    let postContentImage;
-
-    postContentImage = post.images.map((image, i) => {
-      return (
-        <div key={i} className="postImage">
-          <img src={image} alt="postImage" />
-        </div>
-      );
-    });
 
     return (
       <div className="postContent">
@@ -40,15 +31,17 @@ class PostItem extends Component {
         </div>
 
         <div className="postContentText">
-          <p>
-            {post.text.length < 120 ? post.text : post.text.slice(0, 120)}
-            {post.text.length < 120 ? null : (
-              <Link to={`/me/myPosts/${post._id}`}> ...More...</Link>
-            )}
-          </p>
+          <Link to={`/me/myPosts/${post._id}`}>
+            <p>
+              {post.text.length < 120 ? post.text : post.text.slice(0, 120)}
+              {post.text.length < 120 ? null : <span>...More...</span>}
+            </p>
+          </Link>
         </div>
 
-        <div className="postContentImage">{postContentImage}</div>
+        <div className="postContentImage">
+          <PostContentImage post={post} />
+        </div>
 
         <div className="postContentFooter">
           <div

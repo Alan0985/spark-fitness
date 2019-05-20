@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 
-import CommentList from "../comments/CommentList";
-import { getPost, clickLike, addComment } from "../../../actions/postActions";
+import CommentList from "../../comments/CommentList";
+import {
+  getPost,
+  clickLike,
+  addComment
+} from "../../../../actions/postActions";
 
-import postImage_1 from "../../../img/postImages/postImage_1.jpg";
-import postImage_2 from "../../../img/postImages/postImage_2.jpg";
-import postImage_3 from "../../../img/postImages/postImage_3.jpg";
-
-class PostMain extends Component {
+class PostDetailMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,8 +50,18 @@ class PostMain extends Component {
     const { post } = this.props.post;
     const { auth } = this.props;
 
+    let postContentImage;
+
+    postContentImage = post.images.map((image, i) => {
+      return (
+        <div key={i} className="postImage">
+          <img src={image} alt="postImage" />
+        </div>
+      );
+    });
+
     return (
-      <div className="postMain">
+      <div className="postDetailMain">
         <div className="postContent">
           <div className="postContentHeader">
             <div className="avatarNameTime">
@@ -84,19 +94,7 @@ class PostMain extends Component {
             <p>{post.text}</p>
           </div>
 
-          <div className="postContentImage">
-            <div className="postImage">
-              <img src={postImage_1} alt="postImage_1" />
-            </div>
-
-            <div className="postImage">
-              <img src={postImage_2} alt="postImage_2" />
-            </div>
-
-            <div className="postImage">
-              <img src={postImage_3} alt="postImage_3" />
-            </div>
-          </div>
+          <div className="postContentImage">{postContentImage}</div>
         </div>
 
         <div className="addComment">
@@ -129,7 +127,7 @@ class PostMain extends Component {
   }
 }
 
-PostMain.propTypes = {
+PostDetailMain.propTypes = {
   getPost: PropTypes.func.isRequired,
   clickLike: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
@@ -147,4 +145,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getPost, clickLike, addComment }
-)(PostMain);
+)(PostDetailMain);

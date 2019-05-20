@@ -21,14 +21,14 @@ class MyPosts extends Component {
   render() {
     const { user } = this.props.auth;
     const { posts, loading } = this.props.post;
-    let myPosts;
+    let myPostMain;
 
     if (posts.length < 1 || loading) {
-      myPosts = <Spinner />;
+      myPostMain = <Spinner />;
     } else {
       let filteredPosts;
       filteredPosts = posts.filter(post => post.user === user.id);
-      myPosts = <PostContent posts={filteredPosts} />;
+      myPostMain = <PostContent posts={filteredPosts} />;
     }
 
     return (
@@ -47,7 +47,7 @@ class MyPosts extends Component {
           </Link>
         </div>
 
-        <div className="postMain">{myPosts}</div>
+        <div className="myPostMain">{myPostMain}</div>
       </section>
     );
   }

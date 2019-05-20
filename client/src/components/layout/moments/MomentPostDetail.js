@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import PostMain from "../posts/PostMain";
+import PostDetailMain from "../posts/postDetail/PostDetailMain";
 import Spinner from "../../common/Spinner";
 import { getPost, deletePost } from "../../../actions/postActions";
 
-import "../posts/PostDetail.css";
+import "../posts/postDetail/PostDetail.css";
 
 class MomentPostDetail extends Component {
   componentDidMount() {
@@ -52,7 +52,11 @@ class MomentPostDetail extends Component {
             </div>
           ) : null}
         </div>
-        {Object.keys(post).length < 1 || loading ? <Spinner /> : <PostMain />}
+        {Object.keys(post).length < 1 || loading ? (
+          <Spinner />
+        ) : (
+          <PostDetailMain />
+        )}
       </section>
     );
   }
