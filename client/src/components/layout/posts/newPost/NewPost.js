@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classnames from "classnames";
 
 import { addPost } from "../../../../actions/postActions";
 
@@ -18,7 +17,6 @@ class NewPost extends Component {
     this.state = {
       text: "",
       images: [],
-      errors: {},
       uploading: false
     };
     this.onChange = this.onChange.bind(this);
@@ -29,12 +27,6 @@ class NewPost extends Component {
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/me/signIn");
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
     }
   }
 
@@ -99,11 +91,6 @@ class NewPost extends Component {
     this.setState({ images: this.filter(id) });
   };
 
-  onError = id => {
-    alert("Something went wrong here");
-    this.setState({ images: this.filter(id) });
-  };
-
   onSubmit(e) {
     e.preventDefault();
     const { images } = this.state;
@@ -113,13 +100,12 @@ class NewPost extends Component {
       text: this.state.text,
       images: imagesURL
     };
-
     this.props.addPost(newPost);
     window.location.replace("/me/myPosts");
   }
 
   render() {
-    const { errors, images, uploading } = this.state;
+    const { images, uploading } = this.state;
     const { post, loading } = this.props.post;
 
     const newPostImages = () => {
@@ -130,11 +116,7 @@ class NewPost extends Component {
         case images.length > 0 && images.length < 9:
           return (
             <div className="imagesWrapper">
-              <NewPostImages
-                images={images}
-                removeImage={this.removeImage}
-                onError={this.onError}
-              />
+              <NewPostImages images={images} removeImage={this.removeImage} />
               <Plus onChange={this.onUploadImages} />
             </div>
           );
@@ -142,11 +124,7 @@ class NewPost extends Component {
         case images.length === 9:
           return (
             <div className="imagesWrapper">
-              <NewPostImages
-                images={images}
-                removeImage={this.removeImage}
-                onError={this.onError}
-              />
+              <NewPostImages images={images} removeImage={this.removeImage} />
             </div>
           );
         default:
@@ -168,15 +146,22 @@ class NewPost extends Component {
                   <p>Cancel</p>
                 </div>
               </Link>
-              <input type="submit" value="Post" className="post" />
+
+              {this.state.text === "" && this.state.images.length === 0 ? (
+                <input
+                  type="submit"
+                  value="Post"
+                  className="disabledPost"
+                  disabled
+                />
+              ) : (
+                <input type="submit" value="Post" className="post" />
+              )}
             </div>
 
             <div className="newPostContent">
               <textarea
                 type="text"
-                className={classnames("", {
-                  "is-invalid": errors.text
-                })}
                 placeholder="Say Something..."
                 name="text"
                 value={this.state.text}
@@ -184,10 +169,6 @@ class NewPost extends Component {
               />
 
               <div className="newPostImages">{newPostImages()}</div>
-
-              <div className="errorText">
-                {errors.text && <p className="invalidMsg">{errors.text}</p>}
-              </div>
             </div>
           </form>
         </section>
@@ -200,14 +181,12 @@ class NewPost extends Component {
 
 NewPost.propTypes = {
   addPost: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  post: state.post,
-  errors: state.errors
+  post: state.post
 });
 
 export default connect(

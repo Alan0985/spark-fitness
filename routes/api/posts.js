@@ -5,8 +5,6 @@ const passport = require("passport");
 const Post = require("../../models/PostModel");
 const User = require("../../models/User");
 
-const validatePostInput = require("../../validation/newPostValidation");
-
 //route     POST /api/posts
 //Desc      Add one post
 //Access    Private
@@ -14,12 +12,6 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
-
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-
     const newPost = new Post({
       text: req.body.text,
       name: req.user.name,
@@ -108,12 +100,6 @@ router.post(
   "/comment/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
-
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-
     Post.findById(req.params.id)
       .then(post => {
         const newComment = {

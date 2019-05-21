@@ -16,8 +16,7 @@ class PostDetailMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      errors: {}
+      text: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -104,7 +103,16 @@ class PostDetailMain extends Component {
               placeholder=" Add a comment here"
               onChange={this.onChange}
             />
-            <input type="submit" value="Send" className="send" />
+            {this.state.text === "" ? (
+              <input
+                type="submit"
+                value="Send"
+                className="disabledSend"
+                disabled
+              />
+            ) : (
+              <input type="submit" value="Send" className="send" />
+            )}
           </form>
         </div>
 
@@ -126,14 +134,12 @@ PostDetailMain.propTypes = {
   clickLike: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   post: state.post,
-  auth: state.auth,
-  errors: state.errors
+  auth: state.auth
 });
 
 export default connect(

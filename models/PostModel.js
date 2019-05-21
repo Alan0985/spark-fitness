@@ -9,8 +9,7 @@ const PostSchema = new Schema({
   },
 
   text: {
-    type: String,
-    required: true
+    type: String
   },
 
   name: {
@@ -47,8 +46,7 @@ const PostSchema = new Schema({
         type: String
       },
       text: {
-        type: String,
-        required: true
+        type: String
       },
       date: {
         type: Date,

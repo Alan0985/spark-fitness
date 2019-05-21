@@ -103,7 +103,16 @@ class EditProfile extends Component {
               </div>
             </Link>
 
-            <input type="submit" value="Save" className="save" />
+            {this.state.name.length < 2 ? (
+              <input
+                type="submit"
+                value="Save"
+                className="disabledSave"
+                disabled
+              />
+            ) : (
+              <input type="submit" value="Save" className="save" />
+            )}
           </div>
 
           <div className="SFID">
@@ -150,7 +159,6 @@ class EditProfile extends Component {
               type="email"
               name="email"
               value={this.state.email}
-              onChange={this.onChange}
               disabled
             />
           </div>
@@ -170,7 +178,6 @@ class EditProfile extends Component {
           </div>
 
           <div className="errorText">
-            {errors.name && <p className="invalidMsg">{errors.name}</p>}
             {errors.weight && <p className="invalidMsg">{errors.weight}</p>}
           </div>
         </form>
