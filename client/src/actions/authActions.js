@@ -2,7 +2,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 
-import { GET_ERRORS, GET_USER_INFO } from "./types";
+import { GET_ERRORS, GET_USER_INFO, CLEAR_ERRORS } from "./types";
 
 //Sign Up
 export const signUp = (userData, history) => dispatch => {
@@ -53,6 +53,7 @@ export const setCurrentUser = decoded => {
 
 //Get User Info
 export const getUserInfo = () => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
   axios
     .get("/api/users/me/editProfile")
     .then(res =>
@@ -71,6 +72,7 @@ export const getUserInfo = () => dispatch => {
 
 // Update User Info
 export const updateUserInfo = newInfo => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
   axios
     .post("/api/users/me/editProfile", newInfo)
     .then(res => {

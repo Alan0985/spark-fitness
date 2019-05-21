@@ -91,6 +91,7 @@ class EditProfile extends Component {
 
   render() {
     const { errors } = this.state;
+    const { user } = this.props.auth;
 
     return (
       <section id="editProfile">
@@ -103,7 +104,9 @@ class EditProfile extends Component {
               </div>
             </Link>
 
-            {this.state.name.length < 2 ? (
+            {(this.state.name === user.name &&
+              this.state.weight === user.weight) ||
+            this.state.name.length < 2 ? (
               <input
                 type="submit"
                 value="Save"

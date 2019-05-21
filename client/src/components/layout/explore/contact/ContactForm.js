@@ -88,12 +88,24 @@ class ContactForm extends Component {
             {errors.text && <p className="invalidMsg">{errors.text}</p>}
           </div>
 
-          <input
-            className="submit"
-            type="submit"
-            name="submit"
-            value="Submit"
-          />
+          {this.state.name === "" ||
+          this.state.email === "" ||
+          this.state.text === "" ? (
+            <input
+              className="disabledSubmit"
+              type="submit"
+              name="submit"
+              value="Submit"
+              disabled
+            />
+          ) : (
+            <input
+              className="submit"
+              type="submit"
+              name="submit"
+              value="Submit"
+            />
+          )}
         </form>
       </div>
     );

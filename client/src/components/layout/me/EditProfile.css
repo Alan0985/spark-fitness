@@ -100,7 +100,6 @@
 #editProfile .errorText {
   text-align: center;
   margin-top: 200px;
-  /* animation: fadeOut 1s linear; */
 }
 
 #editProfile .invalidMsg {
@@ -112,15 +111,4 @@
   border: 1px solid #c23616;
   border-radius: 20px;
   margin: 5px auto;
-  animation: fadeOut 1s linear;
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
 }
