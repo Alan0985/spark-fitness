@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const path = require("path");
 const passport = require("passport");
 
 const users = require("./routes/api/users");
@@ -8,6 +8,22 @@ const posts = require("./routes/api/posts");
 const explores = require("./routes/api/explores");
 
 const app = express();
+
+// Serve any static files built by React
+// app.use(express.static(path.join(__dirname, "client/build")));
+
+//Production Mode
+if (process.env.NODE_ENV === "production") {
+  console.log(2222222222222 + " Production Mode in server.js");
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.get("/routes/api/*", function(req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
+
+// app.get("/routes/api/*", function(req, res) {
+//   res.sendFile(path.join(__dirname, "client/build", "index.html"));
+// });
 
 //Image Upload To Cloudinary
 require("dotenv").config();
