@@ -12,11 +12,11 @@ const app = express();
 // Serve any static files built by React
 // app.use(express.static(path.join(__dirname, "client/build")));
 
-//Production Mode
+//Check Production Mode
 if (process.env.NODE_ENV === "production") {
   console.log(2222222222222 + " Production Mode in server.js");
   app.use(express.static(path.join(__dirname, "client/build")));
-  app.get("/routes/api/*", function(req, res) {
+  app.get("/routes/api/*", (req, res) => {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
