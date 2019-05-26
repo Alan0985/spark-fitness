@@ -37,14 +37,20 @@ cloudinary.config({
 });
 
 app.use(formData.parse());
-app.post("/image-upload", (req, res) => {
-  const values = Object.values(req.files);
-  const promises = values.map(image => cloudinary.uploader.upload(image.path));
+// app.post("/image-upload", (req, res) => {
+app.post(
+  "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload",
+  (req, res) => {
+    const values = Object.values(req.files);
+    const promises = values.map(image =>
+      cloudinary.uploader.upload(image.path)
+    );
 
-  Promise.all(promises)
-    .then(results => res.json(results))
-    .catch(err => res.status(400).json(err));
-});
+    Promise.all(promises)
+      .then(results => res.json(results))
+      .catch(err => res.status(400).json(err));
+  }
+);
 
 //Middleware
 app.use(express.urlencoded({ extended: false }));
