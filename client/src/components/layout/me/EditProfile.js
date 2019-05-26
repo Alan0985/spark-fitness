@@ -58,6 +58,9 @@ class EditProfile extends Component {
     fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
       method: "POST",
       mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
       body: formData
     })
       .then(res => {
