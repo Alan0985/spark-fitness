@@ -37,10 +37,18 @@ cloudinary.config({
 });
 
 app.use(formData.parse());
+
+/////////
+app.all("/", function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 // app.post("/image-upload", (req, res) => {
 app.post(
   "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload",
-  (req, res) => {
+  (req, res, next) => {
     const values = Object.values(req.files);
     const promises = values.map(image =>
       cloudinary.uploader.upload(image.path)
