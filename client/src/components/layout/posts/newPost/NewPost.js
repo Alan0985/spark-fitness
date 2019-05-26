@@ -62,7 +62,7 @@ class NewPost extends Component {
       uploading: true
     });
 
-    fetch("/image-upload", {
+    fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
       method: "POST",
       body: formData
     })
