@@ -9,6 +9,7 @@ const posts = require("./routes/api/posts");
 const explores = require("./routes/api/explores");
 
 const app = express();
+app.use(cors());
 
 //Image Upload To Cloudinary
 require("dotenv").config();
@@ -23,9 +24,21 @@ cloudinary.config({
 
 app.use(formData.parse());
 
+var whitelist = ["https://api.cloudinary.com"];
+var corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
+
 // app.post("/image-upload", (req, res) => {
 app.post(
   "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload",
+  cors(corsOptions),
   (req, res) => {
     const values = Object.values(req.files);
     const promises = values.map(image =>
@@ -41,7 +54,6 @@ app.post(
 //Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
 
 // DB Config
 const db = require("./key/keys").mongoURI;

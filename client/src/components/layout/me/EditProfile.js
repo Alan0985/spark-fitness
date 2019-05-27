@@ -57,9 +57,6 @@ class EditProfile extends Component {
 
     fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
       method: "POST",
-      headers: new Headers(),
-      mode: "cors",
-      cache: "default",
       body: formData
     })
       .then(res => {
@@ -76,6 +73,28 @@ class EditProfile extends Component {
       .catch(err => {
         console.log(err);
       });
+
+    // fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
+    //   method: "POST",
+    //   headers: new Headers(),
+    //   mode: "cors",
+    //   cache: "default",
+    //   body: formData
+    // })
+    //   .then(res => {
+    //     if (!res.ok) {
+    //       throw res;
+    //     }
+    //     return res.json();
+    //   })
+    //   .then(images => {
+    //     this.setState({
+    //       avatar: images[0].secure_url
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
 
   onSubmit(e) {
