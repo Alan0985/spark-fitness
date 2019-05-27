@@ -24,15 +24,9 @@ cloudinary.config({
 
 app.use(formData.parse());
 
-var whitelist = ["https://spark-fitness.herokuapp.com"];
 var corsOptions = {
-  origin: function(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
+  origin: "https://spark-fitness.herokuapp.com",
+  optionsSuccessStatus: 200
 };
 
 // app.post("/image-upload", (req, res) => {
