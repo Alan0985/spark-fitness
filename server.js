@@ -14,16 +14,12 @@ const app = express();
 
 //Check Production Mode
 if (process.env.NODE_ENV === "production") {
-  console.log(2222222222222 + " Production Mode in server.js");
-  app.use(express.static(path.join(__dirname, "client/build")));
-  app.get("/routes/api/*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
-  });
+  app.use(express.static("client/build"));
 }
 
-// app.get("/routes/api/*", function(req, res) {
-//   res.sendFile(path.join(__dirname, "client/build", "index.html"));
-// });
+app.get("/routes/api/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 //Image Upload To Cloudinary
 require("dotenv").config();
