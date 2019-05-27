@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const passport = require("passport");
+const cors = require("cors");
 
 const users = require("./routes/api/users");
 const posts = require("./routes/api/posts");
@@ -19,15 +20,6 @@ if (process.env.NODE_ENV === "production") {
 
 app.get("/routes/api/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
 });
 
 //Image Upload To Cloudinary
@@ -61,6 +53,7 @@ app.post(
 //Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 
 // DB Config
 const db = require("./key/keys").mongoURI;
