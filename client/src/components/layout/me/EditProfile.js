@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
+import axios from "axios";
 
 import { getUserInfo, updateUserInfo } from "../../../actions/authActions";
 
@@ -55,10 +56,14 @@ class EditProfile extends Component {
       }
     });
 
-    fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
-      method: "POST",
-      body: formData
-    })
+    axios
+      .post(
+        "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload",
+        formData,
+        {
+          withCredentials: true
+        }
+      )
       .then(res => {
         if (!res.ok) {
           throw res;
