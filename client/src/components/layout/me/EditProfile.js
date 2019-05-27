@@ -61,6 +61,9 @@ class EditProfile extends Component {
         "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload",
         formData,
         {
+          headers: {
+            "Access-Control-Allow-Origin": "*"
+          },
           withCredentials: true
         }
       )
