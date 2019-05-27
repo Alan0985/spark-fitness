@@ -24,7 +24,7 @@ cloudinary.config({
 
 app.use(formData.parse());
 
-var whitelist = ["https://api.cloudinary.com"];
+var whitelist = ["https://spark-fitness.herokuapp.com"];
 var corsOptions = {
   origin: function(origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
