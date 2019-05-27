@@ -28,7 +28,7 @@ var whitelist = ["https://spark-fitness.herokuapp.com"];
 var corsOptions = {
   origin: function(origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
+      callback(true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
