@@ -57,16 +57,9 @@ class EditProfile extends Component {
     });
 
     axios
-      .post(
-        "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload",
-        formData,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*"
-          },
-          withCredentials: true
-        }
-      )
+      .post("/image-upload", formData, {
+        withCredentials: true
+      })
       .then(res => {
         if (!res.ok) {
           throw res;
