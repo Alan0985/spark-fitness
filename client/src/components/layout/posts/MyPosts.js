@@ -23,7 +23,7 @@ class MyPosts extends Component {
     const { posts, loading } = this.props.post;
     let myPostMain;
 
-    if (posts.length < 1 || loading) {
+    if (loading) {
       myPostMain = <Spinner />;
     } else {
       let filteredPosts;

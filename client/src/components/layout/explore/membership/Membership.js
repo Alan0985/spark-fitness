@@ -16,10 +16,10 @@ class Membership extends Component {
 
   render() {
     const { membership } = this.props.explore.explore;
-    const { loading } = this.props.explore;
+    const { load } = this.props.explore;
 
     let options;
-    if (typeof membership === "undefined" || loading) {
+    if (typeof membership === "undefined" || load) {
       options = <Spinner />;
     } else {
       options = membership.map(option => (

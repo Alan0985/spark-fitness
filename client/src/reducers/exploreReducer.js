@@ -4,7 +4,7 @@ const initialState = {
   explore: {},
   messages: [],
   message: {},
-  loading: false
+  load: false
 };
 
 export default function(state = initialState, action) {
@@ -12,14 +12,14 @@ export default function(state = initialState, action) {
     case LOADING:
       return {
         ...state,
-        loading: true
+        load: true
       };
 
     case GET_EXPLORE_DATA:
       return {
         ...state,
         explore: action.payload,
-        loading: false
+        load: false
       };
 
     default:

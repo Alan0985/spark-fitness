@@ -62,7 +62,7 @@ class NewPost extends Component {
       uploading: true
     });
 
-    fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
+    fetch("/image-upload", {
       method: "POST",
       body: formData
     })
@@ -106,7 +106,7 @@ class NewPost extends Component {
 
   render() {
     const { images, uploading } = this.state;
-    const { post, loading } = this.props.post;
+    const { loading } = this.props.post;
 
     const newPostImages = () => {
       switch (true) {
@@ -133,7 +133,7 @@ class NewPost extends Component {
     };
 
     let newPost;
-    if (post === null || loading) {
+    if (loading) {
       newPost = <Spinner />;
     } else {
       newPost = (

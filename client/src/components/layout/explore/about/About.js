@@ -15,10 +15,10 @@ class About extends Component {
 
   render() {
     const { team } = this.props.explore.explore;
-    const { loading } = this.props.explore;
+    const { load } = this.props.explore;
 
     let teamMembers;
-    if (typeof team === "undefined" || loading) {
+    if (typeof team === "undefined" || load) {
       teamMembers = <Spinner />;
     } else {
       teamMembers = team.map(teamMember => (

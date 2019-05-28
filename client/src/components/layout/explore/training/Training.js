@@ -16,10 +16,10 @@ class Training extends Component {
 
   render() {
     const { training } = this.props.explore.explore;
-    const { loading } = this.props.explore;
+    const { load } = this.props.explore;
 
     let trainingGroup;
-    if (typeof training === "undefined" || loading) {
+    if (typeof training === "undefined" || load) {
       trainingGroup = <Spinner />;
     } else {
       trainingGroup = training.map(training => (
