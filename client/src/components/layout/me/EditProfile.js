@@ -59,7 +59,6 @@ class EditProfile extends Component {
     //   method: "POST",
     //   body: formData
     // })
-
     fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
       method: "POST",
       body: formData
