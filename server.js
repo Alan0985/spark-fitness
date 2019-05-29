@@ -11,32 +11,32 @@ const explores = require("./routes/api/explores");
 const app = express();
 
 //Image Upload To Cloudinary
-require("dotenv").config();
-const cloudinary = require("cloudinary");
-const formData = require("express-form-data");
+// require("dotenv").config();
+// const cloudinary = require("cloudinary");
+// const formData = require("express-form-data");
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET
-});
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: process.env.API_KEY,
+//   api_secret: process.env.API_SECRET
+// });
 
-app.use(formData.parse());
+// app.use(formData.parse());
 
-app.post(
-  "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload",
-  cors({ credentials: true, origin: true }),
-  (req, res) => {
-    const values = Object.values(req.files);
-    const promises = values.map(image =>
-      cloudinary.uploader.upload(image.path)
-    );
+// app.post(
+//   "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload",
+//   cors({ origin: "https://sparkfitness.herokuapp.com" }),
+//   (req, res) => {
+//     const values = Object.values(req.files);
+//     const promises = values.map(image =>
+//       cloudinary.uploader.upload(image.path)
+//     );
 
-    Promise.all(promises)
-      .then(results => res.json(results))
-      .catch(err => res.status(400).json(err));
-  }
-);
+//     Promise.all(promises)
+//       .then(results => res.json(results))
+//       .catch(err => res.status(400).json(err));
+//   }
+// );
 
 //Middleware
 app.use(express.urlencoded({ extended: false }));
