@@ -64,7 +64,11 @@ class EditProfile extends Component {
       method: "POST",
       body: formData,
       crossDomain: true,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Request-Headers": "*",
+        "Access-Control-Request-Method": "*"
+      },
       API_KEY: "116985741248956",
       API_SECRET: "s1wQb6Q_t4OmLCTkxa26UC3oqLE"
     })
