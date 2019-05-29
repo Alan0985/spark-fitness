@@ -2,12 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const passport = require("passport");
+const cors = require("cors");
 
 const users = require("./routes/api/users");
 const posts = require("./routes/api/posts");
 const explores = require("./routes/api/explores");
 
 const app = express();
+app.use(cors());
 
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
