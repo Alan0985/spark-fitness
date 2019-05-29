@@ -61,7 +61,7 @@ class EditProfile extends Component {
     // })
 
     fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
-      method: "POST",
+      method: "PUT",
       body: formData,
       crossDomain: true,
       headers: {
