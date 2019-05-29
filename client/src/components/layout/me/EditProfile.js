@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
+import request from "superagent";
 
 import { getUserInfo, updateUserInfo } from "../../../actions/authActions";
 
@@ -55,29 +56,52 @@ class EditProfile extends Component {
       }
     });
 
+    const CLOUDINARY_UPLOAD_URL =
+      "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload";
+
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", "xeest4yh")
+      .field("file", formData);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.log(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        // this.setState({
+        //   uploadedFileCloudinaryUrl: response.body.secure_url
+        // });
+        this.setState({
+          avatar: response.body.secure_url
+        });
+      }
+    });
+
     // fetch("/image-upload", {
     //   method: "POST",
     //   body: formData
     // })
-    fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
-      method: "POST",
-      body: formData,
-      upload_preset: "xeest4yh"
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw res;
-        }
-        return res.json();
-      })
-      .then(images => {
-        this.setState({
-          avatar: images[0].secure_url
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
+    //   method: "POST",
+    //   body: formData,
+    //   upload_preset: "xeest4yh"
+    // })
+    //   .then(res => {
+    //     if (!res.ok) {
+    //       throw res;
+    //     }
+    //     return res.json();
+    //   })
+    //   .then(images => {
+    //     this.setState({
+    //       avatar: images[0].secure_url
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
 
   onSubmit(e) {
