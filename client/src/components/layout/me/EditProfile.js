@@ -66,8 +66,7 @@ class EditProfile extends Component {
       crossDomain: true,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Request-Headers": "*",
-        "Access-Control-Request-Method": "*"
+        "Access-Control-Allow-Origin": "*"
       },
       API_KEY: "116985741248956",
       API_SECRET: "s1wQb6Q_t4OmLCTkxa26UC3oqLE"
