@@ -56,8 +56,7 @@ class EditProfile extends Component {
       }
     });
 
-    const CLOUDINARY_UPLOAD_URL =
-      "https://api.cloudinary.com/v1_1/dgmvfyzua/upload";
+    const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dgmvfyzua";
 
     let upload = request
       .post(CLOUDINARY_UPLOAD_URL)
