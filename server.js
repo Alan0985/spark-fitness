@@ -10,8 +10,6 @@ const explores = require("./routes/api/explores");
 
 const app = express();
 
-app.use(cors());
-
 //Image Upload To Cloudinary
 require("dotenv").config();
 const cloudinary = require("cloudinary");
