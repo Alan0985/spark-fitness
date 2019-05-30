@@ -6,7 +6,7 @@ export const addPost = postData => dispatch => {
   dispatch({ type: LOADING });
   axios
     .post("/api/posts", postData)
-    .then(res => window.location.replace("/me/myPosts"))
+    // .then(res => window.location.replace("/me/myPosts"))
     .then(res =>
       dispatch({
         type: ADD_POST,
