@@ -37,7 +37,6 @@ class NewPost extends Component {
 
   onUploadImages(e) {
     const files = Array.from(e.target.files);
-
     if (files.length > 9) {
       //Check if more than 9 images selected once
       alert("Sorry, please upload 9 images at most");
@@ -48,35 +47,55 @@ class NewPost extends Component {
       return false;
     }
 
-    let formData = new FormData();
+    // let formData = new FormData();
     files.forEach((file, i) => {
       if (file.size > 1048576) {
         alert(
           `${file.name} is too large. Please upload images smaller than 1M`
         );
       } else {
-        formData.append(i, file);
+        this.setState({
+          uploading: true
+        });
+        let upload = request
+          .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
+          .field("upload_preset", "xeest4yh")
+          .field("file", files[i]);
+
+        upload.end((err, response) => {
+          if (err) {
+            console.log(err);
+          }
+          this.setState({
+            images: this.state.images.concat(response.body)
+          });
+        });
       }
     });
 
     this.setState({
-      uploading: true
+      uploading: false
     });
 
-    let upload = request
-      .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
-      .field("upload_preset", "xeest4yh")
-      .field("file", files);
+    // this.setState({
+    //   uploading: true
+    // });
 
-    upload.end((err, response) => {
-      if (err) {
-        console.log(err);
-      }
-      this.setState({
-        images: this.state.images.concat(response.body),
-        uploading: false
-      });
-    });
+    // let upload = request
+    //   .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
+    //   .field("upload_preset", "xeest4yh")
+    //   .field("file", files);
+
+    // upload.end((err, response) => {
+    //   if (err) {
+    //     console.log(err);
+    //   }
+    //   console.log(response.body);
+    //   this.setState({
+    //     images: this.state.images.concat(response.body),
+    //     uploading: false
+    //   });
+    // });
 
     // fetch("/image-upload", {
     //   method: "POST",
@@ -111,13 +130,13 @@ class NewPost extends Component {
     e.preventDefault();
     const { images } = this.state;
     const imagesURL = Array.from(images.map(image => image.secure_url));
+    console.log(imagesURL);
 
     const newPost = {
       text: this.state.text,
       images: imagesURL
     };
     this.props.addPost(newPost);
-    window.location.replace("/me/myPosts");
   }
 
   render() {
