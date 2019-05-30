@@ -12,7 +12,6 @@ export const addPost = postData => dispatch => {
         payload: res.data
       })
     )
-    // .then(res => window.location.replace("/me/myPosts"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

@@ -30,7 +30,6 @@ class EditProfile extends Component {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/me/signIn");
     }
-
     this.props.getUserInfo();
   }
 
@@ -45,51 +44,25 @@ class EditProfile extends Component {
   }
 
   onChangeAvatar(e) {
-    const files = Array.from(e.target.files);
+    const file = Array.from(e.target.file);
 
-    files.forEach((file, i) => {
-      if (file.size > 512000) {
-        alert(`${file.name} is too large.`);
-      } else {
-        let upload = request
-          .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
-          .field("upload_preset", "xeest4yh")
-          .field("file", files);
+    if (file.size > 2097152) {
+      alert(`${file.name} is too large. Please upload images smaller than 2M`);
+    } else {
+      let upload = request
+        .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
+        .field("upload_preset", "xeest4yh")
+        .field("file", file);
 
-        upload.end((err, response) => {
-          if (err) {
-            console.log(err);
-          }
-          this.setState({
-            avatar: response.body.secure_url
-          });
+      upload.end((err, response) => {
+        if (err) {
+          console.log(err);
+        }
+        this.setState({
+          avatar: response.body.secure_url
         });
-      }
-    });
-
-    // fetch("/image-upload", {
-    //   method: "POST",
-    //   body: formData
-    // })
-    // fetch("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload", {
-    //   method: "POST",
-    //   body: formData,
-    //   upload_preset: "xeest4yh"
-    // })
-    //   .then(res => {
-    //     if (!res.ok) {
-    //       throw res;
-    //     }
-    //     return res.json();
-    //   })
-    //   .then(images => {
-    //     this.setState({
-    //       avatar: images[0].secure_url
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+      });
+    }
   }
 
   onSubmit(e) {

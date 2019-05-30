@@ -47,11 +47,10 @@ class NewPost extends Component {
       return false;
     }
 
-    // let formData = new FormData();
     files.forEach((file, i) => {
-      if (file.size > 1048576) {
+      if (file.size > 2097152) {
         alert(
-          `${file.name} is too large. Please upload images smaller than 1M`
+          `${file.name} is too large. Please upload images smaller than 2M`
         );
       } else {
         this.setState({
@@ -76,46 +75,6 @@ class NewPost extends Component {
     this.setState({
       uploading: false
     });
-
-    // this.setState({
-    //   uploading: true
-    // });
-
-    // let upload = request
-    //   .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
-    //   .field("upload_preset", "xeest4yh")
-    //   .field("file", files);
-
-    // upload.end((err, response) => {
-    //   if (err) {
-    //     console.log(err);
-    //   }
-    //   console.log(response.body);
-    //   this.setState({
-    //     images: this.state.images.concat(response.body),
-    //     uploading: false
-    //   });
-    // });
-
-    // fetch("/image-upload", {
-    //   method: "POST",
-    //   body: formData
-    // })
-    //   .then(res => {
-    //     if (!res.ok) {
-    //       throw res;
-    //     }
-    //     return res.json();
-    //   })
-    //   .then(images => {
-    //     this.setState({
-    //       images: this.state.images.concat(images),
-    //       uploading: false
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
   }
 
   filter = id => {

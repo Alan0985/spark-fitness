@@ -36,80 +36,35 @@ class Me extends Component {
   }
 
   onChangeCover(e) {
-    const files = Array.from(e.target.files);
+    const file = Array.from(e.target.file);
 
-    files.forEach((file, i) => {
-      if (file.size > 512000) {
-        alert("Please upload an image smaller than 500k");
-      } else {
-        let upload = request
-          .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
-          .field("upload_preset", "xeest4yh")
-          .field("file", files);
+    if (file.size > 2097152) {
+      alert(`${file.name} is too large. Please upload images smaller than 2M`);
+    } else {
+      let upload = request
+        .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
+        .field("upload_preset", "xeest4yh")
+        .field("file", file);
 
-        upload.end((err, response) => {
-          if (err) {
-            console.log(err);
-          }
-          this.setState({
-            cover: response.body.secure_url
-          });
-          const newInfo = {
-            name: this.state.name,
-            email: this.state.email,
-            avatar: this.state.avatar,
-            cover: this.state.cover,
-            weight: this.state.weight,
-            sfid: this.state.sfid
-          };
-          this.props.updateUserInfo(newInfo);
+      upload.end((err, response) => {
+        if (err) {
+          console.log(err);
+        }
+        this.setState({
+          cover: response.body.secure_url
         });
-      }
-    });
+        const newInfo = {
+          name: this.state.name,
+          email: this.state.email,
+          avatar: this.state.avatar,
+          cover: this.state.cover,
+          weight: this.state.weight,
+          sfid: this.state.sfid
+        };
+        this.props.updateUserInfo(newInfo);
+      });
+    }
   }
-
-  // onChangeCover(e) {
-  //   const files = Array.from(e.target.files);
-  //   const formData = new FormData();
-
-  //   files.forEach((file, i) => {
-  //     if (file.size > 512000) {
-  //       alert("Please upload an image smaller than 500k");
-  //     } else {
-  //       formData.append(i, file);
-  //     }
-  //   });
-
-  //   fetch("/image-upload", {
-  //     method: "POST",
-  //     body: formData
-  //   })
-  //     .then(res => {
-  //       if (!res.ok) {
-  //         throw res;
-  //       }
-  //       return res.json();
-  //     })
-  //     .then(images => {
-  //       this.setState({
-  //         cover: images[0].secure_url
-  //       });
-  //     })
-  //     .then(res => {
-  //       const newInfo = {
-  //         name: this.state.name,
-  //         email: this.state.email,
-  //         avatar: this.state.avatar,
-  //         cover: this.state.cover,
-  //         weight: this.state.weight,
-  //         sfid: this.state.sfid
-  //       };
-  //       this.props.updateUserInfo(newInfo);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
 
   onSignOut = () => {
     this.props.signOut();
