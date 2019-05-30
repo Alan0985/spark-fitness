@@ -36,7 +36,7 @@ class Me extends Component {
   }
 
   onChangeCover(e) {
-    const file = Array.from(e.target.file);
+    const file = Array.from(e.target.files);
 
     if (file.size > 2097152) {
       alert(`${file.name} is too large. Please upload images smaller than 2M`);
