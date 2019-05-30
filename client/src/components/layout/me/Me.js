@@ -37,37 +37,34 @@ class Me extends Component {
 
   onChangeCover(e) {
     const files = Array.from(e.target.files);
-    // const formData = new FormData();
 
     files.forEach((file, i) => {
       if (file.size > 512000) {
         alert("Please upload an image smaller than 500k");
       } else {
-        // formData.append(i, file);
-      }
-    });
+        let upload = request
+          .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
+          .field("upload_preset", "xeest4yh")
+          .field("file", files);
 
-    let upload = request
-      .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
-      .field("upload_preset", "xeest4yh")
-      .field("file", files);
-
-    upload.end((err, response) => {
-      if (err) {
-        console.log(err);
+        upload.end((err, response) => {
+          if (err) {
+            console.log(err);
+          }
+          this.setState({
+            cover: response.body.secure_url
+          });
+          const newInfo = {
+            name: this.state.name,
+            email: this.state.email,
+            avatar: this.state.avatar,
+            cover: this.state.cover,
+            weight: this.state.weight,
+            sfid: this.state.sfid
+          };
+          this.props.updateUserInfo(newInfo);
+        });
       }
-      this.setState({
-        cover: response.body.secure_url
-      });
-      const newInfo = {
-        name: this.state.name,
-        email: this.state.email,
-        avatar: this.state.avatar,
-        cover: this.state.cover,
-        weight: this.state.weight,
-        sfid: this.state.sfid
-      };
-      this.props.updateUserInfo(newInfo);
     });
   }
 

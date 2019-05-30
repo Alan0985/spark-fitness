@@ -130,7 +130,6 @@ class NewPost extends Component {
     e.preventDefault();
     const { images } = this.state;
     const imagesURL = Array.from(images.map(image => image.secure_url));
-    console.log(imagesURL);
 
     const newPost = {
       text: this.state.text,
