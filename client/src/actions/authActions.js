@@ -81,7 +81,7 @@ export const updateUserInfo = newInfo => dispatch => {
         payload: res.data
       });
       alert("Saved");
-      window.location = "/me";
+      // window.location = "/me";
     })
     .catch(err =>
       dispatch({

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import request from "superagent";
 
 import { addPost } from "../../../../actions/postActions";
 
@@ -62,25 +63,40 @@ class NewPost extends Component {
       uploading: true
     });
 
-    fetch("/image-upload", {
-      method: "POST",
-      body: formData
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw res;
-        }
-        return res.json();
-      })
-      .then(images => {
-        this.setState({
-          images: this.state.images.concat(images),
-          uploading: false
-        });
-      })
-      .catch(err => {
+    let upload = request
+      .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
+      .field("upload_preset", "xeest4yh")
+      .field("file", files);
+
+    upload.end((err, response) => {
+      if (err) {
         console.log(err);
+      }
+      this.setState({
+        images: this.state.images.concat(response.body),
+        uploading: false
       });
+    });
+
+    // fetch("/image-upload", {
+    //   method: "POST",
+    //   body: formData
+    // })
+    //   .then(res => {
+    //     if (!res.ok) {
+    //       throw res;
+    //     }
+    //     return res.json();
+    //   })
+    //   .then(images => {
+    //     this.setState({
+    //       images: this.state.images.concat(images),
+    //       uploading: false
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
 
   filter = id => {

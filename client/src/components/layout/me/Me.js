@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { signOut } from "../../../actions/authActions";
+import request from "superagent";
 
-import { getUserInfo, updateUserInfo } from "../../../actions/authActions";
+import {
+  getUserInfo,
+  updateUserInfo,
+  signOut
+} from "../../../actions/authActions";
 
 import "./Me.css";
 
@@ -21,9 +25,6 @@ class Me extends Component {
       sfid: user.sfid,
       errors: {}
     };
-
-    // this.onChange = this.onChange.bind(this);
-    // this.onSubmit = this.onSubmit.bind(this);
   }
 
   //If signed out, redirect to /signIn
@@ -31,52 +32,87 @@ class Me extends Component {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/me/signIn");
     }
-
     this.props.getUserInfo();
   }
 
   onChangeCover(e) {
     const files = Array.from(e.target.files);
-    const formData = new FormData();
+    // const formData = new FormData();
 
     files.forEach((file, i) => {
       if (file.size > 512000) {
         alert("Please upload an image smaller than 500k");
       } else {
-        formData.append(i, file);
+        // formData.append(i, file);
       }
     });
 
-    fetch("/image-upload", {
-      method: "POST",
-      body: formData
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw res;
-        }
-        return res.json();
-      })
-      .then(images => {
-        this.setState({
-          cover: images[0].secure_url
-        });
-      })
-      .then(res => {
-        const newInfo = {
-          name: this.state.name,
-          email: this.state.email,
-          avatar: this.state.avatar,
-          cover: this.state.cover,
-          weight: this.state.weight,
-          sfid: this.state.sfid
-        };
-        this.props.updateUserInfo(newInfo);
-      })
-      .catch(err => {
+    let upload = request
+      .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
+      .field("upload_preset", "xeest4yh")
+      .field("file", files);
+
+    upload.end((err, response) => {
+      if (err) {
         console.log(err);
+      }
+      this.setState({
+        cover: response.body.secure_url
       });
+      const newInfo = {
+        name: this.state.name,
+        email: this.state.email,
+        avatar: this.state.avatar,
+        cover: this.state.cover,
+        weight: this.state.weight,
+        sfid: this.state.sfid
+      };
+      this.props.updateUserInfo(newInfo);
+    });
   }
+
+  // onChangeCover(e) {
+  //   const files = Array.from(e.target.files);
+  //   const formData = new FormData();
+
+  //   files.forEach((file, i) => {
+  //     if (file.size > 512000) {
+  //       alert("Please upload an image smaller than 500k");
+  //     } else {
+  //       formData.append(i, file);
+  //     }
+  //   });
+
+  //   fetch("/image-upload", {
+  //     method: "POST",
+  //     body: formData
+  //   })
+  //     .then(res => {
+  //       if (!res.ok) {
+  //         throw res;
+  //       }
+  //       return res.json();
+  //     })
+  //     .then(images => {
+  //       this.setState({
+  //         cover: images[0].secure_url
+  //       });
+  //     })
+  //     .then(res => {
+  //       const newInfo = {
+  //         name: this.state.name,
+  //         email: this.state.email,
+  //         avatar: this.state.avatar,
+  //         cover: this.state.cover,
+  //         weight: this.state.weight,
+  //         sfid: this.state.sfid
+  //       };
+  //       this.props.updateUserInfo(newInfo);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
   onSignOut = () => {
     this.props.signOut();

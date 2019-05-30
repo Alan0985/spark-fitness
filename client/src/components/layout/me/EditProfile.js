@@ -46,20 +46,18 @@ class EditProfile extends Component {
 
   onChangeAvatar(e) {
     const files = Array.from(e.target.files);
-    const formData = new FormData();
+    // const formData = new FormData();
 
-    files.forEach((file, i) => {
-      if (file.size > 512000) {
-        alert(`${file.name} is too large.`);
-      } else {
-        formData.append(i, file);
-      }
-    });
+    // files.forEach((file, i) => {
+    //   if (file.size > 512000) {
+    //     alert(`${file.name} is too large.`);
+    //   } else {
+    //     formData.append(i, file);
+    //   }
+    // });
 
-    const CLOUDINARY_UPLOAD_URL =
-      "https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload";
     let upload = request
-      .post(CLOUDINARY_UPLOAD_URL)
+      .post("https://api.cloudinary.com/v1_1/dgmvfyzua/image/upload")
       .field("upload_preset", "xeest4yh")
       .field("file", files);
 
@@ -67,15 +65,9 @@ class EditProfile extends Component {
       if (err) {
         console.log(err);
       }
-
-      if (response.body.secure_url !== "") {
-        // this.setState({
-        //   uploadedFileCloudinaryUrl: response.body.secure_url
-        // });
-        this.setState({
-          avatar: response.body.secure_url
-        });
-      }
+      this.setState({
+        avatar: response.body.secure_url
+      });
     });
 
     // fetch("/image-upload", {

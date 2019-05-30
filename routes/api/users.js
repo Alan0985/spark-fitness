@@ -85,6 +85,7 @@ router.post("/me/signIn", (req, res) => {
             name: user.name,
             email: user.email,
             avatar: user.avatar,
+            cover: user.cover,
             sfid: user.sfid,
             weight: user.weight,
             password: user.password
