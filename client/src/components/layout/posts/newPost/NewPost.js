@@ -95,7 +95,7 @@ class NewPost extends Component {
       images: imagesURL
     };
     this.props.addPost(newPost);
-    window.location.replace("/me/myPosts");
+    // window.location.replace("/me/myPosts");
   }
 
   render() {

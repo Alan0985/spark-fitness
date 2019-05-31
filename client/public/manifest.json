@@ -11,6 +11,11 @@
       "src": "favicon.ico",
       "sizes": "192x192 144x144 128x128 96x96 64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
+    },
+    {
+      "src": "sf_256.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
