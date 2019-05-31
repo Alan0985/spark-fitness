@@ -1,22 +1,16 @@
 {
   "name": "Spark Fitness",
   "short_name": "Spark",
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#c23616",
   "icons": [
     {
-      "src": "img/icons/sf_192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-
-    {
-      "src": "img/icons/sf_512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "favicon.ico",
+      "sizes": "192x192 144x144 128x128 96x96 64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
   ]
 }
