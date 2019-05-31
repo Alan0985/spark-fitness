@@ -7,6 +7,10 @@
   color: #2c3e50;
 }
 
+#allPosts .postMain {
+  margin-bottom: 60px;
+}
+
 #allPosts .postDetailMain {
   width: 100vw;
   height: 100%;
