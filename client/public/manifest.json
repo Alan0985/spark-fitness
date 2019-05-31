@@ -8,13 +8,13 @@
   "theme_color": "#c23616",
   "icons": [
     {
-      "src": "../src/img/icons/sf_192.png",
+      "src": "img/icons/sf_192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
 
     {
-      "src": "../src/img/icons/sf_512.png",
+      "src": "img/icons/sf_512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
