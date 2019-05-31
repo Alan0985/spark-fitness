@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/Alan0985/spark-fitness/issues"
   },
-  "homepage": "https://github.com/Alan0985/spark-fitness#readme",
+  "homepage": ".",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.14.0",
