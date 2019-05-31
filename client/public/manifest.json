@@ -8,44 +8,9 @@
   "theme_color": "#c23616",
   "icons": [
     {
-      "src": "img/icons/sf_48.png",
-      "sizes": "48x48",
-      "type": "image/png"
-    },
-    {
-      "src": "img/icons/sf_72.png",
-      "sizes": "72x72",
-      "type": "image/png"
-    },
-    {
-      "src": "img/icons/sf_96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "img/icons/sf_144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "img/icons/sf_168.png",
-      "sizes": "168x168",
-      "type": "image/png"
-    },
-    {
-      "src": "img/icons/sf_192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "img/icons/sf_256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "img/icons/sf_512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
   ]
 }
