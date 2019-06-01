@@ -5,12 +5,12 @@ export default function Video() {
   return (
     <section id="video">
       <div className="videoBG">
-        {/* <video autoPlay loop muted>
+        <video autoPlay loop muted>
           <source src={videoPath} type="video/mp4" />
-        </video> */}
+        </video>
         <div className="imageBG" />
       </div>
-      {/* <div className="videoOverlay" /> */}
+      <div className="videoOverlay" />
       <div className="videoText">
         <i className="fab fa-gripfire" />
         <h1>Spark</h1>
