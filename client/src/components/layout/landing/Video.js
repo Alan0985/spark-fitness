@@ -10,7 +10,7 @@ export default function Video() {
         </video> */}
         <div className="imageBG" />
       </div>
-      <div className="videoOverlay" />
+      {/* <div className="videoOverlay" /> */}
       <div className="videoText">
         <i className="fab fa-gripfire" />
         <h1>Spark</h1>
