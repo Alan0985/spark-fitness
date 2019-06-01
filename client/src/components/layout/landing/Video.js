@@ -5,9 +5,9 @@ export default function Video() {
   return (
     <section id="video">
       <div className="videoBG">
-        <video autoPlay loop muted>
+        {/* <video autoPlay loop muted>
           <source src={videoPath} type="video/mp4" />
-        </video>
+        </video> */}
         <div className="imageBG" />
       </div>
       <div className="videoOverlay" />
