@@ -6,7 +6,7 @@ export default function Video() {
   return (
     <section id="video">
       <div className="videoBG">
-        <video loop muted poster={posterPath}>
+        <video autoPlay loop muted poster={posterPath}>
           <source src={videoPath} type="video/mp4" />
         </video>
       </div>
