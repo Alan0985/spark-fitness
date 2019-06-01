@@ -1,12 +1,11 @@
 import React from "react";
 const videoPath = require("../../../video/fitness.mp4");
-const posterPath = require("../../../img/768/me_768.jpg");
 
 export default function Video() {
   return (
     <section id="video">
       <div className="videoBG">
-        <video autoPlay loop muted poster={posterPath}>
+        <video autoPlay loop muted>
           <source src={videoPath} type="video/mp4" />
         </video>
       </div>
