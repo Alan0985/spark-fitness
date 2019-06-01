@@ -1,12 +1,13 @@
 import React from "react";
-const videoPath =
-  "https://sparkfitness.herokuapp.com/static/media/fitness.5b1d891a.mp4";
+const videoPath = require("../../../video/fitness.mp4");
 
 export default function Video() {
   return (
     <section id="video">
       <div className="videoBG">
-        <video src={videoPath} autoPlay loop muted />
+        <video controls loop muted poster="../../../img/768/me_768.jpg">
+          <source src={videoPath} type="video/mp4" />
+        </video>
       </div>
       <div className="videoOverlay" />
       <div className="videoText">
