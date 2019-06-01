@@ -17,11 +17,16 @@
   overflow: hidden;
 }
 
-.videoBG video {
+#video video,
+#video .imageBG {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#video .imageBG {
+  background-image: url(../../../img/1200/landing_1200.jpg);
 }
 
 .videoOverlay {

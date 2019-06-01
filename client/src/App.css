@@ -11,7 +11,8 @@ body {
 
 @media only screen and (max-width: 768px) {
   #desktopNavbar,
-  #explore footer {
+  #explore footer,
+  #video .videoBG {
     display: none;
   }
 
@@ -42,7 +43,8 @@ body {
 
 @media only screen and (min-width: 769px) {
   #mobileNavbar,
-  #exploreNavbar {
+  #exploreNavbar,
+  #video .imageBG {
     display: none;
   }
 }

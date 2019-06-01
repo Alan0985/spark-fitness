@@ -9,6 +9,7 @@ export default function Video() {
         <video autoPlay loop muted poster={posterPath}>
           <source src={videoPath} type="video/mp4" />
         </video>
+        <div className="imageBG" />
       </div>
       <div className="videoOverlay" />
       <div className="videoText">
