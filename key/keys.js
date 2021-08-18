@@ -1,4 +1,4 @@
 module.exports = {
-  mongoURI: "mongodb://sf0985:sf0985@ds139896.mlab.com:39896/spark",
+  mongoURI: "mongodb+srv://alan123:alan123@sf.ofvaf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   secretOrKey: "secretOrKey"
 };

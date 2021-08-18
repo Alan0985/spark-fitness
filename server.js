@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const path = require("path");
 const passport = require("passport");
 
+var webdriver = require("selenium-webdriver");
+
 const users = require("./routes/api/users");
 const posts = require("./routes/api/posts");
 const explores = require("./routes/api/explores");
@@ -18,9 +20,9 @@ const db = require("./key/keys").mongoURI;
 
 //Connect to MongoDB
 mongoose
-  .connect(db)
+  .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 //Passport
 app.use(passport.initialize());

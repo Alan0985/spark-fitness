@@ -22,7 +22,7 @@ const ExploreSchema = new Schema({
 
   training: [
     {
-      catagory: {
+      category: {
         type: String
       },
 
@@ -52,7 +52,7 @@ const ExploreSchema = new Schema({
             type: Number
           },
 
-          hot: {
+          popularity: {
             type: Number
           }
         }

@@ -6,6 +6,7 @@ import { GET_ERRORS, GET_USER_INFO, CLEAR_ERRORS } from "./types";
 
 //Sign Up
 export const signUp = (userData, history) => dispatch => {
+  console.log(1111)
   axios
     .post("/api/users/me/signUp", userData)
     .then(res => history.push("/me/signIn"))
