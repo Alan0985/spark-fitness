@@ -31,5 +31,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "https://sfnz.herokuapp.com"
+  "proxy": "https://sparkfitness.cyclic.app/"
 }
