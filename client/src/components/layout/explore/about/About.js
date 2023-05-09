@@ -14,6 +14,7 @@ class About extends Component {
   }
 
   render() {
+    console.log("this.props.explore", this.props.explore);
     const { team } = this.props.explore.explore;
     const { load } = this.props.explore;
 
@@ -21,7 +22,7 @@ class About extends Component {
     if (typeof team === "undefined" || load) {
       teamMembers = <Spinner />;
     } else {
-      teamMembers = team.map(teamMember => (
+      teamMembers = team.map((teamMember) => (
         <div className="teamMember" key={teamMember.id}>
           <img src={teamMember.avatar} alt={teamMember.name} />
           <h2>{teamMember.name}</h2>
@@ -69,14 +70,11 @@ class About extends Component {
 
 About.propTypes = {
   getExploreData: PropTypes.func.isRequired,
-  explore: PropTypes.object.isRequired
+  explore: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  explore: state.explore
+const mapStateToProps = (state) => ({
+  explore: state.explore,
 });
 
-export default connect(
-  mapStateToProps,
-  { getExploreData }
-)(About);
+export default connect(mapStateToProps, { getExploreData })(About);
