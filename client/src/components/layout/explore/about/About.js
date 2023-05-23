@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { getExploreData } from "../../../../actions/exploreActions";
+import { getTeamData } from "../../../../actions/exploreActions";
 
 import Spinner from "../../../common/Spinner";
 
@@ -10,13 +10,11 @@ import "./About.css";
 
 class About extends Component {
   componentDidMount() {
-    this.props.getExploreData();
+    this.props.getTeamData();
   }
 
   render() {
-    console.log("this.props.explore", this.props.explore);
-    const { team } = this.props.explore.explore;
-    const { load } = this.props.explore;
+    const { load, team } = this.props.explore;
 
     let teamMembers;
     if (typeof team === "undefined" || load) {
@@ -69,7 +67,7 @@ class About extends Component {
 }
 
 About.propTypes = {
-  getExploreData: PropTypes.func.isRequired,
+  getTeamData: PropTypes.func.isRequired,
   explore: PropTypes.object.isRequired,
 };
 
@@ -77,4 +75,4 @@ const mapStateToProps = (state) => ({
   explore: state.explore,
 });
 
-export default connect(mapStateToProps, { getExploreData })(About);
+export default connect(mapStateToProps, { getTeamData })(About);

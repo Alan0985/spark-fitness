@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { getExploreData } from "../../../../actions/exploreActions";
+import { getMembershipData } from "../../../../actions/exploreActions";
 
 import Option from "./Option";
 import Spinner from "../../../common/Spinner";
@@ -11,19 +11,18 @@ import "./Membership.css";
 
 class Membership extends Component {
   componentDidMount() {
-    this.props.getExploreData();
+    this.props.getMembershipData();
   }
 
   render() {
-    const { membership } = this.props.explore.explore;
-    const { load } = this.props.explore;
+    const { load, membership } = this.props.explore;
 
     let options;
     if (typeof membership === "undefined" || load) {
       options = <Spinner />;
     } else {
-      options = membership.map(option => (
-        <Option key={option.type} option={option} />
+      options = membership.map((option) => (
+        <Option key={option.membershipOption} option={option} />
       ));
     }
 
@@ -42,15 +41,12 @@ class Membership extends Component {
 }
 
 Membership.propTypes = {
-  getExploreData: PropTypes.func.isRequired,
-  explore: PropTypes.object.isRequired
+  getMembershipData: PropTypes.func.isRequired,
+  explore: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  explore: state.explore
+const mapStateToProps = (state) => ({
+  explore: state.explore,
 });
 
-export default connect(
-  mapStateToProps,
-  { getExploreData }
-)(Membership);
+export default connect(mapStateToProps, { getMembershipData })(Membership);

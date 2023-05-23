@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="address">
           <p>P: +64 21 1234567</p>
           <p>E: info@sparkfitness.co.nz</p>
-          <p>Island Bay, Wellington, New Zealand</p>
+          <p>City Center, Christchurch, New Zealand</p>
         </div>
         <div className="socialMedia">
           <i className="fab fa-facebook-f" />
@@ -17,8 +17,8 @@ export default function Footer() {
         </div>
       </div>
       <div className="copyRight">
-        Copyright &copy; Spark Fitness; Developed By
-        <a href="https://github.com/Alan0985"> Alan Wang</a>
+        Copyright &copy; Spark Fitness; Powered By
+        <a href="https://github.com/Alan0985"> Allen Wang</a>
       </div>
     </footer>
   );

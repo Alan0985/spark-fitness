@@ -1,6 +1,6 @@
 {
   "name": "spark",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Spark Fitness",
   "main": "server.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/Alan0985/spark-fitness.git"
   },
-  "author": "Alan Wang",
+  "author": "Allen Wang",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Alan0985/spark-fitness/issues"
@@ -26,6 +26,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.26.2",
     "concurrently": "^4.1.2",
+    "config": "^3.3.9",
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
@@ -36,7 +37,10 @@
     "node": "^20.1.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "pg": "^8.11.0",
+    "pg-hstore": "^2.3.4",
     "selenium-webdriver": "^4.0.0-beta.4",
+    "sequelize": "^6.31.1",
     "superagent": "^5.3.1",
     "validator": "^10.11.0"
   },

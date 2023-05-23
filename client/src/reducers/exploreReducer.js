@@ -1,25 +1,46 @@
-import { GET_EXPLORE_DATA, LOADING } from "../actions/types";
+import {
+  GET_TEAM_DATA,
+  GET_MEMBERSHIP_DATA,
+  GET_TRAINING_DATA,
+  LOADING,
+} from "../actions/types";
 
 const initialState = {
-  explore: {},
+  team: [],
+  membership: [],
+  training: [],
   messages: [],
   message: {},
-  load: false
+  load: false,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOADING:
       return {
         ...state,
-        load: true
+        load: true,
       };
 
-    case GET_EXPLORE_DATA:
+    case GET_TEAM_DATA:
       return {
         ...state,
-        explore: action.payload,
-        load: false
+        team: action.payload,
+        load: false,
+      };
+
+    case GET_MEMBERSHIP_DATA:
+      return {
+        ...state,
+        membership: action.payload,
+        load: false,
+      };
+
+    case GET_TRAINING_DATA:
+      return {
+        ...state,
+        training: action.payload,
+        load: false,
       };
 
     default:

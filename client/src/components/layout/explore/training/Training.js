@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { getExploreData } from "../../../../actions/exploreActions";
+import { getTrainingData } from "../../../../actions/exploreActions";
 
 import { TrainingGroup } from "./TrainingGroup";
 import Spinner from "../../../common/Spinner";
@@ -11,18 +11,17 @@ import "./Training.css";
 
 class Training extends Component {
   componentDidMount() {
-    this.props.getExploreData();
+    this.props.getTrainingData();
   }
 
   render() {
-    const { training } = this.props.explore.explore;
-    const { load } = this.props.explore;
+    const { load, training } = this.props.explore;
 
     let trainingGroup;
     if (typeof training === "undefined" || load) {
       trainingGroup = <Spinner />;
     } else {
-      trainingGroup = training.map(training => (
+      trainingGroup = training.map((training) => (
         <TrainingGroup key={training.category} training={training} />
       ));
     }
@@ -45,15 +44,12 @@ class Training extends Component {
 }
 
 Training.propTypes = {
-  getExploreData: PropTypes.func.isRequired,
-  explore: PropTypes.object.isRequired
+  getTrainingData: PropTypes.func.isRequired,
+  explore: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  explore: state.explore
+const mapStateToProps = (state) => ({
+  explore: state.explore,
 });
 
-export default connect(
-  mapStateToProps,
-  { getExploreData }
-)(Training);
+export default connect(mapStateToProps, { getTrainingData })(Training);

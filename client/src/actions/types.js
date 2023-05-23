@@ -14,5 +14,7 @@ export const GET_POST = "GET_POST";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
 
-export const GET_EXPLORE_DATA = "GET_EXPLORE_DATA";
+export const GET_TEAM_DATA = "GET_TEAM_DATA";
+export const GET_MEMBERSHIP_DATA = "GET_MEMBERSHIP_DATA";
+export const GET_TRAINING_DATA = "GET_TRAINING_DATA";
 export const CREATE_NEW_MESSAGE = "CREATE_NEW_MESSAGE";

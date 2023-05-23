@@ -15,7 +15,7 @@ export default function ContactInfo() {
 
       <div>
         <p>Address:</p>
-        <p>Island Bay, Wellington, New Zealand</p>
+        <p>City Center, Christchurch, New Zealand</p>
       </div>
 
       <div>

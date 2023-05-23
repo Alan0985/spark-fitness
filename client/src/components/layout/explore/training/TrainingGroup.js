@@ -1,12 +1,16 @@
 import React from "react";
 import { TrainingClass } from "./TrainingClass";
 
-export const TrainingGroup = props => {
+export const TrainingGroup = (props) => {
   let trainingClass;
+  trainingClass = props.training.classes.map((classItem) => {
+    let parsedClassItem = JSON.parse(classItem);
 
-  trainingClass = props.training.classes.map(classItem => (
-    <TrainingClass key={classItem.name} classItem={classItem} />
-  ));
+    return (
+      <TrainingClass key={parsedClassItem.title} classItem={parsedClassItem} />
+    );
+  });
+
   return (
     <div className="trainingGroup">
       <div className="trainingIntro">

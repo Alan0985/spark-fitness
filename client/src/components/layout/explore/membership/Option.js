@@ -5,13 +5,13 @@ class Option extends Component {
   constructor() {
     super();
     this.state = {
-      showFranchise: false
+      showFranchise: false,
     };
   }
 
   toggleFranchise() {
     this.setState({
-      showFranchise: !this.state.showFranchise
+      showFranchise: !this.state.showFranchise,
     });
   }
 
@@ -39,10 +39,10 @@ class Option extends Component {
     }
 
     return (
-      <div id={`option${option.type}`} className="option">
+      <div id={`option${option.membershipOption}`} className="option">
         <div className="optionHeader">
           <div className="optionTitle">
-            <h1>{option.type}</h1>
+            <h1>{option.membershipOption}</h1>
             <h5>{option.summary}</h5>
           </div>
           <div className="optionDetail">
