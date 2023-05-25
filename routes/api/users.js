@@ -27,7 +27,7 @@ router.post("/me/signUp", async (req, res) => {
 
     const { name, email, sfid, weight, password } = req.body;
 
-    User.findOne({ where: { email: email } }).then((user) => {
+    await User.findOne({ where: { email: email } }).then((user) => {
       if (user) {
         errors.email = "This Email has been taken.";
         return res.status(400).json(errors);
@@ -62,7 +62,7 @@ router.post("/me/signUp", async (req, res) => {
 //route     POST /api/users/signIn
 //Desc      SignIn user / Return the JWT
 //Access    Public
-router.post("/me/signIn", (req, res) => {
+router.post("/me/signIn", async (req, res) => {
   const { errors, isValid } = validateSignInInput(req.body);
   //Validate
   if (!isValid) {
@@ -72,7 +72,7 @@ router.post("/me/signIn", (req, res) => {
   const { email, password } = req.body;
 
   //Find user by email
-  User.findOne({ where: { email: email } }).then((user) => {
+  await User.findOne({ where: { email: email } }).then((user) => {
     //Check for user
     if (!user) {
       errors.email = "User not found, please Sign Up first";
@@ -120,8 +120,8 @@ router.post("/me/signIn", (req, res) => {
 router.get(
   "/me/editProfile",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    User.findOne({ where: { email: req.user.email } })
+  async (req, res) => {
+    await User.findOne({ where: { email: req.user.email } })
       .then((user) => res.json(user))
       .catch((err) => res.status(404).json(err));
   }
@@ -133,7 +133,7 @@ router.get(
 router.post(
   "/me/editProfile",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+  async (req, res) => {
     const { errors, isValid } = validateNewUserInfo(req.body);
     //Validate
     if (!isValid) {
@@ -142,7 +142,7 @@ router.post(
 
     const { name, avatar, cover, sfid, weight } = req.body;
 
-    User.findOne({ where: { email: req.user.email } })
+    await User.findOne({ where: { email: req.user.email } })
       .then((user) => {
         if (user) {
           user.update({ name, avatar, cover, sfid, weight }).then((newUser) => {
