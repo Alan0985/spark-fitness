@@ -16,44 +16,47 @@ const validateNewUserInfo = require("../../validation/newUserInfoValidation");
 //route     POST /api/users/signUp
 //Desc      SignUp users route
 //Access    Public
-router.post("/me/signUp", (req, res) => {
-  const { errors, isValid } = validateSignUpInput(req.body);
+router.post("/me/signUp", async (req, res) => {
+  try {
+    const { errors, isValid } = validateSignUpInput(req.body);
 
-  //Validate
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  User.findOne({ email: req.body.email }).then(user => {
-    if (user) {
-      errors.email = "This Email has been taken.";
+    //Validate
+    if (!isValid) {
       return res.status(400).json(errors);
-    } else {
-      const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        avatar:
-          "https://res.cloudinary.com/dgmvfyzua/image/upload/v1558149427/avatar_default_ex0t7c.svg",
-        cover:
-          "https://res.cloudinary.com/dgmvfyzua/image/upload/v1558150786/cover_default_euagoq.jpg",
-        sfid: req.body.sfid,
-        weight: req.body.weight,
-        password: req.body.password,
-        password2: req.body.password2
-      });
-
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          newUser.password = hash;
-          newUser
-            .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
-        });
-      });
     }
-  });
+
+    const { name, email, sfid, weight, password } = req.body;
+
+    User.findOne({ where: { email: email } }).then((user) => {
+      if (user) {
+        errors.email = "This Email has been taken.";
+        return res.status(400).json(errors);
+      } else {
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(password, salt, (err, hash) => {
+            if (err) throw err;
+
+            User.create({
+              name,
+              email,
+              avatar:
+                "https://res.cloudinary.com/dgmvfyzua/image/upload/v1558149427/avatar_default_ex0t7c.svg",
+              cover:
+                "https://res.cloudinary.com/dgmvfyzua/image/upload/v1558150786/cover_default_euagoq.jpg",
+              sfid: "-",
+              weight,
+              password: hash,
+            })
+              .then((user) => res.send(user))
+              .catch((err) => console.log(err));
+          });
+        });
+      }
+    });
+  } catch (error) {
+    console.error("Error registering user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 //route     POST /api/users/signIn
@@ -66,18 +69,17 @@ router.post("/me/signIn", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
 
   //Find user by email
-  User.findOne({ email }).then(user => {
+  User.findOne({ where: { email: email } }).then((user) => {
     //Check for user
     if (!user) {
       errors.email = "User not found, please Sign Up first";
       return res.status(404).json(errors);
     } else {
       //If user exists, check the password
-      bcrypt.compare(password, user.password).then(isMatch => {
+      bcrypt.compare(password, user.password).then((isMatch) => {
         if (isMatch) {
           //Token Payload
           const payload = {
@@ -88,7 +90,7 @@ router.post("/me/signIn", (req, res) => {
             cover: user.cover,
             sfid: user.sfid,
             weight: user.weight,
-            password: user.password
+            password: user.password,
           };
 
           //Sign Token
@@ -99,12 +101,12 @@ router.post("/me/signIn", (req, res) => {
             (err, token) => {
               res.json({
                 success: true,
-                token: "Bearer " + token
+                token: "Bearer " + token,
               });
             }
           );
         } else {
-          errors.password = "Password is not correct";
+          errors.password = "Either Username or Password is not correct";
           return res.status(400).json(errors);
         }
       });
@@ -119,9 +121,9 @@ router.get(
   "/me/editProfile",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ email: req.user.email })
-      .then(user => res.json(user))
-      .catch(err => res.status(404).json(err));
+    User.findOne({ where: { email: req.user.email } })
+      .then((user) => res.json(user))
+      .catch((err) => res.status(404).json(err));
   }
 );
 
@@ -138,25 +140,19 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    let newUserFields = {};
-    newUserFields = req.user;
-    if (req.body.name) newUserFields.name = req.body.name;
-    if (req.body.email) newUserFields.email = req.body.email;
-    if (req.body.avatar) newUserFields.avatar = req.body.avatar;
-    if (req.body.cover) newUserFields.cover = req.body.cover;
-    if (req.body.weight) newUserFields.weight = req.body.weight;
-    if (req.body.sfid) newUserFields.sfid = req.body.sfid;
+    const { name, avatar, cover, sfid, weight } = req.body;
 
-    //Update User Info
-    User.findOneAndUpdate(
-      { email: req.user.email },
-      { $set: newUserFields },
-      { new: true }
-    )
-      .then(newUser => {
-        res.json(newUser);
+    User.findOne({ where: { email: req.user.email } })
+      .then((user) => {
+        if (user) {
+          user.update({ name, avatar, cover, sfid, weight }).then((newUser) => {
+            res.json(newUser);
+          });
+        } else {
+          console.log("User not found.");
+        }
       })
-      .catch(err => res.status(404).json(err));
+      .catch((err) => res.status(404).json(err));
   }
 );
 
@@ -167,11 +163,8 @@ router.get(
   "/me",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.json({
-      id: req.user.id,
-      name: req.user.name,
-      email: req.user.email
-    });
+    const { id, name, email } = req.user;
+    res.json({ id, name, email });
   }
 );
 

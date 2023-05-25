@@ -1,36 +1,29 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const DataTypes = require("sequelize");
+const db = require("../config/db");
 
 //Create Schema
-const UserSchema = new Schema({
+const User = db.define("user", {
   name: {
-    type: String,
-    required: true
+    type: DataTypes.STRING,
   },
   email: {
-    type: String,
-    required: true
+    type: DataTypes.STRING,
   },
   password: {
-    type: String,
-    required: true
+    type: DataTypes.STRING,
   },
   avatar: {
-    type: String
+    type: DataTypes.STRING,
   },
   cover: {
-    type: String
+    type: DataTypes.STRING,
   },
   sfid: {
-    type: String
+    type: DataTypes.STRING,
   },
   weight: {
-    type: Number
+    type: DataTypes.NUMBER,
   },
-  date: {
-    type: Date,
-    default: Date.now
-  }
 });
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = User;
