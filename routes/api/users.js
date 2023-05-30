@@ -25,7 +25,7 @@ router.post("/me/signUp", async (req, res) => {
       return res.status(400).json(errors);
     }
 
-    const { name, email, sfid, weight, password } = req.body;
+    const { name, email, weight, password } = req.body;
 
     await User.findOne({ where: { email: email } }).then((user) => {
       if (user) {

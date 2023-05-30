@@ -5,60 +5,60 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: "users",
   },
 
   text: {
-    type: String
+    type: String,
   },
 
   name: {
-    type: String
+    type: String,
   },
 
   avatar: {
-    type: String
+    type: String,
   },
 
   images: {
-    type: Array
+    type: Array,
   },
 
   postLikes: [
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: "users"
-      }
-    }
+        ref: "users",
+      },
+    },
   ],
 
   comments: [
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: "users",
       },
       name: {
-        type: String
+        type: String,
       },
       avatar: {
-        type: String
+        type: String,
       },
       text: {
-        type: String
+        type: String,
       },
       date: {
         type: Date,
-        default: Date.now
-      }
-    }
+        default: Date.now,
+      },
+    },
   ],
 
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 module.exports = PostModel = mongoose.model("posts", PostSchema);

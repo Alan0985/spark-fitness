@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
-const Post = require("../../models/Post");
+const Post = require("../../models/PostModel");
 const User = require("../../models/User");
 
 //route     POST /api/posts
@@ -11,37 +11,15 @@ const User = require("../../models/User");
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    const newPost = {
+  (req, res) => {
+    const newPost = new Post({
       text: req.body.text,
       name: req.user.name,
       avatar: req.user.avatar,
       images: req.body.images,
-      postLikes: [],
-      comments: [],
-    };
-
-    // const newPost = {
-    //   text: "Test AAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAA",
-    //   name: "ALen",
-    //   avatar:
-    //     "https://res.cloudinary.com/dgmvfyzua/image/upload/v1558149427/avatar_default_ex0t7c.svg",
-    //   images: [
-    //     "https://res.cloudinary.com/dgmvfyzua/image/upload/v1628816912/tp6r806kwkrouobiibby.jpg",
-    //     "https://res.cloudinary.com/dgmvfyzua/image/upload/v1628816916/geoqkfmwv25nbooqbcfm.jpg",
-    //     "https://res.cloudinary.com/dgmvfyzua/image/upload/v1628816942/mrpzni9rmyzhmg2jmkm9.jpg",
-    //   ],
-    //   postLikes: [],
-    //   comments: [],
-    // };
-
-    try {
-      const post = await Post.create(newPost);
-      res.json(post);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Server error" });
-    }
+      user: req.user.id
+    });
+    newPost.save().then(post => res.json(post));
   }
 );
 
@@ -53,12 +31,12 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Post.findById(req.params.postId)
-      .then((post) => {
-        post.remove().then((res) => {
+      .then(post => {
+        post.remove().then(res => {
           res.json({ Success: true });
         });
       })
-      .catch((err) =>
+      .catch(err =>
         res.status(400).json({ msg: "ooops, something wrong here" })
       );
   }
@@ -67,16 +45,10 @@ router.delete(
 //route     GET /api/posts/:id
 //Desc      Get one post
 //Access    Private
-router.get("/:id", async (req, res) => {
-  try {
-    const post = await Post.findById({ WHERE: { id: req.params.id } });
-    if (!post) {
-      return res.status(404).json({ msg: "No Post Found" });
-    }
-    return res.json(post);
-  } catch (err) {
-    res.status(500).json({ message: "Server error" });
-  }
+router.get("/:id", (req, res) => {
+  Post.findById({ _id: req.params.id })
+    .then(post => res.json(post))
+    .catch(err => res.status(404).json({ msg: "No Post Found" }));
 });
 
 //route     GET /api/posts
@@ -85,16 +57,11 @@ router.get("/:id", async (req, res) => {
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    try {
-      const posts = await Post.findAll({ order: [["createdAt", "DESC"]] });
-      if (posts.length === 0) {
-        return res.status(404).json({ msg: "No Post Found" });
-      }
-      return res.json(posts);
-    } catch (err) {
-      res.status(500).json({ message: "Server error" });
-    }
+  (req, res) => {
+    Post.find()
+      .sort({ date: -1 })
+      .then(posts => res.json(posts))
+      .catch(err => res.status(404).json({ msg: "No Post Found" }));
   }
 );
 
@@ -105,10 +72,10 @@ router.post(
   "/like/:postId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Post.findById(req.params.postId).then((post) => {
+    Post.findById(req.params.postId).then(post => {
       if (
         //Check if the post is liked or not
-        post.postLikes.filter((like) => like.user.toString() === req.user.id)
+        post.postLikes.filter(like => like.user.toString() === req.user.id)
           .length === 0
       ) {
         //Add user id to postLikes array
@@ -116,12 +83,12 @@ router.post(
       } else {
         //Get index and remove user id from postLikes array
         const index = post.postLikes
-          .map((like) => like.user.toString())
+          .map(like => like.user.toString())
           .indexOf(req.user.id);
         post.postLikes.splice(index, 1);
       }
 
-      post.save().then((post) => res.json(post));
+      post.save().then(post => res.json(post));
     });
   }
 );
@@ -134,17 +101,17 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Post.findById(req.params.id)
-      .then((post) => {
+      .then(post => {
         const newComment = {
           user: req.user.id,
           name: req.user.name,
           avatar: req.user.avatar,
-          text: req.body.text,
+          text: req.body.text
         };
         post.comments.unshift(newComment);
-        post.save().then((post) => res.json(post));
+        post.save().then(post => res.json(post));
       })
-      .catch((err) => res.status(404).json({ NotFound: "Post Not Found" }));
+      .catch(err => res.status(404).json({ NotFound: "Post Not Found" }));
   }
 );
 
@@ -155,12 +122,12 @@ router.delete(
   "/comment/:postId/:commentId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Post.findById(req.params.postId).then((post) => {
+    Post.findById(req.params.postId).then(post => {
       const index = post.comments
-        .map((comment) => comment._id.toString())
+        .map(comment => comment._id.toString())
         .indexOf(req.params.commentId);
       post.comments.splice(index, 1);
-      post.save().then((post) => res.json(post));
+      post.save().then(post => res.json(post));
     });
   }
 );
