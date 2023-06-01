@@ -9,21 +9,21 @@ import CommentList from "../../comments/CommentList";
 import {
   getPost,
   clickLike,
-  addComment
+  addComment,
 } from "../../../../actions/postActions";
 
 class PostDetailMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ""
+      text: "",
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ text: e.target.value });
   };
 
@@ -31,19 +31,21 @@ class PostDetailMain extends Component {
     this.props.clickLike(postId);
   }
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { user } = this.props.auth;
-    const { _id } = this.props.post.post;
+    const { id } = this.props.post.post;
 
     const newComment = {
       name: user.name,
       avatar: user.avatar,
-      text: this.state.text
+      text: this.state.text,
     };
 
-    this.props.addComment(_id, newComment);
+    console.log("newComment", newComment);
+
+    this.props.addComment(id, newComment);
     this.setState({ text: "" });
   };
 
@@ -62,16 +64,16 @@ class PostDetailMain extends Component {
               <div className="nameTime">
                 <p className="name">{post.name}</p>
                 <p className="postTime">
-                  <Moment format="YYYY/MM/DD HH:mm">{post.date}</Moment>
+                  <Moment format="YYYY/MM/DD HH:mm">{post.createdAt}</Moment>
                 </p>
               </div>
             </div>
 
             <div
               className="postLikes"
-              onClick={this.onClickLike.bind(this, post._id)}
+              onClick={this.onClickLike.bind(this, post.id)}
             >
-              {post.postLikes.filter(like => like.user === auth.user.id)
+              {post.postLikes.filter((like) => like.userId === auth.user.id)
                 .length > 0 ? (
                 <i className="fas fa-heart" />
               ) : (
@@ -134,15 +136,14 @@ PostDetailMain.propTypes = {
   clickLike: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   post: state.post,
-  auth: state.auth
+  auth: state.auth,
 });
 
-export default connect(
-  mapStateToProps,
-  { getPost, clickLike, addComment }
-)(PostDetailMain);
+export default connect(mapStateToProps, { getPost, clickLike, addComment })(
+  PostDetailMain
+);

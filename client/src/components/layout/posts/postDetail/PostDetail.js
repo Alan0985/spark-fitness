@@ -34,6 +34,8 @@ class PostDetail extends Component {
     const { post, loading } = this.props.post;
     const { auth } = this.props;
 
+    console.log("post", post);
+
     return (
       <section id="postDetail">
         <div className="postDetailHeader">
@@ -43,11 +45,11 @@ class PostDetail extends Component {
               <p>Post Detail</p>
             </div>
           </Link>
-          {post.user === auth.user.id ? (
+          {post.userId === auth.user.id ? (
             <div className="deletePost">
               <i
                 className="fas fa-trash-alt"
-                onClick={this.onDeletePost.bind(this, post._id)}
+                onClick={this.onDeletePost.bind(this, post.id)}
               />
             </div>
           ) : null}
@@ -67,16 +69,13 @@ PostDetail.propTypes = {
   deletePost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   post: state.post,
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(
-  mapStateToProps,
-  { getPost, deletePost }
-)(PostDetail);
+export default connect(mapStateToProps, { getPost, deletePost })(PostDetail);

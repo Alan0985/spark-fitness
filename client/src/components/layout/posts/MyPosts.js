@@ -27,7 +27,7 @@ class MyPosts extends Component {
       myPostMain = <Spinner />;
     } else {
       let filteredPosts;
-      filteredPosts = posts.filter(post => post.user === user.id);
+      filteredPosts = posts.filter((post) => post.userId === user.id);
       myPostMain = <PostContent posts={filteredPosts} />;
     }
 
@@ -56,15 +56,12 @@ class MyPosts extends Component {
 MyPosts.propTypes = {
   getPosts: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  post: state.post
+  post: state.post,
 });
 
-export default connect(
-  mapStateToProps,
-  { getPosts }
-)(MyPosts);
+export default connect(mapStateToProps, { getPosts })(MyPosts);

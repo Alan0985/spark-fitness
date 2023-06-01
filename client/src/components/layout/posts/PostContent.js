@@ -17,13 +17,13 @@ class PostContent extends Component {
         </div>
       );
     } else {
-      return posts.map(post => <PostItem key={post._id} post={post} />);
+      return posts.map((post) => <PostItem key={post.id} post={post} />);
     }
   }
 }
 
 PostContent.propTypes = {
-  posts: PropTypes.array.isRequired
+  posts: PropTypes.array.isRequired,
 };
 
 export default PostContent;

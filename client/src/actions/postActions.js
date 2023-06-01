@@ -2,122 +2,123 @@ import axios from "axios";
 import { ADD_POST, GET_POSTS, GET_POST, GET_ERRORS, LOADING } from "./types";
 
 //Add one post
-export const addPost = postData => dispatch => {
+export const addPost = (postData) => (dispatch) => {
   dispatch({ type: LOADING });
   axios
     .post("/api/posts", postData)
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: ADD_POST,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .then(res => window.location.replace("/me/myPosts"))
-    .catch(err =>
+    .then((res) => window.location.replace("/me/myPosts"))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 //Delete one post
-export const deletePost = postId => dispatch => {
+export const deletePost = (postId) => (dispatch) => {
   axios
     .delete(`/api/posts/${postId}`)
-    .then(res => res.json({ success: true }))
-    .catch(err =>
+    .then((res) => res.json({ success: true }))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 //Get one post
-export const getPost = id => dispatch => {
+export const getPost = (id) => (dispatch) => {
   dispatch({ type: LOADING });
   axios
     .get(`/api/posts/${id}`)
-    .then(res => {
+    .then((res) => {
+      console.log("res.data", res.data);
       dispatch({
         type: GET_POST,
-        payload: res.data
+        payload: res.data,
       });
     })
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 //Get all posts
-export const getPosts = () => dispatch => {
+export const getPosts = () => (dispatch) => {
   dispatch({ type: LOADING });
   axios
     .get("/api/posts")
-    .then(res => {
+    .then((res) => {
       dispatch({
         type: GET_POSTS,
-        payload: res.data
+        payload: res.data,
       });
     })
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 //Like or Unlike post
-export const clickLike = postId => dispatch => {
+export const clickLike = (postId) => (dispatch) => {
   axios
     .post(`/api/posts/like/${postId}`)
-    .then(res => window.location.reload())
-    .catch(err =>
+    .then((res) => window.location.reload())
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 //Add Comment
-export const addComment = (postId, commentData) => dispatch => {
+export const addComment = (postId, commentData) => (dispatch) => {
   dispatch({ type: LOADING });
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_POST,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 //Delete Comment
-export const deleteComment = (postId, commentId) => dispatch => {
+export const deleteComment = (postId, commentId) => (dispatch) => {
   axios
     .delete(`/api/posts/comment/${postId}/${commentId}`)
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_POST,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };

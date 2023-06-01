@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const db = require("../../config/db");
 
 const Post = require("../../models/Post");
 const User = require("../../models/User");
@@ -19,21 +20,8 @@ router.post(
       images: req.body.images,
       postLikes: [],
       comments: [],
+      userId: req.user.id,
     };
-
-    // const newPost = {
-    //   text: "Test AAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAA",
-    //   name: "ALen",
-    //   avatar:
-    //     "https://res.cloudinary.com/dgmvfyzua/image/upload/v1558149427/avatar_default_ex0t7c.svg",
-    //   images: [
-    //     "https://res.cloudinary.com/dgmvfyzua/image/upload/v1628816912/tp6r806kwkrouobiibby.jpg",
-    //     "https://res.cloudinary.com/dgmvfyzua/image/upload/v1628816916/geoqkfmwv25nbooqbcfm.jpg",
-    //     "https://res.cloudinary.com/dgmvfyzua/image/upload/v1628816942/mrpzni9rmyzhmg2jmkm9.jpg",
-    //   ],
-    //   postLikes: [],
-    //   comments: [],
-    // };
 
     try {
       const post = await Post.create(newPost);
@@ -51,16 +39,20 @@ router.post(
 router.delete(
   "/:postId",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Post.findById(req.params.postId)
-      .then((post) => {
-        post.remove().then((res) => {
-          res.json({ Success: true });
-        });
-      })
-      .catch((err) =>
-        res.status(400).json({ msg: "ooops, something wrong here" })
-      );
+  async (req, res) => {
+    try {
+      const deleteCount = await Post.destroy({
+        where: { id: req.params.postId },
+      });
+
+      if (deleteCount === 0) {
+        return res.status(404).json({ msg: "Post not found" });
+      }
+
+      return res.json({ msg: "Post Deleted Successfully" });
+    } catch (err) {
+      return res.status(500).json({ msg: "Server error" });
+    }
   }
 );
 
@@ -68,8 +60,9 @@ router.delete(
 //Desc      Get one post
 //Access    Private
 router.get("/:id", async (req, res) => {
+  console.log("id", req.params.id);
   try {
-    const post = await Post.findById({ WHERE: { id: req.params.id } });
+    const post = await Post.findByPk(req.params.id);
     if (!post) {
       return res.status(404).json({ msg: "No Post Found" });
     }
@@ -104,25 +97,45 @@ router.get(
 router.post(
   "/like/:postId",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Post.findById(req.params.postId).then((post) => {
+  async (req, res) => {
+    const postId = req.params.postId;
+    const userId = req.user.id;
+    try {
+      const post = await Post.findByPk(postId);
+      console.log("postLikes", post.postLikes);
+      if (!post) {
+        return res.status(404).json({ msg: "Post Not Found" });
+      }
       if (
         //Check if the post is liked or not
-        post.postLikes.filter((like) => like.user.toString() === req.user.id)
-          .length === 0
+        post.postLikes.filter((id) => parseFloat(id) === userId).length === 0
       ) {
-        //Add user id to postLikes array
-        post.postLikes.unshift({ user: req.user.id });
-      } else {
-        //Get index and remove user id from postLikes array
-        const index = post.postLikes
-          .map((like) => like.user.toString())
-          .indexOf(req.user.id);
-        post.postLikes.splice(index, 1);
-      }
+        const updatedPostLikes = [...post.postLikes, userId];
+        await Post.update(
+          {
+            postLikes: db.literal(`ARRAY['${updatedPostLikes.join("','")}']`),
+          },
+          { where: { id: postId } }
+        );
 
-      post.save().then((post) => res.json(post));
-    });
+        return res.json({ msg: "Post Liked Successfully" });
+      } else {
+        const updatedPostLikes = post.postLikes.filter(
+          (id) => parseFloat(id) !== userId
+        );
+
+        await Post.update(
+          {
+            postLikes: db.literal(`ARRAY['${updatedPostLikes.join("','")}']`),
+          },
+          { where: { id: postId } }
+        );
+
+        return res.json({ msg: "Post unliked Successfully" });
+      }
+    } catch (err) {
+      return res.status(500).json({ msg: "Server error" });
+    }
   }
 );
 
@@ -132,20 +145,48 @@ router.post(
 router.post(
   "/comment/:id",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Post.findById(req.params.id)
-      .then((post) => {
-        const newComment = {
-          user: req.user.id,
-          name: req.user.name,
-          avatar: req.user.avatar,
-          text: req.body.text,
-        };
-        post.comments.unshift(newComment);
-        post.save().then((post) => res.json(post));
-      })
-      .catch((err) => res.status(404).json({ NotFound: "Post Not Found" }));
+  async (req, res) => {
+    const postId = req.params.id;
+    const comment = req.body;
+
+    console.log("req.body", req.body);
+    try {
+      const post = await Post.findByPk(postId);
+      if (!post) {
+        return res.status(404).json({ msg: "No post found" });
+      }
+
+      const updatedComments = [...post.comments, comment];
+
+      console.log(
+        "JSON.stringify(updatedComments)",
+        JSON.stringify(updatedComments)
+      );
+      await Post.update(
+        {
+          comments: db.literal(`ARRAY[${JSON.stringify(updatedComments)}]`),
+        },
+        { where: { id: postId } }
+      );
+
+      return res.json({ msg: "Comment Added Successfully" });
+    } catch (err) {
+      return res.status(500).json({ msg: "Server Error" });
+    }
   }
+  //   Post.findByPk(req.params.id)
+  //     .then((post) => {
+  //       const newComment = {
+  //         user: req.user.id,
+  //         name: req.user.name,
+  //         avatar: req.user.avatar,
+  //         text: req.body.text,
+  //       };
+  //       post.comments.unshift(newComment);
+  //       post.save().then((post) => res.json(post));
+  //     })
+  //     .catch((err) => res.status(404).json({ NotFound: "Post Not Found" }));
+  // }
 );
 
 //route     DELETE /api/posts/comment/:postId/:commentId
@@ -155,7 +196,7 @@ router.delete(
   "/comment/:postId/:commentId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Post.findById(req.params.postId).then((post) => {
+    Post.findByPk(req.params.postId).then((post) => {
       const index = post.comments
         .map((comment) => comment._id.toString())
         .indexOf(req.params.commentId);

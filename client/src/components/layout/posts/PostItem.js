@@ -25,13 +25,13 @@ class PostItem extends Component {
           <div className="nameTime">
             <p className="name">{post.name}</p>
             <p className="postTime">
-              <Moment format="YYYY/MM/DD HH:mm">{post.date}</Moment>
+              <Moment format="YYYY/MM/DD HH:mm">{post.createdAt}</Moment>
             </p>
           </div>
         </div>
 
         <div className="postContentText">
-          <Link to={`/me/myPosts/${post._id}`}>
+          <Link to={`/me/myPosts/${post.id}`}>
             <p>
               {post.text.length < 120 ? post.text : post.text.slice(0, 120)}
               {post.text.length < 120 ? null : <span>...More...</span>}
@@ -46,10 +46,10 @@ class PostItem extends Component {
         <div className="postContentFooter">
           <div
             className="postLikes"
-            onClick={this.onClickLike.bind(this, post._id)}
+            onClick={this.onClickLike.bind(this, post.id)}
           >
-            {post.postLikes.filter(like => like.user === auth.user.id).length >
-            0 ? (
+            {post.postLikes.filter((like) => like.user === auth.user.id)
+              .length > 0 ? (
               <i className="fas fa-heart" />
             ) : (
               <i className="far fa-heart" />
@@ -61,7 +61,7 @@ class PostItem extends Component {
             <p className="commentsQty">{post.comments.length}</p>
           </div>
           <div className="allComments">
-            <Link to={`/me/myPosts/${post._id}`}>Comments</Link>
+            <Link to={`/me/myPosts/${post.id}`}>Comments</Link>
           </div>
         </div>
       </div>
@@ -72,14 +72,11 @@ class PostItem extends Component {
 PostItem.propTypes = {
   clickLike: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
-export default connect(
-  mapStateToProps,
-  { clickLike }
-)(PostItem);
+export default connect(mapStateToProps, { clickLike })(PostItem);

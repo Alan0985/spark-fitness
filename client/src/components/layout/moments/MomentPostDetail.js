@@ -43,11 +43,11 @@ class MomentPostDetail extends Component {
               <p>Post Detail</p>
             </div>
           </Link>
-          {post.user === auth.user.id ? (
+          {post.userId === auth.user.id ? (
             <div className="deletePost">
               <i
                 className="fas fa-trash-alt"
-                onClick={this.onDeletePost.bind(this, post._id)}
+                onClick={this.onDeletePost.bind(this, post.id)}
               />
             </div>
           ) : null}
@@ -67,16 +67,15 @@ MomentPostDetail.propTypes = {
   deletePost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   post: state.post,
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(
-  mapStateToProps,
-  { getPost, deletePost }
-)(MomentPostDetail);
+export default connect(mapStateToProps, { getPost, deletePost })(
+  MomentPostDetail
+);

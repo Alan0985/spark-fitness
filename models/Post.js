@@ -38,6 +38,10 @@ const Post = db.define("post", {
     defaultValue: [],
     allowNull: true,
   },
+
+  userId: {
+    type: DataTypes.INTEGER,
+  },
 });
 
 Post.associate = (models) => {
