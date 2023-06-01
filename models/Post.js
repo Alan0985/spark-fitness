@@ -39,6 +39,8 @@ const Post = db.define("post", {
     allowNull: true,
   },
 
+  date: new Date(),
+
   userId: {
     type: DataTypes.INTEGER,
   },

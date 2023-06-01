@@ -21,6 +21,7 @@ router.post(
       postLikes: [],
       comments: [],
       userId: req.user.id,
+      date: new Date(),
     };
 
     try {
