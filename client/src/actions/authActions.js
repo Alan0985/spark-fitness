@@ -5,24 +5,23 @@ import setAuthToken from "../utils/setAuthToken";
 import { GET_ERRORS, GET_USER_INFO, CLEAR_ERRORS } from "./types";
 
 //Sign Up
-export const signUp = (userData, history) => dispatch => {
-  console.log(1111)
+export const signUp = (userData, history) => (dispatch) => {
   axios
     .post("/api/users/me/signUp", userData)
-    .then(res => history.push("/me/signIn"))
-    .catch(err =>
+    .then((res) => history.push("/me/signIn"))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 //Sign In
-export const signIn = userData => dispatch => {
+export const signIn = (userData) => (dispatch) => {
   axios
     .post("/api/users/me/signIn", userData)
-    .then(res => {
+    .then((res) => {
       //Save the token
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
@@ -36,64 +35,64 @@ export const signIn = userData => dispatch => {
       //Set Current User
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 //Set Current User
-export const setCurrentUser = decoded => {
+export const setCurrentUser = (decoded) => {
   return {
     type: GET_USER_INFO,
-    payload: decoded
+    payload: decoded,
   };
 };
 
 //Get User Info
-export const getUserInfo = () => dispatch => {
+export const getUserInfo = () => (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
   axios
     .get("/api/users/me/editProfile")
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_USER_INFO,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 // Update User Info
-export const updateUserInfo = newInfo => dispatch => {
+export const updateUserInfo = (newInfo) => (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
   axios
     .post("/api/users/me/editProfile", newInfo)
-    .then(res => {
+    .then((res) => {
       dispatch({
         type: GET_USER_INFO,
-        payload: res.data
+        payload: res.data,
       });
       alert("Saved");
       // window.location = "/me";
     })
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 // Sign Out
-export const signOut = () => dispatch => {
+export const signOut = () => (dispatch) => {
   //Remove token from localStorge
   localStorage.removeItem("jwtToken");
 

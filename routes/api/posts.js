@@ -79,7 +79,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const posts = await Post.findAll({ order: [["createdAt", "DESC"]] });
+      const posts = await Post.findAll({ order: [["date", "DESC"]] });
       if (posts.length === 0) {
         return res.status(404).json({ msg: "No Post Found" });
       }

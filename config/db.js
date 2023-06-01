@@ -1,6 +1,7 @@
 const sequelize = require("sequelize");
+const keys = require("../key/keys");
 
-module.exports = new sequelize("spark", "postgres", "Post_123", {
+module.exports = new sequelize(keys.dbName, keys.dbUserName, keys.dbPWD, {
   host: "localhost",
   dialect: "postgres",
 

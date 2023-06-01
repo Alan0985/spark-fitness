@@ -1,5 +1,6 @@
 module.exports = {
-  // mongoURI: process.env.mongoURI,
-  // secretOrKey: process.env.secretOrKey,
   secretOrKey: "secretOrKey",
+  dbName: "spark",
+  dbUserName: "postgres",
+  dbPWD: "Post_123",
 };
