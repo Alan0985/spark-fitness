@@ -38,9 +38,11 @@ class PostDetailMain extends Component {
     const { id } = this.props.post.post;
 
     const newComment = {
+      userId: user.id,
       name: user.name,
       avatar: user.avatar,
       text: this.state.text,
+      date: new Date(),
     };
 
     console.log("newComment", newComment);
@@ -64,7 +66,7 @@ class PostDetailMain extends Component {
               <div className="nameTime">
                 <p className="name">{post.name}</p>
                 <p className="postTime">
-                  <Moment format="YYYY/MM/DD HH:mm">{post.createdAt}</Moment>
+                  <Moment format="YYYY/MM/DD HH:mm">{post.date}</Moment>
                 </p>
               </div>
             </div>

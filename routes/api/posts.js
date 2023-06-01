@@ -27,7 +27,6 @@ router.post(
       const post = await Post.create(newPost);
       res.json(post);
     } catch (err) {
-      console.error(err);
       res.status(500).json({ message: "Server error" });
     }
   }
@@ -60,7 +59,6 @@ router.delete(
 //Desc      Get one post
 //Access    Private
 router.get("/:id", async (req, res) => {
-  console.log("id", req.params.id);
   try {
     const post = await Post.findByPk(req.params.id);
     if (!post) {
@@ -102,7 +100,6 @@ router.post(
     const userId = req.user.id;
     try {
       const post = await Post.findByPk(postId);
-      console.log("postLikes", post.postLikes);
       if (!post) {
         return res.status(404).json({ msg: "Post Not Found" });
       }
@@ -149,7 +146,6 @@ router.post(
     const postId = req.params.id;
     const comment = req.body;
 
-    console.log("req.body", req.body);
     try {
       const post = await Post.findByPk(postId);
       if (!post) {
@@ -158,13 +154,9 @@ router.post(
 
       const updatedComments = [...post.comments, comment];
 
-      console.log(
-        "JSON.stringify(updatedComments)",
-        JSON.stringify(updatedComments)
-      );
       await Post.update(
         {
-          comments: db.literal(`ARRAY[${JSON.stringify(updatedComments)}]`),
+          comments: updatedComments,
         },
         { where: { id: postId } }
       );
@@ -174,19 +166,6 @@ router.post(
       return res.status(500).json({ msg: "Server Error" });
     }
   }
-  //   Post.findByPk(req.params.id)
-  //     .then((post) => {
-  //       const newComment = {
-  //         user: req.user.id,
-  //         name: req.user.name,
-  //         avatar: req.user.avatar,
-  //         text: req.body.text,
-  //       };
-  //       post.comments.unshift(newComment);
-  //       post.save().then((post) => res.json(post));
-  //     })
-  //     .catch((err) => res.status(404).json({ NotFound: "Post Not Found" }));
-  // }
 );
 
 //route     DELETE /api/posts/comment/:postId/:commentId

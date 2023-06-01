@@ -34,7 +34,7 @@ const Post = db.define("post", {
   },
 
   comments: {
-    type: DataTypes.ARRAY(DataTypes.JSON),
+    type: DataTypes.ARRAY(DataTypes.STRING),
     defaultValue: [],
     allowNull: true,
   },

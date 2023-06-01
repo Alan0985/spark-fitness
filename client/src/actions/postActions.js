@@ -40,7 +40,6 @@ export const getPost = (id) => (dispatch) => {
   axios
     .get(`/api/posts/${id}`)
     .then((res) => {
-      console.log("res.data", res.data);
       dispatch({
         type: GET_POST,
         payload: res.data,
@@ -91,12 +90,7 @@ export const addComment = (postId, commentData) => (dispatch) => {
   dispatch({ type: LOADING });
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
-    .then((res) =>
-      dispatch({
-        type: GET_POST,
-        payload: res.data,
-      })
-    )
+    .then((res) => window.location.reload())
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,

@@ -14,14 +14,14 @@ class CommentList extends Component {
         </div>
       );
     } else {
-      return comments.map(comment => (
-        <CommentItem key={comment._id} comment={comment} />
+      return comments.map((comment, index) => (
+        <CommentItem key={index} comment={comment} />
       ));
     }
   }
 }
 
 CommentList.propTypes = {
-  comments: PropTypes.array.isRequired
+  comments: PropTypes.array.isRequired,
 };
 export default CommentList;
