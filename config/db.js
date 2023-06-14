@@ -5,6 +5,8 @@ module.exports = new sequelize(keys.dbName, keys.dbUserName, keys.dbPWD, {
   host: "localhost",
   dialect: "postgres",
 
+  // console.log("test")
+
   pool: {
     max: 5,
     min: 0,
